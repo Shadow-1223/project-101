@@ -1,1 +1,0 @@
-if(message) return message 
