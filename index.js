@@ -1,4 +1,3 @@
-const mySecret = process.env['TOKEN']
 const DiscordJS = require('discord.js')
 const sdhandler = require('sdhandler')
 const fetch = require('node-fetch')
