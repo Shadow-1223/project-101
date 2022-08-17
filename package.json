@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mateoaranda/jikanjs": "^1.2.4",
+    "@types/node": "^18.0.6",
+    "discord.js": "^13.10.2",
+    "dotenv": "^16.0.1",
+    "git": "^0.1.5",
+    "gitignore": "^0.7.0",
+    "heroku": "^7.62.0",
+    "ionicons": "^6.0.2",
+    "mongoose": "^6.5.2",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.19",
+    "sdhandler": "^1.2.7"
+  }
+}
