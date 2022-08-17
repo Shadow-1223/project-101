@@ -18,7 +18,7 @@ const client = new DiscordJS.Client({
 
 client.on('messageCreate', async (message) => {
   if(message.channel.id === '831883601942544454') {
-        fetch.default(`https://api.monkedev.com/fun/chat?msg=${message.content}&uid=${message.author.id}`)
+        fetch.default(`http://api.brainshop.ai/get?bid=168455&key=Nk2KYcasLw4ljzTq&uid=${message.author.id}&msg=${message.content}`)
         .then(res => res.json())
         .then(data => {
             message.channel.send(data.response)
