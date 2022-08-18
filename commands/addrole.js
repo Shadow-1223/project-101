@@ -109,16 +109,13 @@ module.exports = {
     if (menu) {
       for (const o of menu.options) {
         if (o.value === options[0].value) {
-          return {
-            custom: true,
-            interaction.reply({
+          return interaction.reply({
             content: `<@&${o.value}> is already part of this menu.`,
             allowMentions: {
               roles: [],
             },
             ephemeral: true
-            })
-          };
+          })
         }
       }
 
@@ -139,15 +136,14 @@ module.exports = {
       components: [row],
     });
 
-    return {
-      custom: true,
-      interaction.reply({
-      content: `<@&${o.value}> is already part of this menu.`,
-      allowMentions: {
-         roles: [],
-      },
-      ephemeral: true
+    if(interaction) {
+        interaction.reply({
+          content: `<@&${o.value}> is already part of this menu.`,
+          allowMentions: {
+             roles: [],
+          },
+         ephemeral: true
       })
-    };
+    }
   },
 };
