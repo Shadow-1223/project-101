@@ -71,7 +71,7 @@ module.exports = {
     const messageID = stuff.pop();
     const channelID = stuff.pop();
     const channel = interaction.guild.channels.cache.get(channelID);
-    console.log(messageID)
+    console.log(channel)
 
     const role = message
       ? message.mentions.roles.first()
