@@ -14,11 +14,11 @@ const {
 const discordjs = require("discord.js");
 
 module.exports = {
-  name: "addrole",
-  description: "adds a role to the auto role message.",
-  type: Constants.ApplicationCommandTypes.CHAT_INPUT,
-
-  permissions: [Permissions.FLAGS.ADMINISTRATOR],
+  name : "addrole",
+  description : "adds a role to the auto role message.",
+  type : Constants.ApplicationCommandTypes.CHAT_INPUT,
+  requiredRoles : ['985756703087788062' , '986179620640550952'],
+  permissions : [Permissions.FLAGS.ADMINISTRATOR],
   options: [
     {
       name: "message_link",
