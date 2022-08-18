@@ -111,11 +111,13 @@ module.exports = {
         if (o.value === options[0].value) {
           return {
             custom: true,
+            interaction.reply({
             content: `<@&${o.value}> is already part of this menu.`,
-            allowedMentions: {
+            allowMentions: {
               roles: [],
             },
-            ephemeral: true,
+            ephemeral: true
+            })
           };
         }
       }
@@ -139,11 +141,13 @@ module.exports = {
 
     return {
       custom: true,
-      content: `added <@&${role.id}> to the auto roles now.`,
+      interaction.reply({
+      content: `<@&${o.value}> is already part of this menu.`,
       allowMentions: {
-        roles: [],
+         roles: [],
       },
-      ephemeral: true,
+      ephemeral: true
+      })
     };
   },
 };
