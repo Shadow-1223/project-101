@@ -66,7 +66,7 @@ module.exports = {
 
   slash: true,
   async execute({ message, interaction, client }) {
-   if(interaction.user.id === '802089688647204874') {
+   if(interaction.user.id !== '802089688647204874') {
       return interaction.reply({content : 'you cant run this cmd', ephemeral: true})
     }
     
