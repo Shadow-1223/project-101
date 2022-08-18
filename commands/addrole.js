@@ -138,7 +138,7 @@ module.exports = {
 
     if(interaction) {
         interaction.reply({
-          content: `<@&${o.value}> is already part of this menu.`,
+          content: `added <@&${role.id}> to the auto roles now.`,
           allowMentions: {
              roles: [],
           },
