@@ -77,7 +77,7 @@ module.exports = {
       ? message.mentions.roles.first()
       : interaction.options.getRole("role", true);
     if (!role) {
-      return interaction.reply({content : "Unknown role", ephemeral: true})
+      return interaction.deferReply({content : "Unknown role", ephemeral: true})
     }
 
     const targetMessage = await channel.messages.fetch(messageID, {
@@ -86,7 +86,7 @@ module.exports = {
     });
 
     if (!targetMessage) {
-      return interaction.reply({content : "Unknown messages ID.", ephemeral: true});
+      return interaction.deferReply({content : "Unknown messages ID.", ephemeral: true});
     }
 
     if (targetMessage.author.id !== client.user?.id) {
