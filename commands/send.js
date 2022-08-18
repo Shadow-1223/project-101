@@ -33,10 +33,6 @@ module.exports = {
   ],
   slash: true,
   async execute({ interaction }) {
-    if(interaction.user.id !== '802089688647204874') {
-      return interaction.reply({content : 'you cant run this cmd', ephemeral: true})
-    }
-  
     const channel = interaction.options.getChannel('channel');
 
     const attachment = interaction.options.getAttachment('attachment')
