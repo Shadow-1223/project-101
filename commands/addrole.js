@@ -35,7 +35,7 @@ module.exports = {
   ],
 
   async init(client) {
-    client.on("interactionCreate", (Interaction) => {
+    client.on("interactionCreate", async (Interaction) => {
       if (!Interaction.isSelectMenu()) {
         return;
       }
@@ -49,14 +49,14 @@ module.exports = {
         });
 
         for (const id of removed) {
-          member.roles.remove(id.value);
+          await member.roles.remove(id.value);
         }
 
         for (const id of values) {
-          member.roles.add(id);
+          await member.roles.add(id);
         }
 
-        Interaction.reply({
+        await Interaction.reply({
           content: "Roles Update!",
           ephemeral: true,
         });
@@ -66,10 +66,6 @@ module.exports = {
 
   slash: true,
   async execute({ message, interaction, client }) {
-   if(interaction.user.id !== '802089688647204874') {
-      return interaction.reply({content : 'you cant run this cmd', ephemeral: true})
-    }
-    
     const link = interaction.options.getString("message_link", true);
     const stuff = link.split("/");
     const messageID = stuff.pop();
@@ -80,7 +76,7 @@ module.exports = {
       ? message.mentions.roles.first()
       : interaction.options.getRole("role", true);
     if (!role) {
-      return "Unknown role";
+      return interaction.reply({content : "Unknown role", ephemeral: true})
     }
 
     const targetMessage = await channel.messages.fetch(messageID, {
@@ -89,11 +85,11 @@ module.exports = {
     });
 
     if (!targetMessage) {
-      return "Unknown messages ID.";
+      return interaction.reply({content : "Unknown messages ID.", ephemeral: true});
     }
 
     if (targetMessage.author.id !== client.user?.id) {
-      return `Please provide a message ID that was sent <@${client.user?.id}>`;
+      return interaction.reply ({content : `Please provide a message ID that was sent <@${client.user?.id}>`, ephemeral: true});
     }
 
     let row = targetMessage.components[0];
@@ -132,9 +128,7 @@ module.exports = {
           .setMinValues(0)
           .setMaxValues(1)
           .setPlaceholder("select your roles")
-          .addOptions({
-            description: options,
-          })
+          .addOptions(options)
       );
     }
 
