@@ -32,7 +32,7 @@ module.exports = {
     }
   ],
   slash: true,
-  async execute({ interaction }) {
+  async execute({ interaction, message }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
     
     const channel = interaction.options.getChannel('channel');
