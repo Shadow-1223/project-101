@@ -3,16 +3,18 @@ require('dotenv').config();
 const DiscordJS = require('discord.js')
 const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
-const { Client , Intents } = require('discord.js')
 
-const client = new Client({
-    intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGES_REACTIONS,
-        Intents.FLAGS.GUILD_PRESENCES,
-    ]
-}) // Specify the necessary intents.
+const { Intents } = DiscordJS
+
+const client = new DiscordJS.Client({
+  // These intents are recommended for the built in help menu
+  intents : [
+	Intents.FLAGS.GUILDS,
+	Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+	Intents.FLAGS.GUILD_PRESENCES
+  ],
+})
 
 client.on('ready', async () => {
   await mongoose.connect(
