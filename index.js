@@ -1,20 +1,18 @@
-const DiscordJS = require('discord.js')
-const sdhandler = require('sdhandler')
-const fetch = require('node-fetch')
-const mongoose = require('mongoose')
 require('dotenv').config();
 
-const { Intents } = DiscordJS
+const DiscordJS = require('discord.js')
+const sdhandler = require('sdhandler')
+const mongoose = require('mongoose')
+const { Client , Intents } = require('discord.js')
 
-const client = new DiscordJS.Client({
-  // These intents are recommended for the built in help menu
-  intents : [
-	Intents.FLAGS.GUILDS,
-	Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-	Intents.FLAGS.GUILD_PRESENCES
-  ],
-})
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGES_REACTIONS,
+        Intents.FLAGS.GUILD_PRESENCE,
+    ]
+}) // Specify the necessary intents.
 
 client.on('ready', async () => {
   await mongoose.connect(
@@ -23,7 +21,7 @@ client.on('ready', async () => {
       keepAlive: true
     }
     )
-  client.user.setPresence({activities: [{name: 'currently in fixing bugs'}], status: 'idle', type: 'GAMING'})
+  client.user.setPresence({activities: [{name: 'currently in fixing bugs'}], status: 'idle', type: 'WATCHING'})
 })
 
 sdhandler.sdhandler({
