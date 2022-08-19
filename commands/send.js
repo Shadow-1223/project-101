@@ -42,15 +42,13 @@ module.exports = {
     const text = interaction.options.getString('text')
     const title = interaction.options.getString('title')
 
-    const file = new MessageAttachment()
-
     const msg2 = new MessageEmbed()
       .setImage(attachment)
 
     const msg1 = new MessageEmbed()
-      .setTitle(`${title}`)
+      .setTitle(title)
       .setDescription(text)
-    interaction.channel.send({ embeds: [msg2, msg1], files: [file] })
+    interaction.channel.send({ embeds: [msg2, msg1] })
 
 
     if (interaction) {
