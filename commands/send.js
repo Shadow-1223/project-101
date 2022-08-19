@@ -1,4 +1,5 @@
 const { Permissions, Constants, MessageEmbed, MessageAttachment } = require("discord.js");
+const title = " ";
 
 module.exports = {
   name: 'send',
@@ -40,7 +41,7 @@ module.exports = {
 
     const attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
-    const title = interaction.options.getString('title')
+    title = interaction.options.getString('title')
 
     const msg2 = new MessageEmbed()
       .setImage(attachment)
