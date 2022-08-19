@@ -10,7 +10,7 @@ const client = new Client({
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGES_REACTIONS,
-        Intents.FLAGS.GUILD_PRESENCE,
+        Intents.FLAGS.GUILD_PRESENCES,
     ]
 }) // Specify the necessary intents.
 
