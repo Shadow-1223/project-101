@@ -48,7 +48,7 @@ module.exports = {
     const msg1 = new MessageEmbed()
       .setTitle(title)
       .setDescription(text)
-    interaction.channel.send({ embeds: [msg2, msg1] })
+    channel.send({ embeds: [msg2, msg1] })
 
 
     if (interaction) {
