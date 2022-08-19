@@ -36,6 +36,7 @@ module.exports = {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
     
     const channel = interaction.options.getChannel("channel");
+    console.log(interaction)
 
     const attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
