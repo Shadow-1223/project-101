@@ -1,5 +1,4 @@
 const { Permissions, Constants, MessageEmbed, MessageAttachment } = require("discord.js");
-const title = " ";
 
 module.exports = {
   name: 'send',
@@ -37,11 +36,11 @@ module.exports = {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
     
     const channel = interaction.options.getChannel("channel");
-    console.log(interaction)
 
     const attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
-    title = interaction.options.getString('title')
+    const title = interaction.options.getString('title')
+    console.log(title)
 
     const msg2 = new MessageEmbed()
       .setImage(attachment)
