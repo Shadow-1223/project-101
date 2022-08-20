@@ -47,8 +47,9 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-    channel.send({ embeds: [embed] })
-
+    channel.send ().then (() => {
+      interaction.reply({ embeds: [embed] })
+    })
 
     if (interaction) {
       interaction.reply({
