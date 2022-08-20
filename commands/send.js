@@ -37,12 +37,12 @@ module.exports = {
    
     const channel = client.channels.cache.get('id')
 
-    let attachment = interaction.options.getAttachment('attachment')
+    //let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
     let title = interaction.options.getString('title')
 
-    const embeds = new MessageEmbed()
-      embeds.setImage(attachment)
+    /*const embeds = new MessageEmbed()
+      embeds.setImage(attachment)*/
 
     const embed = new MessageEmbed()
       embed.setTitle(title) 
