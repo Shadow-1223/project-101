@@ -34,20 +34,20 @@ module.exports = {
   slash: true,
   async execute({ interaction, message }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
-    
-    const channel = interaction.options.getChannel("channel");
+   
+    const channel = <client>.channels.cache.get('id')
 
-    const attachment = interaction.options.getAttachment('attachment')
+    let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
     let title = interaction.options.getString('title')
 
-
-
+    const embeds = new MessageEmbed()
+      embed.setImage(attachment)
 
     const embed = new MessageEmbed()
       embed.setTitle(title) 
       embed.setDescription(text)
-    interaction.channel.send({ embeds: [embed] })
+    interaction.channel.send({ embeds: [embed, embeds] })
 
 
     if (interaction) {
