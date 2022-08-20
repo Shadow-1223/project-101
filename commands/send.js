@@ -50,12 +50,5 @@ module.exports = {
     channel.send ({embeds: [embed] }).then (() => {
       interaction.reply({content: 'stuff' })
     })
-
-    if (interaction) {
-      interaction.reply({
-        content: 'send message!',
-        ephemeral: true
-      })
-    }
   }
 }
