@@ -35,7 +35,7 @@ module.exports = {
   async execute({ interaction, message, client, options }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
-    const channel = interaction.guild.channels.cache.find(ch => ch.name === 'channel')
+    const channel = interaction.guild.channels.cache.find(ch => ch.name === 'rules')
 
     //let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
