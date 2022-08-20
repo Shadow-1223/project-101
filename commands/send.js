@@ -42,7 +42,7 @@ module.exports = {
     let title = interaction.options.getString('title')
 
     const embeds = new MessageEmbed()
-      embed.setImage(attachment)
+      embeds.setImage(attachment)
 
     const embed = new MessageEmbed()
       embed.setTitle(title) 
