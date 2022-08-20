@@ -38,9 +38,9 @@ module.exports = {
 
     const msg2 = new MessageEmbed()
       .setImage(attachment)
-      .setDescription("ㅤ")
 
     const msg1 = new MessageEmbed()
+      .setTitle('why')
       .setDescription(text)
     interaction.channel.send({ embeds: [msg2, msg1] })
 
