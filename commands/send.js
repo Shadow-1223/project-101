@@ -33,11 +33,7 @@ module.exports = {
 
     const attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
-    const title = interaction.options.getString('title')
-    console.log(title)
 
-    const msg2 = new MessageEmbed()
-      .setImage(attachment)
 
     const msg1 = new MessageEmbed()
       .setTitle('why')
