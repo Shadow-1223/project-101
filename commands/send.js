@@ -32,14 +32,14 @@ module.exports = {
     }
   ],
   slash: true,
-  async execute({ interaction, message, client }) {
+  async execute({ interaction, message, client, options }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
-    const channel = client.channels.cache.get('id')
+    const channel = interaction.guild.channels.cache.find(ch => ch.name === 'channel')
 
     //let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
-    let title = interaction.options.getString('title')
+    const title = options.getString('title') ? options.getString('title') : "Some Title"
 
     /*const embeds = new MessageEmbed()
       embeds.setImage(attachment)*/
