@@ -38,7 +38,7 @@ module.exports = {
 
     const msg2 = new MessageEmbed()
       .setImage(attachment)
-      .setDescription(" ")
+      .setDescription("ㅤ")
 
     const msg1 = new MessageEmbed()
       .setDescription(text)
