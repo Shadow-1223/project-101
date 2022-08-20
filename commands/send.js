@@ -32,7 +32,7 @@ module.exports = {
     }
   ],
   slash: true,
-  async execute({ interaction, message }) {
+  async execute({ interaction, message, client }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
     const channel = client.channels.cache.get('id')
