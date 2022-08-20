@@ -23,12 +23,6 @@ module.exports = {
       description: 'attach an image',
       type: Constants.ApplicationCommandOptionTypes.ATTACHMENT,
       required: false
-    },
-    {
-      name: 'title',
-      description: 'type a message title',
-      type: Constants.ApplicationCommandOptionTypes.STRING,
-      required: false
     }
   ],
   slash: true,
@@ -46,7 +40,6 @@ module.exports = {
       .setImage(attachment)
 
     const msg1 = new MessageEmbed()
-      .setTitle(text)
       .setDescription(text)
     interaction.channel.send({ embeds: [msg2, msg1] })
 
