@@ -39,13 +39,11 @@ module.exports = {
 
     //let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
-    const title = options.getString('title') ? options.getString('title') : ""
 
     /*const embeds = new MessageEmbed()
       embeds.setImage(attachment)*/
 
     const embed = new MessageEmbed()
-      embed.setTitle(title) 
       embed.setDescription(text)
     channel.send({ embeds: [embed] })
 
