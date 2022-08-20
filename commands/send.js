@@ -18,10 +18,16 @@ module.exports = {
       type: Constants.ApplicationCommandOptionTypes.STRING,
       required: true
     },
-    {
+    /*{
       name: 'attachment',
       description: 'attach an image',
       type: Constants.ApplicationCommandOptionTypes.ATTACHMENT,
+      required: false
+    }*/
+    { 
+      name: 'title',
+      description: 'type a title',
+      type: Constants.ApplicationCommandOptionTypes.STRING,
       required: false
     }
   ],
@@ -33,12 +39,15 @@ module.exports = {
 
     const attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
+    let title = interaction.options.getString('title')
 
 
-    const msg1 = new MessageEmbed()
-      .setTitle('why')
-      .setDescription(text)
-    interaction.channel.send({ embeds: [msg1] })
+
+
+    const embed = new MessageEmbed()
+      embed.setTitle(title) 
+      embed.setDescription(text)
+    interaction.channel.send({ embeds: [embed] })
 
 
     if (interaction) {
