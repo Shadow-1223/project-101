@@ -44,7 +44,7 @@ module.exports = {
 
     const msg2 = new MessageEmbed()
       .setImage(attachment)
-      .setDescription(title)
+      .setDescription(text)
 
     const msg1 = new MessageEmbed()
       .setDescription(text)
