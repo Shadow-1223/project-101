@@ -35,7 +35,7 @@ module.exports = {
   async execute({ interaction, message }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
-    const channel = <client>.channels.cache.get('id')
+    const channel = client.channels.cache.get('id')
 
     let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
