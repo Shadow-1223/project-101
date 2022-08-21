@@ -52,7 +52,7 @@ module.exports = {
     if (interaction) {
       interaction.reply({
         content: 'send message!',
-        ephemeral: true
+        ephemeral: interaction.channel.id === channel.id ? false : true
       })
     }
   }
