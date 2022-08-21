@@ -50,7 +50,7 @@ module.exports = {
     channel.send({embeds: [embed]})
 
     if (interaction && interaction.channel.id !== channel.id) {
-      interaction.reply({
+      interaction.deferReply({
         content: 'send message!',
         ephemeral: true
       })
