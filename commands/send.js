@@ -1,5 +1,4 @@
 const { Permissions, Constants, MessageEmbed, MessageAttachment } = require("discord.js");
-const wait = require('node:timers/promises').setTimeout;
 
 
 module.exports = {
@@ -49,8 +48,9 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-    await interaction.deferReply({embeds: [embed]})
-    await interaction.followUp({content: `i have successfully send ur message in ${channel}`, ephemeral: true})
+    await interaction.deferReply()
+    await wait(200)
+    await interaction.editReply({content: `i have successfully send ur message in ${channel}`, embeds: [embed])
 
     if (interaction && interaction.channel.id !== channel.id) {
       interaction.deferReply({
