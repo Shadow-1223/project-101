@@ -49,7 +49,7 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-    await interaction.channel.send({embeds: [embed]})
+    await interaction.deferReply({embeds: [embed]})
     await interaction.followUp({content: `i have successfully send ur message in ${channel}`, ephemeral: true})
 
     if (interaction && interaction.channel.id !== channel.id) {
