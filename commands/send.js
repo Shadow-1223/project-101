@@ -47,7 +47,7 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-    channel.send({embeds: [embed]})
+    interaction.channel.send({embeds: [embed]})
 
     if (interaction && interaction.channel.id !== channel.id) {
       interaction.deferReply({
