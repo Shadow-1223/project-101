@@ -49,11 +49,11 @@ module.exports = {
       embed.setDescription(text)
     channel.send({embeds: [embed]})
 
-    if (interaction) {
+    if (interaction && interaction.channel.id !== channel.id) {
       interaction.reply({
         content: 'send message!',
-        ephemeral: interaction.channel.id === channel.id ? false : true
+        ephemeral: true
       })
-    }
+    } 
   }
 }
