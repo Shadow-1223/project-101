@@ -46,6 +46,7 @@ module.exports = {
 
     const embeds = new MessageEmbed()
       embeds.setImage(attachment)
+      embeds.setDescription("")
 
     const embed = new MessageEmbed()
       embed.setTitle(title)
