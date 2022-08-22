@@ -50,9 +50,8 @@ module.exports = {
       embed.setDescription(text)
    if (interaction.channel.id !== channel.id) {
         const msg = await channel.send({embeds: [embed]});
-   if (!msg) return interaction.editReply({ content: 'Failed to send message!' });
-        interaction.editReply({ content: 'Sent message!' });
-   if (!interaction) return interaction.deferReply({ ephemeral: true });
+   if (!msg) return interaction.editReply({ content: 'Failed to send message!', ephemeral: true});
+        interaction.reply({ content: 'Sent message!' });
     } 
   }
 }
