@@ -40,18 +40,18 @@ module.exports = {
      if(!channel) return interaction.reply({content: `mention a channel!`, ephemeral: true});
 
 
-    //let attachment = interaction.options.getAttachment('attachment')
-    const text = interaction.options.getString('text')
+    let attachment = options.getAttachment('attachment') 
+    const text = options.getString('text')
     const title = options.getString('title') ? options.getString('title') : ""
 
-    /*const embeds = new MessageEmbed()
-      embeds.setImage(attachment)*/
+    const embeds = new MessageEmbed()
+      embeds.setImage(attachment)
 
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
-   channel.send({embeds: [embed]})
+   channel.send({embeds: [embed, embeds]})
    
   }
 }
