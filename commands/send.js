@@ -53,7 +53,7 @@ module.exports = {
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
    channel.send({embeds: [embed]})
    
-   if (interaction && interaction.channel.id !== channel.id) {
+   if (interaction) {
       interaction.reply({
         content: 'send message!',
         ephemeral: true
