@@ -49,11 +49,13 @@ module.exports = {
       embed.setTitle(title)
       embed.setDescription(text)
    interaction.channel.send({embeds: [embed]})
-   if(!interaction) return interaction.reply({content: 'failed to send it'});
+   if(!interaction) return interaction.reply({content: 'failed to send it', ephemeral: true});
 
-   if(interaction) {
-       content: 'send message!',
-       ephemeral: true
+   if (interaction && interaction.channel.id !== channel.id) {
+      interaction.deferReply({
+        content: 'send message!',
+        ephemeral: true
+      })
     }
   }
 }
