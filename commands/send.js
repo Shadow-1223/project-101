@@ -49,7 +49,7 @@ module.exports = {
       embed.setTitle(title)
       embed.setDescription(text)
     await interaction.deferReply()
-    await wait(200)
+    await wait(1000)
     await interaction.editReply({content: `i have successfully send ur message in ${channel}`, embeds: [embed]})
 
     if (interaction && interaction.channel.id !== channel.id) {
