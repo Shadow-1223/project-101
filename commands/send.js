@@ -48,13 +48,11 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-    channel.send({embeds: [embed]})
-   if (!interaction) return interaction.deferReply({ ephemeral: true });
-
    if (interaction.channel.id !== channel.id) {
-        const msg = await channel.send({ content: 'message' });
+        const msg = await channel.send({embeds: [embed]});
    if (!msg) return interaction.editReply({ content: 'Failed to send message!' });
         interaction.editReply({ content: 'Sent message!' });
+   if (!interaction) return interaction.deferReply({ ephemeral: true });
     } 
   }
 }
