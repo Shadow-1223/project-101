@@ -36,7 +36,9 @@ module.exports = {
   async execute({ interaction, message, client, options }) {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
-    const channel = options.getChannel('channel')
+     const channel = options.getChannel('channel')
+     if(!channel) return interaction.reply({content: `mention a channel!`, ephemeral: true});
+
 
     //let attachment = interaction.options.getAttachment('attachment')
     const text = interaction.options.getString('text')
@@ -48,14 +50,14 @@ module.exports = {
     const embed = new MessageEmbed()
       embed.setTitle(title)
       embed.setDescription(text)
-   interaction.channel.send({embeds: [embed]})
-   if(!interaction) return interaction.reply({content: 'failed to send it', ephemeral: true});
-
+   interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
+   channel.send({embeds: [embed]})
+   
    if (interaction && interaction.channel.id !== channel.id) {
-      interaction.deferReply({
+      interaction.reply({
         content: 'send message!',
         ephemeral: true
       })
-    }
+    } 
   }
 }
