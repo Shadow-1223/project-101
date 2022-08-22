@@ -52,7 +52,7 @@ module.exports = {
    if (!interaction) return interaction.deferReply({ ephemeral: true });
 
    if (interaction.channel.id !== channel.id) {
-        const msg = await channel.send({ content: message });
+        const msg = await channel.send({ content: 'message' });
    if (!msg) return interaction.editReply({ content: 'Failed to send message!' });
         interaction.editReply({ content: 'Sent message!' });
     } 
