@@ -19,12 +19,12 @@ module.exports = {
       type: Constants.ApplicationCommandOptionTypes.STRING,
       required: true
     },
-    /*{
+    {
       name: 'attachment',
       description: 'attach an image',
       type: Constants.ApplicationCommandOptionTypes.ATTACHMENT,
       required: false
-    }*/
+    },
     { 
       name: 'title',
       description: 'type a title',
