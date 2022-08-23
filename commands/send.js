@@ -48,8 +48,8 @@ module.exports = {
       .setImage(attachment)
 
     const embed = new MessageEmbed()
-      .setTitle(title)
-      .setDescription(text)
+      if (title) embed.setTitle(title) 
+      embed.setDescription(text)
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
    channel.send({embeds: [embed, embeds]})
    
