@@ -1,5 +1,4 @@
 const { Permissions, Constants, MessageEmbed, MessageAttachment } = require("discord.js");
-const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
   name: 'send',
@@ -45,7 +44,7 @@ module.exports = {
     const title = options.getString('title')
 
     const embeds = new MessageEmbed()
-      .setImage(attachment)
+      .setImage(attachment.url)
 
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
