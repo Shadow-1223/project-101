@@ -51,6 +51,7 @@ module.exports = {
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
       embed.setDescription(text)
+      embeds.push(embed)
 
    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
    channel.send({ embeds: [embed, embeds] })
