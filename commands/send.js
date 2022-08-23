@@ -36,11 +36,9 @@ module.exports = {
     if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
    
      const channel = options.getChannel('channel')
-     if(!channel) return interaction.reply({content: `mention a channel!`, ephemeral: true});
 
 
     let attachment = options.getAttachment('attachment')
-    console.log(attachment)
     const text = options.getString('text')
     const title = options.getString('title')
 
@@ -50,8 +48,7 @@ module.exports = {
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
       embed.setDescription(text)
+   await channel.send({embeds: [embed, embeds]})
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
-   channel.send({embeds: [embed, embeds]})
-   
   }
 }
