@@ -42,11 +42,11 @@ module.exports = {
 
     let attachment = options.getAttachment('attachment') 
     const text = options.getString('text')
-    const title = options.getString('title') ? options.getString('title') : ""
+    const title = options.getString('title') ? options.getString('title') : null
 
     const embeds = new MessageEmbed()
       embeds.setImage(attachment)
-      embeds.setDescription("")
+      embeds.setDescription(null)
 
     const embed = new MessageEmbed()
       embed.setTitle(title)
