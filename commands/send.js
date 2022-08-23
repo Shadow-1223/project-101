@@ -54,7 +54,7 @@ module.exports = {
       embeds.push(embed)
 
    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
-   channel.send({ embeds: [embed, embeds] })
+   channel.send({ embeds: embeds })
    
   }
 } 
