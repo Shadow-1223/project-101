@@ -50,5 +50,6 @@ module.exports = {
       embed.setDescription(text)
    await channel.send({embeds: [embed, embeds]})
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
+   console.log(attachment, interaction)
   }
 }
