@@ -33,23 +33,28 @@ module.exports = {
   ],
   slash: true,
   async execute({ interaction, message, client, options }) {
-    if(message) return message.reply({content : 'this cmd is not working on leagcy cmd'})
+   if (message) return message.reply({content : 'this cmd is not working on leagcy cmd' })
    
-     const channel = interaction.options.getChannel('channel')
+    const channel = options.getChannel('channel')
 
+    let attachment = options.getAttachment('attachment')
 
-    let attachment = interaction.options.getAttachment('attachment')
-    const text = interaction.options.getString('text')
-    const title = interaction.options.getString('title')
+    const text = options.getString('text')
+    const title = options.getString('title')
+    const embeds = [];
 
-    const embeds = new MessageEmbed()
-      .setImage(attachment)
+    if (attachment) embeds.push(
+         new MessageEmbed()
+             .setImage(attachment.url)
+         )
 
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
       embed.setDescription(text)
-   await channel.send({embeds: [embed, embeds]})
-   interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
-   console.log(attachment, interaction)
+     embeds.push(embed)
+
+   interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
+   channel.send({ embeds: [embeds] })
+   
   }
-}
+} 
