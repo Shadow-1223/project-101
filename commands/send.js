@@ -45,12 +45,12 @@ module.exports = {
     const title = options.getString('title') ? options.getString('title') : null
 
     const embeds = new MessageEmbed()
-      embeds.setImage(attachment)
-      embeds.setDescription(null)
+      .setImage(attachment)
+      .setDescription(null)
 
     const embed = new MessageEmbed()
-      embed.setTitle(title)
-      embed.setDescription(text)
+      .setTitle(title)
+      .setDescription(text)
    interaction.reply({content: `your message was sent in: ${channel}`, ephemeral: true})
    channel.send({embeds: [embed, embeds]})
    
