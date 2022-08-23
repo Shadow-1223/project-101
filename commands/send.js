@@ -44,7 +44,7 @@ module.exports = {
     const title = options.getString('title')
 
     const embeds = new MessageEmbed()
-      .setImage(attachment.url)
+      .setImage(attachment.url())
 
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
