@@ -39,12 +39,13 @@ module.exports = {
      if(!channel) return interaction.reply({content: `mention a channel!`, ephemeral: true});
 
 
-    let attachment = options.getAttachment('attachment') 
+    let attachment = options.getAttachment('attachment')
+    console.log(attachment)
     const text = options.getString('text')
     const title = options.getString('title')
 
     const embeds = new MessageEmbed()
-      .setImage(attachment.url())
+      .setImage(attachment.url)
 
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
