@@ -1,12 +1,11 @@
 require('dotenv').config();
 
-const DiscordJS = require('discord.js')
 const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
 
-const { Intents } = DiscordJS
+const { Intents, Client } = require('discord.js')
 
-const client = new DiscordJS.Client({
+const client = new Client({
   // These intents are recommended for the built in help menu
   intents : [
 	Intents.FLAGS.GUILDS,
