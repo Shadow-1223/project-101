@@ -33,7 +33,12 @@ module.exports = {
   ],
   slash: true,
   async execute({ interaction, message, client, options }) {
-   if (message) return message.reply({content : 'this cmd is not working on leagcy cmd' })
+    if(message) return message.reply({
+	content : 'this cmd is not working on leagcy cmd',
+	allowMentions: {
+	    roles: []
+	}
+    })
    
     const channel = options.getChannel('channel')
 
