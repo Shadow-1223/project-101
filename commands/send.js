@@ -29,6 +29,12 @@ module.exports = {
       description: 'type a title',
       type: Constants.ApplicationCommandOptionTypes.STRING,
       required: false
+    },
+    { 
+      name: 'hexcolor',
+      description: 'put a hexcolor',
+      type: Constants.ApplicationCommandOptionTypes.STRING,
+      required: false
     }
   ],
   slash: true,
@@ -42,7 +48,9 @@ module.exports = {
    
     const channel = options.getChannel('channel')
 
-    let attachment = options.getAttachment('attachment')
+    const attachment = options.getAttachment('attachment')
+    const hexcolor = options.getString('hexcolor')
+    if(!hexcolor) return interaction.reply('Valid HexColor')
 
     const text = options.getString('text')
     const title = options.getString('title')
@@ -51,12 +59,14 @@ module.exports = {
     if (attachment) embeds.push(
          new MessageEmbed()
              .setImage(attachment.url)
+             .setColor(hexcolor)
          )
 
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
       embed.setDescription(text)
-      embeds.push(embed)
+      embed.setColor(hexcolor)
+      if(hexcolor) embeds.push(embed)
 
    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
    channel.send({ embeds: embeds })
