@@ -50,7 +50,6 @@ module.exports = {
 
     const attachment = options.getAttachment('attachment')
     const hexcolor = options.getString('hexcolor')
-    if(!hexcolor) return interaction.reply('Valid HexColor')
 
     const text = options.getString('text')
     const title = options.getString('title')
