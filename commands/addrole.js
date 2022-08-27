@@ -69,7 +69,7 @@ module.exports = {
     if(message) return message.reply({
 	content : 'this cmd is not working on leagcy cmd',
 	allowMentions: {
-	    roles: []
+	    repliedUser: false
 	}
     })
     
