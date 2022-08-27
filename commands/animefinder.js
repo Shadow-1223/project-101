@@ -25,7 +25,7 @@ module.exports = {
       fetchReply: true
     })
 
-    let animeId = parseInt(options[0].value)
+    let animeId = options.getString('anime')
     let animeFinder = await new anime(client)
     if (!isNaN(animeId)) {
       try {
