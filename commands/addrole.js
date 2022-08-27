@@ -68,9 +68,9 @@ module.exports = {
   async execute({ message, interaction, client }) {
     if(message) return message.reply({
 	content : 'this cmd is not working on leagcy cmd',
-	allowMentions: {
-	    repliedUser: false
-	}
+	allowedMentions: {
+            repliedUser: false
+       }
     })
     
     const link = interaction.options.getString("message_link", true);
