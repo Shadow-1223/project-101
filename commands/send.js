@@ -35,9 +35,9 @@ module.exports = {
   async execute({ interaction, message, client, options }) {
     if(message) return message.reply({
 	content : 'this cmd is not working on leagcy cmd',
-	allowMentions: {
-	    repliedUser: false
-	}
+	allowedMentions: {
+           repliedUser: false
+       }
     })
    
     const channel = options.getChannel('channel')
@@ -60,6 +60,5 @@ module.exports = {
 
    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
    channel.send({ embeds: embeds })
-   
   }
 } 
