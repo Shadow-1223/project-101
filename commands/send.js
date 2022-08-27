@@ -64,8 +64,12 @@ module.exports = {
     const embed = new MessageEmbed()
       if (title) embed.setTitle(title) 
       embed.setDescription(text)
-      embed.setColor(hexcolor)
-      if(hexcolor) embeds.push(embed)
+      try{
+        embed.setColor(hexcolor)
+      } catch {
+        embed.setColor(null)
+      }
+      embeds.push(embed)
 
    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
    channel.send({ embeds: embeds })
