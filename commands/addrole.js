@@ -66,6 +66,13 @@ module.exports = {
 
   slash: true,
   async execute({ message, interaction, client }) {
+    if(message) return message.reply({
+	content : 'this cmd is not working on leagcy cmd',
+	allowMentions: {
+	    roles: []
+	}
+    })
+    
     const link = interaction.options.getString("message_link", true);
     const stuff = link.split("/");
     const messageID = stuff.pop();
