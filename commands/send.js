@@ -40,10 +40,10 @@ module.exports = {
   slash: true,
   async execute({ interaction, message, client, options }) {
     if(message) return message.reply({
-	content : 'this cmd is not working on leagcy cmd',
-	allowedMentions: {
-           repliedUser: false
-       }
+        content : 'this cmd is not working on leagcy cmd',
+        allowedMentions : {
+            repliedUser: false
+        }
     })
    
     const channel = options.getChannel('channel')
@@ -62,16 +62,16 @@ module.exports = {
          )
 
     const embed = new MessageEmbed()
-      if (title) embed.setTitle(title) 
+      if(title) embed.setTitle(title)
       embed.setDescription(text)
-      try{
-        embed.setColor(hexcolor)
-      } catch {
-        embed.setColor(null)
+      if(hexcolor) {
+          embed.setColor(hexcolor)
+      } else {
+          embed.setColor(null)
       }
-      embeds.push(embed)
-
-   interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
-   channel.send({ embeds: embeds })
+      embed.push(embed)
+      
+    channel.send({ embeds: embeds })
+    interaction.reply({ content: `your message was sent in: ${channel}`, ephemeral: true })
   }
-} 
+}
