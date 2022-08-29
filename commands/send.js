@@ -72,6 +72,6 @@ module.exports = {
       embeds.push(embed)
       
     channel.send({ embeds: embeds })
-    interaction.reply({ content: `message was sent by <@${interaction.user.tag}> in ${channel}`, ephemeral: true })
+    interaction.reply({ content: `message was sent by <@${interaction.user.id}> in ${channel}`, ephemeral: true })
   }
 }
