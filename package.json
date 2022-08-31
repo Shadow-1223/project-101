@@ -19,8 +19,8 @@
     "gitignore": "^0.7.0",
     "heroku": "^7.62.0",
     "ionicons": "^6.0.2",
-    "discord.js-commando": "^0.12.3",
     "mongoose": "^6.5.2",
+    "discord.js-commando": "^0.12.3",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.19",
     "sdhandler": "^1.2.7"
