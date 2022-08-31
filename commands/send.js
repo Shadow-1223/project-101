@@ -9,31 +9,31 @@ module.exports = {
         {
             name : 'channel',
             description : 'Specify a channel',
-            type : Constant.ApplicationCommandOptionTypes.CHANNEL,
+            type : Constants.ApplicationCommandOptionTypes.CHANNEL,
             required : true
         },
         {
             name : 'message',
             description : 'Type a Message in this options',
-            type : Constant.ApplicationCommandOptionTypes.STRING,
+            type : Constants.ApplicationCommandOptionTypes.STRING,
             required : true
         },
         {
             name : 'title',
             description : 'Set a title in this options and it will show on the MessageEmbeds once it got sent',
-            type : Constant.ApplicationCommandOptionTypes.STRING,
+            type : Constants.ApplicationCommandOptionTypes.STRING,
             required : false
         },
         {
             name : 'attachment',
             description : 'Put a image from your gallery/album in this options and it will show in the MessageEmbed',
-            type : Constant.ApplicationCommandOptionTypes.ATTACHMENT,
+            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT,
             required : false
         },
         {
             name : 'hex_color',
             description : 'Set/Type a hex color in this options and it will show in MessageEmbed',
-            type : Constant.ApplicationCommandOptionTypes.STRING,
+            type : Constants.ApplicationCommandOptionTypes.STRING,
             required : false
         }
     ],
