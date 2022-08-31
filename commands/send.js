@@ -1,9 +1,9 @@
-const { Permissions, Constant, MessageEmbed } = require('discord.js')
+const { Permissions, Constants, MessageEmbed } = require('discord.js')
 
 module.exports = {
     name : 'send',
     description : 'Send a message',
-    type : Constant.ApplicationCommandTypes.CHAT_INPUT,
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     permissions : [Permissions.FLAGS.ADMINISTRATOR],
     options : [
         {
