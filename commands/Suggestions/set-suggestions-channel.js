@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando')
 const { Permissions } = require('discord.js')
 
-module.exports = class SetSuggestionChannelCommand extends Commando.commands {
+module.exports (message) = class SetSuggestionChannelCommand extends Commando.commands {
     constructor(client) {
         super(client, {
             name: 'setsuggestions',
