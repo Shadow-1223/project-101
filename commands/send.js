@@ -53,13 +53,7 @@ module.exports = {
         
         const text = options.getString('message')
         const title = options.getString('title')
-        const embeds = [];
-        const stuff = [
-           "name": ['migzchi'],
-           "age": ['14']
-           "description": ['JavaScript beginner']
-        ]
-        console.log(stuff)
+        const embeds = []
         
         if(attachment) embeds.push(
             new MessageEmbed()
