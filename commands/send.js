@@ -72,10 +72,10 @@ module.exports = {
         embeds.push(embed)
         channel.send({ embeds : embeds })
         
-        if(interaction) {
-            await interaction.reply({
-                content : `Your message was sent in ${channel}`,
-                ephemeral : true
+        if (interaction) {
+            interaction.reply({
+                content: 'Send message!',
+                ephemeral: true,
             })
         }
     }
