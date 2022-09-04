@@ -70,7 +70,7 @@ module.exports = {
             embed.setColor(null)
         }
         embeds.push(embed)
-        channel.send({ embeds : embeds })
+        interaction.channel.send({ embeds : embeds })
         
         if(interaction) {
             await interaction.reply({
