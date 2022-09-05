@@ -1,5 +1,5 @@
 const {Permissions, Constants, MessageEmbed} = require('discord.js')
-const WarnModel = require('../models/warnModel')
+const WarnModel = require('../modals/warnModel')
 
 module.exports = {
     name : "warn",
