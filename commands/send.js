@@ -74,7 +74,7 @@ module.exports = {
         
         if(interaction) {
             await interaction.reply({
-                content : 'Send message!',
+                content : `Your message was sent in ${channel}`,
                 ephemeral : true,
             })
         }
