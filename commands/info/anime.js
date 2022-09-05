@@ -1,5 +1,5 @@
 const { MessageEmbed, Permissions, Constants } = require('discord.js');
-const anime = require('../events/anime');
+const anime = require('../../events/anime');
 module.exports = {
   name: 'anime_finder',
   description: 'Find Anime by name or id',
