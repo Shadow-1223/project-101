@@ -22,7 +22,7 @@ client.on('ready', async () => {
       keepAlive: true
     }
     )
-  client.user.setPresence({activities: [{name: 'currently in fixing bugs'}], status: 'idle', type: 'WATCHING'})
+  client.user.setPresence({activities: [{name: 'ka help'}], status: 'dnd', type: 'STREAMING'})
 })
 
 sdhandler.sdhandler({
