@@ -22,7 +22,8 @@ client.on('ready', async () => {
       keepAlive: true
     }
     )
-  client.user.setPresence({activities: [{name: 'ka help'}], status: 'dnd', type: 'STREAMING'})
+  // Set the client user's activity
+client.user.setActivity('ka help', { type: 'WATCHING' });
 })
 
 sdhandler.sdhandler({
