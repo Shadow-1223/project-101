@@ -8,7 +8,7 @@ module.exports = {
             .setTitle("New Suggestions")
             .setColor("#FFFF00")
             .setAuthor({ name: `${message.author.tag}`, iconURL: `${message.author.displayAvatarURL({ dynamic: true })}` })
-            .setDiscription(`${message.content}`)
+            .setDescription(`${message.content}`)
             .setTimestamp()
             
             message.channel.send({ embeds: [embed] }).then(async (msg) => {
