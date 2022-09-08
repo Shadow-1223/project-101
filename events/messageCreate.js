@@ -3,7 +3,7 @@ const { MessageEmbed }= require('discord.js')
 module.exports = {
     name : 'messageCreate',
     async run(client , message) {
-        if(message.channel.id === '986920640227459115') {
+        if(message.channel.id === '921486948084895784') {
             let embed = new MessageEmbed()
             .setTitle("New Suggestions")
             .setColor("#FFFF00")
