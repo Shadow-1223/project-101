@@ -23,7 +23,7 @@ client.on('ready', async () => {
     }
     )
   // Set the client user's activity
-client.user.setActivity('ka help', { type: 'STREAMING' });
+client.user.setActivity('ka help', { type: 'WATCHING' });
 })
 
 sdhandler.sdhandler({
