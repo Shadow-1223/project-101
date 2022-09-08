@@ -11,12 +11,11 @@ module.exports = {
             .setDescription(`${message.content}`)
             .setTimestamp()
             
-            message.channel.send({ embeds: [embed] }).then(async (msg) => {
-                await message.delete()
+            message.channel.send({ embeds: [embed] }).then((msg) => {
+                message.delete()
                 msg.react("👍")
                 msg.react("👎")
             })
-            console.log(message)
         }
     }
 }
