@@ -6,7 +6,7 @@ module.exports = {
         if(message.channel.id === '986920640227459115') {
             let embed = new MessageEmbed()
             .setTitle("New Suggestions")
-            .setColor("Yellow")
+            .setColor("#FFFF00")
             .setAuthor({ name: `${message.author.tag}`, iconURL: `${message.author.displayAvatarURL({ dynamic: true })}` })
             .setDiscription(`${message.content}`)
             .setTimestamp()
