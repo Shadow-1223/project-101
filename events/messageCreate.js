@@ -16,7 +16,7 @@ module.exports = {
                 msg.react("👍")
                 msg.react("👎")
             })
-            console.log(then)
+            console.log(message)
         }
     }
 }
