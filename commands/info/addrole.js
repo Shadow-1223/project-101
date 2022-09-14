@@ -50,7 +50,7 @@ module.exports = {
                 }
                 
                 await interaction.reply({
-                    content : `Gave you the <@&${role.id}> role`,
+                    content : `Gave you the <@&${o.values}> role`,
                     allowedMentions : {
                         roles : []
                     },
@@ -58,7 +58,7 @@ module.exports = {
                 }) 
             } else {
                 return interaction.reply({
-                    content : `Removed the <@&${role.id}> from you`,
+                    content : `Removed the <@&${o.values}> from you`,
                     allowedMentions : {
                         roles : []
                     },
