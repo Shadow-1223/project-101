@@ -78,11 +78,11 @@ module.exports = {
         })
         
         
-        const link = interaction.options.getString("message_link", true)
-        const stuff = link.split("/")
-        const channelID = stuff.pop()
-        const messageID = stuff.pop()
-        const channel = interaction.guild.channel.cache.get(channelID)
+        const link = interaction.options.getString("message_link", true);
+        const stuff = link.split("/");
+        const messageID = stuff.pop();
+        const channelID = stuff.pop();
+        const channel = interaction.guild.channels.cache.get(channelID);
         
         const role = interaction.options.getRole("role", true)
         if(!role) {
