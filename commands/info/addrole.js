@@ -40,30 +40,30 @@ module.exports = {
                 const removed = component.options.filter((options) => {
                     return !values.includes(options.value)
                 })
-            }
-            
-            if(const id of removed) {
-                await member.roles.remove(id.values)
-            }
-            
-            if(const id of values) {
-                await member.roles.add(id)
-            }
-            
-            await interaction.reply({
-                content : `<@&${o.value}> has been added`,
-                allowedMentions : {
-                    roles : []
-                },
-                ephemeral : true
-            }) else if(!values) {
-                return interaction.reply({
-                    content : `<@&${o.value}> has been removed`,
+                
+                for (const id of removed) {
+                    await member.roles.remove(id.value)
+                }
+                
+                for (const id of values) {
+                    await member.roles.add(id)
+                }
+                
+                await interaction.reply({
+                    content : `Gave you the <@&${role.id}> role`,
                     allowedMentions : {
                         roles : []
                     },
-                    ephemeral : true 
-                })
+                    ephemeral : true
+                }) else {
+                    await interaction.reply({
+                        content : `Removed the <@&${role.id}> from you`,
+                        allowedMentions : {
+                            roles : []
+                        },
+                        ephemeral : true
+                    })
+                }
             }
         })
     },
@@ -78,11 +78,11 @@ module.exports = {
         })
         
         
-        const link = interaction.options.getString("message_link", true);
-        const stuff = link.split("/");
-        const messageID = stuff.pop();
-        const channelID = stuff.pop();
-        const channel = interaction.guild.channels.cache.get(channelID);
+        const link = interaction.options.getString("message_link", true)
+        const stuff = link.split("/")
+        const channelID = stuff.pop()
+        const messageID = stuff.pop()
+        const channel = interaction.guild.channel.cache.get(channelID)
         
         const role = interaction.options.getRole("role", true)
         if(!role) {
