@@ -61,7 +61,7 @@ module.exports = {
     },
     
     slash : true
-    async execute({ message , interaction , client }) {
+    async execute({ message, interaction, client }) {
         if(message) return message.reply({
             content : 'This command does not work on legacy command. Please try use slash command',
             allowedMentions : {
