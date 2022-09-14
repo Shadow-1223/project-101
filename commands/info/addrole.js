@@ -60,8 +60,8 @@ module.exports = {
         })
     },
     
-    slash : true
-    async execute({message, interaction, client}) {
+    slash : true,
+    async execute({message , interactionxhnxndndcn.  rcffmvnngncnvnvmmvmvbmmgmg knob kfkfj7, client}) {
         if(message) return message.reply({
             content : 'This command does not work on legacy command. Please try use slash command',
             allowedMentions : {
