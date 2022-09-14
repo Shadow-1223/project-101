@@ -33,7 +33,7 @@ module.exports = {
                 return;
             }
             
-            const { customId, values, member } = interaction;
+            const { customId, values, member, role } = interaction;
             
             if(customId === 'auto_roles') {
                 const component = interaction.component
@@ -50,7 +50,7 @@ module.exports = {
                 }
                 
                 await interaction.reply({
-                    content : `Gave you the <@&${o.values}> role`,
+                    content : `Gave you the <@&${role.id}> role`,
                     allowedMentions : {
                         roles : []
                     },
@@ -58,7 +58,7 @@ module.exports = {
                 }) 
             } else {
                 return interaction.reply({
-                    content : `Removed the <@&${o.values}> from you`,
+                    content : `Removed the <@&${role.id}> from you`,
                     allowedMentions : {
                         roles : []
                     },
