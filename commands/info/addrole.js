@@ -55,16 +55,8 @@ module.exports = {
                         roles : []
                     },
                     ephemeral : true
-                }) else {
-                    await interaction.reply({
-                        content : `Removed the <@&${role.id}> from you`,
-                        allowedMentions : {
-                            roles : []
-                        },
-                        ephemeral : true
-                    })
-                }
-            }
+                })
+            } else {}
         })
     },
     
