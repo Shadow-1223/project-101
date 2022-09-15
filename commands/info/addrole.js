@@ -36,7 +36,7 @@ module.exports = {
             const { customId, values, member } = interaction;
             
             if(customId === 'auto_roles') {
-                const roleId = interaction.options.getRole("role", true)
+                const roleId = interaction.options.getRole("role")
                 const component = interaction.component
                 const removed = component.options.filter((options) => {
                     return !values.includes(options.value)
