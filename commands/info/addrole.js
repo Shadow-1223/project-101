@@ -83,7 +83,7 @@ module.exports = {
             })
         }
         
-        const targetMessage = await channel.message.fetch(messageID, {
+        const targetMessage = await channel.messages.fetch(messageID, {
             cache : true,
             force : true
         })
