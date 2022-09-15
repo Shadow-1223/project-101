@@ -84,9 +84,9 @@ module.exports = {
         }
         
         const targetMessage = await channel.messages.fetch(messageID, {
-            cache : true,
-            force : true
-        })
+            cache: true,
+            force: true,
+        });
         
         if(!targetMessage) {
             return interaction.deferReply({
