@@ -73,7 +73,7 @@ module.exports = {
         const stuff = link.split("/")
         const channelID = stuff.pop()
         const messageID = stuff.pop()
-        const channel = interaction.guild.channel.cache.get(channelID)
+        const channel = interaction.guild.channels.cache.get(channelID)
         
         const role = interaction.options.getRole("role", true)
         if(!role) {
