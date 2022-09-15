@@ -36,7 +36,7 @@ module.exports = {
             const { customId, values, member } = interaction;
             
             if(customId === 'auto_roles') {
-                const role = interaction.options.getRole("role", true)
+                const roleId = interaction.options.getRole("role", true)
                 const component = interaction.component
                 const removed = component.options.filter((options) => {
                     return !values.includes(options.value)
@@ -51,7 +51,7 @@ module.exports = {
                 }
                 
                 await interaction.reply({
-                    content : `Gave you the <@&${role}> role`,
+                    content : `Gave you the <@&${roleId}> role`,
                     allowedMentions : {
                         roles : []
                     },
