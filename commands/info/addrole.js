@@ -50,7 +50,7 @@ module.exports = {
                 }
                 
                 await interaction.reply({
-                    content : `Gave you the <@&${'roleId'}> role`,
+                    content : `Gave you the <@&${role}> role`,
                     allowedMentions : {
                         roles : []
                     },
