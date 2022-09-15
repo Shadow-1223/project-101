@@ -51,9 +51,6 @@ module.exports = {
                 
                 await interaction.reply({
                     content : `Role Update`,
-                    allowedMentions : {
-                        roles : []
-                    },
                     ephemeral : true
                 }) 
             }
@@ -110,8 +107,7 @@ module.exports = {
         const options = [
             {
                 label : role.name,
-                value : role.id, 
-                emoji : '',
+                value : role.id,
             }
         ]
         
