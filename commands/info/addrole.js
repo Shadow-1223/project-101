@@ -23,7 +23,7 @@ module.exports = {
 
   async init(client) {
     client.on("interactionCreate", async (interaction) => {
-      if (!Interaction.isSelectMenu()) {
+      if (!interaction.isSelectMenu()) {
         return;
       }
 
