@@ -61,7 +61,7 @@ module.exports = {
             }
         })
         
-        const linkinteraction.options.getString('message_link', true)
+        const link = interaction.options.getString('message_link', true)
         const stuff = link.split('/')
         const messageID = stuff.pop()
         const channelID = stuff.pop()
