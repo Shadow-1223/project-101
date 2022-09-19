@@ -17,7 +17,7 @@ module.exports = {
         {
             name : 'role',
             description : 'Enter role in this options',
-            type : Constants.ApplicationCommandOptionTypes.ROLE,
+            type : Comstants.ApplicationCommandOptionTypes.ROLE,
             required : true
         }
     ],
@@ -37,16 +37,16 @@ module.exports = {
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
-                member.roles.remove(roleId)
-                
-                interaction.reply({
-                    content : `You no longer have <@&${roleId}> role`
-                })
-            } else {
                 member.roles.add(roleId)
                 
                 interaction.reply({
                     content : `You now have <@&${roleId}> role`
+                })
+            } else {
+                member.roles.remove(roleId)
+                
+                interaction.reply({
+                    content : `You no longer have <@&${roleId}> role`
                 })
             }
         })
@@ -61,7 +61,7 @@ module.exports = {
             }
         })
         
-        const link = interaction.options.getString('message_link', true)
+        const linkinteraction.options.getString('message_link', true)
         const stuff = link.split('/')
         const messageID = stuff.pop()
         const channelID = stuff.pop()
@@ -74,7 +74,7 @@ module.exports = {
         const role = interaction.options.getRole("role", true) 
         if(!role) {
             return interaction.reply({
-                content : 'Unknown role',
+                content : 'Unknown' role',
                 ephemeral : true
             })
         }
@@ -91,7 +91,7 @@ module.exports = {
         
         if(targetMessage.author.id !== client.user?.id) {
             return interaction.reply({
-                content : `Please provide a message ID that was sent <@${client.user?.id}>`,
+                content : `Please provide a message ID that was sent ${client.user?.id}`,
                 ephemeral: true
             })
         }
@@ -127,7 +127,7 @@ module.exports = {
         } else {
             row.addComponents(
                 new MessageSelectMenu()
-                .setCustomId(`${prefix}${role.id}`)
+                .setCustomId(`${prefix}${roleId}`)
                 .setMinValues(0)
                 .setMaxValues(1)
                 .setPlaceholder("select your role")
@@ -142,9 +142,6 @@ module.exports = {
         if(interaction) {
             interaction.reply({
                 content : `added <@&${role.id}> to the menu`,
-                allowedMentions : {
-                    roles : []
-                },
                 ephemeral : true
             })
         }
