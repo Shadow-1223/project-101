@@ -37,17 +37,17 @@ module.exports = {
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
-                member.roles.add(roleId)
-                
-                interaction.reply({
-                    content : `You now have <@&${roleId}> role`,
-                    ephemeral : true
-                })
-            } else {
                 member.roles.remove(roleId)
                 
                 interaction.reply({
                     content : `You no longer have <@&${roleId}> role`,
+                    ephemeral : true
+                })
+            } else {
+                member.roles.add(roleId)
+                
+                interaction.reply({
+                    content : `You now have <@&${roleId}> role`,
                     ephemeral : true
                 })
             }
