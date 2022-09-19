@@ -91,7 +91,7 @@ module.exports = {
         
         if(targetMessage.author.id !== client.user?.id) {
             return interaction.reply({
-                content : `Please provide a message ID that was sent ${client.user?.id}`,
+                content : `Please provide a message ID that was sent <@${client.user?.id}>`,
                 ephemeral: true
             })
         }
