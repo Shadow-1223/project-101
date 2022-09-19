@@ -74,7 +74,7 @@ module.exports = {
         const role = interaction.options.getRole("role", true) 
         if(!role) {
             return interaction.reply({
-                content : 'Unknown' role',
+                content : 'Unknown role',
                 ephemeral : true
             })
         }
