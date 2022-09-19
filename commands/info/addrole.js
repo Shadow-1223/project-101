@@ -40,13 +40,15 @@ module.exports = {
                 member.roles.add(roleId)
                 
                 interaction.reply({
-                    content : `You now have <@&${roleId}> role`
+                    content : `You now have <@&${roleId}> role`,
+                    ephemeral : true
                 })
             } else {
                 member.roles.remove(roleId)
                 
                 interaction.reply({
-                    content : `You no longer have <@&${roleId}> role`
+                    content : `You no longer have <@&${roleId}> role`,
+                    ephemeral : true
                 })
             }
         })
@@ -61,7 +63,7 @@ module.exports = {
             }
         })
         
-        const linkinteraction.options.getString('message_link', true)
+        const link = interaction.options.getString('message_link', true)
         const stuff = link.split('/')
         const messageID = stuff.pop()
         const channelID = stuff.pop()
