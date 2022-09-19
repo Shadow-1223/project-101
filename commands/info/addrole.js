@@ -127,7 +127,7 @@ module.exports = {
         } else {
             row.addComponents(
                 new MessageSelectMenu()
-                .setCustomId(`${prefix}${roleId}`)
+                .setCustomId(`${prefix}${role.id}`)
                 .setMinValues(0)
                 .setMaxValues(1)
                 .setPlaceholder("select your role")
