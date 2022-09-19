@@ -17,7 +17,7 @@ module.exports = {
         {
             name : 'role',
             description : 'Enter role in this options',
-            type : Comstants.ApplicationCommandOptionTypes.ROLE,
+            type : Constants.ApplicationCommandOptionTypes.ROLE,
             required : true
         }
     ],
