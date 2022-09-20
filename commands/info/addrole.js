@@ -68,7 +68,7 @@ module.exports = {
         const messageID = stuff.pop()
         const channelID = stuff.pop()
         const channel = interaction.guild.channels.cache.get(channelID)
-        if(!link) return interaction.reply({
+        if(!link || !channel) return interaction.reply({
             content : 'invalid link',
             ephemeral : true
         })
