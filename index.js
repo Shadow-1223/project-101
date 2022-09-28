@@ -26,11 +26,13 @@ client.on('ready', async () => {
 client.user.setActivity('ka help', { type: 'WATCHING' });
 })
 
-sdhandler.sdhandler({
-  client : client , //Supply the Client Object 
-  commandsDir : "./commands", // (Optional) The relative path to your commands folder. If nothing is provided ./commands will be taken by default
-  eventsDir : "./events" , // (Optional) The relative path to your events folder . If nothing is provided ./events will be taken by default
-  token: process.env.TOKEN ,
-  prefix : ['ka '] , // (Optional) The prefix(es) of your Bot (For legacy commands). Default is ["!"] .
-  buttonsDir : "./buttons", // (Optional) The relative path to your buttons folder. If nothing is provided , ./buttons will be taken by default
+new SDClient({
+    token : process.env.TOKEN, // Your Bot's token
+    intents : client , // An Array of Intents
+    commandsDir : "./commands", // The directory which contains command files .Default is "commands"
+    eventsDir : "./events", // The directory which contains event files .Default is "events"
+    testOnly : false, // Toggle this to true if you want to register in specific test servers . Default is "false"
+    prefix : ["ka "], // An Array of Prefixes for your bot. Default is "!"
+    guildId : [], // An Array of IDs of Test servers
+    compileFolder : "compile-folder-name" // ONLY for Typescript Projects. Specify your compile folder(out-dir)
 })
