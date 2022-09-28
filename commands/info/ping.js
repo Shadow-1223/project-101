@@ -1,19 +1,16 @@
-const { Permissions, Constants } = require("discord.js");
+const { Command , CommandMode } = require("sdhandler");
+const { Constants, Permissions } = require("discord.js")
 
-module.exports = {
-  name: 'ping',
-  description: 'Replies with a pong !',
-  permissions: [Permissions.FLAGS.SEND_MESSAGES],
-  type: Constants.ApplicationCommandTypes.CHAT_INPUT,
-  slash: true,
-  async execute({ interaction, message }) {
-    
-    if (message) {
-      await message.reply({ content: 'Pong !' })
-    }
+module.exports = new Command({
+    name : "ping", // Name of the command
+    description : "Pings the sender!", // Brief description of the command
+    mode : CommandMode.Both, // Mode of the command - Legacy , Slash or Both
+    type : 
+    async execute({message , interaction , member}){ // Command callback function
+        if(message) return message.reply({content : `Hey , ${member}`})
 
-    if (interaction) {
-      await interaction.reply({ content: 'Pong !' })
+        else {
+            return interaction.reply({content : `Hey , ${member}`})
+        }
     }
-  }
-}
+})
