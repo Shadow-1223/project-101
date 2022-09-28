@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const sdhandler = require('sdhandler')
+const { SDClient } = require('sdhandler')
 const mongoose = require('mongoose')
 
 const { Intents, Client } = require('discord.js')
