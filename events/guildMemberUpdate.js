@@ -1,54 +1,53 @@
-const { GuildMember, MessageEmbed, MessageAttachment } = require("discord.js")
+const { MessageEmbed , GuildMember , MessageAttachment } = require("discord.js")
+const { Event } = require("sdhandler")
 const Canvas = require("canvas")
 
-module.exports = {
-    name : "guildMemberUpdate",
+module.exports = new Event("guildMemberUpdate", async (oldMember , newMember , interaction) => {
     /**
-    * 
-    * @param {GuildMeber} oldMember
-    * @param {GuildMember} newMeber
+     * @param {Guildmember} oldMember
+     * @param {GuildMember} newMember
+     * 
     */
-    async run(newMember, oldMember, interaction) {
-        const { guild } = newMember
+    const { guild } = newMember
+    
+    let Thankyou = new MessageEmbed()
+    .setColor("PURPLE")
+    .setAuthor("SERVER BOOSTED", guild.iconURL({ dynamic : true , size : 512 }))
+    
+    if(!oldMember.premiumSince && newMember.premiumSince) {
+        const canvas = Canvas.createCanvas(800 , 250)
+        const ctx = canvas.getContext("2d")
         
-        const ThankyouEmbed = new MessageEmbed()
-        .setColor("PURPLE")
-        .setAuthor("SERVER BOOSTED", guild.iconURL({ dynamic : true, size : 512 }))
+        const background = await Canvas.loadImage(".../structures/Images/booster.png")
         
-        if(!oldMember.premiumSince && newMember.premiumSince) {
-            const canvas = Canvas.createCanvas(800, 250)
-            const ctx = canvas.getContext("2d")
+        ctx.strokeStyle = "#e60000"
+        cts.strokeRect(0 , 0 , canvas.height , canvas.weight)
         
-            const background = await Canvas.loadImage(".../structures/Images/booster.png")
+        ctx.font = "18px cursive"
+        ctx.textAlign = "center"
+        ctx.fillStyle = "#FFFFFF"
+        ctx.fillText(newMember.displayName , canvas.weight / 2 , canvas.height / 2)
         
-            ctx.strokeStyle = "#e60000"
-            ctx.strokeRect(0, 0, canvas.width, canvas.height)
+        const avatar = await Canvas.loadImage(newMember.user.displayAvatarURL({ format : "png" }))
         
-            ctx.font = "18px cursive"
-            ctx.textAlign = "center"
-            ctx.fillStyle = "#FFFFFF"
-            ctx.fillText(newMember.displayName, canvas.width / 2, canvas.height / 1.2)
+        ctx.beginPath()
+        ctx.arc(125 , 125 , 100 , Math.PI * 2 , true)
+        ctx.closePath()
+        ctx.clip()
+        ctx.drawImage(avatar , 25 , 25 , 200 , 200)
         
-            const avatar = await Canvas.loadImage(newMember.user.displayAvatarURL({format : "png"}))
         
-            ctx.beginPath()
-            ctx.arc(125, 125, 100, 0, Math.PI * 2, true)
-            ctx.closePath()
-            ctx.clip()
-            ctx.drawImage(avatar, 25, 25, 200, 200)
+        const attachment = new MessageAttachment(canvas.toBuffer(), "booster.png")
         
-            const attachment = new MessageAttachment(canvas.toBuffer(), "booster.png")
-            
-            ThankyouEmbed.setDescription(`<@${interaction.user.id}> just boost the server`)
-            ThankyouEmbed.setImage("attachment://booster.png")
-            
-            guild.systemChannel.send({
-                embeds : [ThankyouEmbed], 
-                files : [attachment]
-            }).catch((err) => console.log(err))
-            
-            ThankyouEmbed.setDescription("Thank you for boosting the server!")
-            newMember.send({ embeds : [ThankyouEmbed]})
-        }
+        Thankyou.setDescription(`<@&${interaction.user.id}> has boosted the server!`)
+        Thankyou.setImage("attachment://booster.pnt")
+        
+        guild.systemChannel.send({
+            embeds : [Thankyou],
+            files : [attachment]
+        })
+        
+        Thankyou.setDescription("Thank you for boosting the server")
+        newMember.send({ embeds : [Thankyou] })
     }
-}
+})
