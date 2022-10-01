@@ -10,7 +10,7 @@ module.exports = new Command({
     options : [
         {
             name : "channel",
-            description : "Specify channel you want your message to be sent!"
+            description : "Specify channel you want your message to be sent!",
             type : Constants.ApplicationCommandOptionTypes.CHANNEL,
             required : true
         },
