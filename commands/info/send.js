@@ -22,7 +22,7 @@ module.exports = new Command({
         },
         {
             name : "title",
-            description : "Type something idk maybe like 'wow'"
+            description : "Type something idk maybe like 'wow'",
             type : Constants.ApplicationCommandOptionTypes.STRING,
             required : false 
         },
