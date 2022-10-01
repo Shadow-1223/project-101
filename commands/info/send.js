@@ -1,82 +1,84 @@
-const { Permissions, Constants, MessageEmbed } = require('discord.js')
+const { Command , CommandMode } = require("sdhandler")
+const { Permissions , Constants , MessageEmbed } = require("discord.js")
 
-module.exports = {
-    name : 'send',
-    description : 'Send a message',
-    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
+module.exports = new Command({
+    name : "send",
+    description : "Send messages to specify channel",
+    mode : CommandMode.Slash,
     permissions : [Permissions.FLAGS.ADMINISTRATOR],
+    aliases : ["s"],
     options : [
         {
-            name : 'channel',
-            description : 'Specify a channel',
+            name : "channel",
+            description : "Specify channel you want your message to be sent!"
             type : Constants.ApplicationCommandOptionTypes.CHANNEL,
             required : true
         },
         {
-            name : 'message',
-            description : 'Type a Message in this options',
+            name : "message",
+            description : "Type something you like. ex: 'smh'",
             type : Constants.ApplicationCommandOptionTypes.STRING,
             required : true
         },
         {
-            name : 'title',
-            description : 'Set a title in this options and it will show on the MessageEmbeds once it got sent',
+            name : "title",
+            description : "Type something idk maybe like 'wow'"
             type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : false
+            required : false 
         },
         {
-            name : 'attachment',
-            description : 'Put a image from your gallery/album in this options and it will show in the MessageEmbed',
+            name : "attachment",
+            description : " Attach a image from your gallery/album",
             type : Constants.ApplicationCommandOptionTypes.ATTACHMENT,
-            required : false
+            required : false 
         },
         {
-            name : 'hex_color',
-            description : 'Set/Type a hex color in this options and it will show in MessageEmbed',
+            name : "hex_color",
+            description : "Type what Hex Color you want",
             type : Constants.ApplicationCommandOptionTypes.STRING,
             required : false
-        }
+        },
     ],
     
-    slash : true,
     async execute({ interaction , message , options }) {
         if(message) return message.reply({
-            content : 'The command does not have legacy command build in. Please try use slash command',
+            content : "You can't run this command on legacy command",
             allowedMentions : {
-                repliedUser: false
+                repliedUser : false
             }
         })
         
-        const channel = options.getChannel('channel')
-        const attachment = options.getAttachment('attachment')
-        const hexColor = options.getString('hex_color')
+        const channel = options.getChannel("channel")
+        const textMessage = options.getString("message")
+        const title = options.getString("title")
         
-        const text = options.getString('message')
-        const title = options.getString('title')
+        const attachment = options.getAttachment("attachment")
+        const hexColor = options.getString("hex_color")
         const embeds = []
         
         if(attachment) embeds.push(
             new MessageEmbed()
-               .setImage(attachment.url)
-               .setColor(hexColor)
+            .setImage(attachment)
+            .setColor(hexColor.toUpperCase())
         )
         
         const embed = new MessageEmbed()
         if(title) embed.setTitle(title)
-        embed.setDescription(text)
+        embed.setDescription(textMessage)
         try {
             embed.setColor(hexColor)
         } catch {
             embed.setColor(null)
         }
+        
         embeds.push(embed)
         channel.send({ embeds : embeds })
         
         if(interaction) {
             interaction.reply({
-                content : `Your message was sent in ${channel}`,
-                ephemeral : true,
+                content : `Your message has been sent in ${channel}`,
+                ephemeral : true
             })
         }
     }
-}
+})
