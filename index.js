@@ -28,7 +28,7 @@ client.user.setActivity('ka help', { type: 'WATCHING' });
 
 new SDClient({
     token : process.env.TOKEN, // Your Bot's token
-    intents : client , // An Array of Intents
+    intents : [client] , // An Array of Intents
     commandsDir : "./commands", // The directory which contains command files .Default is "commands"
     eventsDir : "./events", // The directory which contains event files .Default is "events"
     testOnly : false, // Toggle this to true if you want to register in specific test servers . Default is "false"
