@@ -121,7 +121,7 @@ module.exports = new Command({
         const options = [
             {
                 label : role.name,
-                value : role.id
+                value : role.id,
                 emoji : { name : emoji.name , id : emoji.id }
             }
         ]
