@@ -1,39 +1,52 @@
-const { Constants, Permissions, MessageActionRow, MessageSelectMenu } = require("discord.js")
+const { Command , CommandMode } = require("sdhandler")
+const { Constants , Permissions , MessageSelectMenu , MessageActionRow } = require("discord.js")
 const prefix = 'auto_roles'
 
-module.exports = {
-    name : 'addrole',
-    description : 'add a role to the menu',
+module.exports = new Command({
+    name : 'setRoles',
+    description : 'Set the role to the message',
+    mode : CommandMode.Slash,
     type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     permissions : [Permissions.FLAGS.ADMINISTRATOR],
-    requiredRoles : ['985756703087788062' , '986179620640550952'],
     options : [
         {
             name : 'message_link',
-            description : 'Enter message link',
+            description : 'Paste the message link here',
             type : Constants.ApplicationCommandOptionTypes.STRING,
             required : true
         },
         {
             name : 'role',
-            description : 'Enter role in this options',
-            type : Constants.ApplicationCommandOptionTypes.ROLE,
+            description 'Mention a specific role you want ex: "@role", etc.',
+            type : Constants.ApplicationCommandOptionTypes.STRING,
+            required : true
+        },
+        {
+            name : 'emoji',
+            description : 'Put whatever emoji you want',
+            type : Constant.ApplicationCommandOptionTypes.STRING,
+            required : false
+        },
+        {
+            name : "placeholder",
+            description : 'Type any placeholder name like "select your roles"',
+            type : Constants.ApplicationCommandOptionTypes.STRING,
             required : true
         }
     ],
     
     async init(client) {
-        client.on('interactionCreate', async (interaction) => {
+        client.on('interactionCreate', async interaction => {
             if(!interaction.isSelectMenu()) {
-                return;
+                return
             }
             
-            const { guild, customId } = interaction
+            const { guild , customId } = interaction
             if(!guild || !customId.startsWith(prefix)) {
-                return;
+                return
             }
             
-            const roleId = customId.replace(prefix, '')
+            const roleId = customId.replace(prefix , '')
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
@@ -54,32 +67,34 @@ module.exports = {
         })
     },
     
-    slash : true,
-    async execute({ interaction , message , client }) {
-        if(message) return message.reply({
-            content : 'this command does not have legacy cmd on',
-            allowedMentions : {
-                repliedUser : false
-            }
-        })
-        
-        const link = interaction.options.getString('message_link', true)
-        const stuff = link.split('/')
-        const messageID = stuff.pop()
+    async execute({ interaction , options , client }) {
+        const link = options.getString("message_link", true)
+        const stuff = link.split("/")
         const channelID = stuff.pop()
-        const channel = interaction.guild.channels.cache.get(channelID)
+        const messageID = stuff.pop()
+        const channel = interaction.guild.channels.get(channelID)
         if(!link || !channel) return interaction.reply({
-            content : 'Invalid link. Please Enter ***REAL*** message link. ',
+            content : "Invalid Link\n", "nice try breaking my bot -migzchi#9798",
             ephemeral : true
         })
         
-        const role = interaction.options.getRole("role", true) 
-        if(!role) {
-            return interaction.reply({
-                content : 'Unknown role',
-                ephemeral : true
-            })
-        }
+        const emoji = interaction.options.getString("emoji")
+        if(!emoji) return interaction.reply({
+            content : "Invalid emoji please try again later.",
+            ephemeral : true
+        })
+        
+        const placeHolder = interaction.options.getString("placeholder", true)
+        if(!placeHolder) return interaction.reply({
+            content : "Invalid PlaceHolder",
+            ephemeral : true
+        })
+        
+        const role = option.getRole("role", true)
+        if(!role) return interaction.reply({
+            content : "Unknown role",
+            ephemeral : true
+        })
         
         const targetMessage = await channel.messages.fetch(messageID, {
             cache : true,
@@ -87,14 +102,14 @@ module.exports = {
         })
         
         if(!targetMessage) return interaction.reply({
-            content : 'Unknown message ID',
+            content : "Unknown message ID",
             ephemeral : true
         })
         
         if(targetMessage.author.id !== client.user?.id) {
             return interaction.reply({
-                content : `Please provide a message ID that was sent ${client.user?.id}`,
-                ephemeral: true
+                content : `Please provide a message ID that was sent <@${client.user?.id}>`,
+                ephemeral : true
             })
         }
         
@@ -107,6 +122,7 @@ module.exports = {
             {
                 label : role.name,
                 value : role.id
+                emoji : { name : emoji.name , id : emoji.id }
             }
         ]
         
@@ -117,9 +133,9 @@ module.exports = {
                     return interaction.reply({
                         content : `<@&${o.value}> is already part of this menu`,
                         allowedMentions : {
-                            roles : [],
+                            roles : []
                         },
-                        ephemeral: true
+                        ephemeral : true
                     })
                 }
             }
@@ -132,7 +148,7 @@ module.exports = {
                 .setCustomId(`${prefix}${roleId}`)
                 .setMinValues(0)
                 .setMaxValues(1)
-                .setPlaceholder("select your role")
+                .setPlaceHolder(placeHolder)
                 .addOptions(options)
             )
         }
@@ -148,4 +164,4 @@ module.exports = {
             })
         }
     }
-}
+})
