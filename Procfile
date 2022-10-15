@@ -1,2 +1,2 @@
-web: node index.js
-Worker: node index.js
+web: /project-101-web
+worker: /project-101-worker
