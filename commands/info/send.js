@@ -4,6 +4,7 @@ const { Permissions , Constants , MessageEmbed } = require("discord.js")
 module.exports = new Command({
     name : "send",
     description : "Send messages to specify channel",
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     mode : CommandMode.Slash,
     permissions : [Permissions.FLAGS.ADMINISTRATOR],
     aliases : ["s"],
@@ -54,6 +55,11 @@ module.exports = new Command({
         
         const attachment = options.getAttachment("attachment")
         const hexColor = options.getString("hex_color")
+        if(!hexColor) return interaction.reply({
+            content : "Invalid HexColor",
+            ephemeral : true
+        })
+        
         const embeds = []
         
         if(attachment) embeds.push(
