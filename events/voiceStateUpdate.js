@@ -1,8 +1,9 @@
+const client = require("../index.js")
 const { Collection } = require("discord.js")
 const { Event } = require("sdhandler")
 const voiceCollection = new Collection()
 
-module.exports = new Event("voiceStateUpdate", async ( oldState , newState , client ) => {
+module.exports = new Event("voiceStateUpdate", async ( oldState , newState ) => {
     const user = await client.users.fetch(newState.id)
     const member = newState.guild.member(user)
     
