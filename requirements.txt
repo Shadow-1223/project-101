@@ -1,7 +1,0 @@
-discord.js
-sdhandler
-mongoose
-canvas
-dotenv
-ms
-nodemon
