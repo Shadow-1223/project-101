@@ -17,15 +17,15 @@ const client = new Client({
     ]
 })
 
-client.on("ready", async () {
+client.on("ready", async () => {
     await mongoose.connect(
         process.env.MONGO_URI,
         {
             keepAlive : true
         }
     )
-    // set the bot activities
-    client.user.setActivity("ka help (currently in maintenance please wait until we fix it the problem)", { type : "STREAMING" })
+    //set activity of the bot.
+    client.user.setActivity("ka help (its now online thank you for your patience)", { type : "STREAMING" })
 })
 
 new SDClient({
