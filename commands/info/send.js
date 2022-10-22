@@ -1,49 +1,48 @@
-const { Command , CommandMode } = require("sdhandler")
 const { Permissions , Constants , MessageEmbed } = require("discord.js")
 
-module.exports = new Command({
-    name : "send",
-    description : "Send messages to specify channel",
-    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
-    mode : CommandMode.Slash,
-    permissions : [Permissions.FLAGS.ADMINISTRATOR],
-    aliases : ["s"],
+module.exports = {
+    name : "setup_messages" ,
+    description : "Send messages to specify channel" ,
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
+    permissions : [Permissions.FLAGS.ADMINISTRATOR] ,
+    aliases : ["Sm"] ,
+    slash : true ,
     options : [
         {
-            name : "channel",
-            description : "Specify channel you want your message to be sent!",
-            type : Constants.ApplicationCommandOptionTypes.CHANNEL,
-            required : true
+            name : "channel" ,
+            description : "Select a channel were your message to be sent" ,
+            required : true ,
+            type : Constants.ApplicationCommandOptionTypes.CHANNEL ,
         },
         {
-            name : "message",
-            description : "Type something you like. ex: 'smh'",
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : true
+            name : "message" ,
+            description : "Type a word like 'etc' " ,
+            required : true ,
+            type : Constants.ApplicationCommandOptionTypes.STRING
         },
         {
-            name : "title",
-            description : "Type something idk maybe like 'wow'",
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : false 
+            name : "title" ,
+            description : "Write something about your wolrd or news using title" ,
+            required : true ,
+            type : Constants.ApplicationCommandOptionTypes.STRING
         },
         {
             name : "attachment",
-            description : " Attach a image from your gallery/album",
-            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT,
-            required : false 
+            description : "Attach any image from your gallery/album" ,
+            required : true ,
+            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT
         },
         {
             name : "hex_color",
-            description : "Type what Hex Color you want",
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : false
-        },
+            description : "Paste or type what embed color you want to put" ,
+            required : true ,
+            type : Constants.ApplicationCommandOptionTypes.STRING
+        }
     ],
     
     async execute({ interaction , message , options }) {
         if(message) return message.reply({
-            content : "You can't run this command on legacy command",
+            content : "You can't run `setup_messages` command on legacy command" ,
             allowedMentions : {
                 repliedUser : false
             }
@@ -51,16 +50,16 @@ module.exports = new Command({
         
         const channel = options.getChannel("channel")
         const textMessage = options.getString("message")
-        const title = options.getString("title")
+        const embedTitle = options.getString("title")
         
         const attachment = options.getAttachment("attachment")
         const hexColor = options.getString("hex_color")
         if(!hexColor) return interaction.reply({
-            content : "Invalid HexColor",
+            content : "invalid embed color" ,
             ephemeral : true
         })
         
-        const embeds = []
+        const textEmbeds = []
         
         if(attachment) embeds.push(
             new MessageEmbed()
@@ -69,22 +68,22 @@ module.exports = new Command({
         )
         
         const embed = new MessageEmbed()
-        if(title) embed.setTitle(title)
+        if(title) embed.setTitle(embedTitle)
         embed.setDescription(textMessage)
         try {
-            embed.setColor(hexColor)
+            embed.setColor(hexColor.toUpperCase())
         } catch {
             embed.setColor(null)
         }
         
-        embeds.push(embed)
-        channel.send({ embeds : embeds })
+        textEmbeds.push(embed)
+        channel.send({ embeds : textEmbeds })
         
         if(interaction) {
             interaction.reply({
-                content : `Your message has been sent in ${channel}`,
-                ephemeral : true
+                content : `Your message has been in ${channel}`
+                ephemeral: true
             })
         }
     }
-})
+}
