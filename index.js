@@ -1,6 +1,6 @@
 require('dotenv/config')
 
-const { SDClient } = require('sdhandler')
+const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
 const { Intents, Client } = require('discord.js')
 
@@ -28,13 +28,11 @@ client.on("ready", async () => {
     client.user.setActivity("ka help (its now online thank you for your patience)", { type : "STREAMING" })
 })
 
-new SDClient({
-    token : process.env.TOKEN, // Your Bot's token
-    intents : client.options.intents , // An Array of Intents
-    commandsDir : "./commands", // The directory which contains command files .Default is "commands"
-    eventsDir : "./events", // The directory which contains event files .Default is "events"
-    testOnly : false, // Toggle this to true if you want to register in specific test servers . Default is "false"
-    prefix : ["ka "], // An Array of Prefixes for your bot. Default is "!"
-    guildId : [], // An Array of IDs of Test servers
-    compileFolder : "compile-folder-name" // ONLY for Typescript Projects. Specify your compile folder(out-dir)
+sdhandler.sdhandler({
+    client : client ,
+    commandsDir : "./commands" ,
+    eventsDir : "./events" ,
+    token : process.env.TOKEN ,
+    prefix : ["ka "] ,
+    buttonsDir : "./buttons"
 })
