@@ -11,13 +11,58 @@ module.exports = {
     async execute({ interaction , args , messages , client }) {
         if(interaction) {
             const ping =  new Date().getTime() - interaction.createdTimestamp
-            const time = Math.round(client.ws.ping)
+            const pingTime = Math.round(client.ws.ping)
             
             const pingEmbed = new MessageEmbed()
+            .setColor("RANDOM")
             .setTitle("🏓 Pong!")
-            .setDescription("**Lentacy:** \n " + `${ping}ms` + "\n **API** \n")
+            .addFields(
+                [
+                    {
+                        name : "Lentacy" ,
+                        value : `${ping}ms`
+                    },
+                    {
+                        name : "API" ,
+                        value : `${pingTime}ms`
+                    }
+                ]
+            )
             
-            interaction.reply({ embeds : [pingEmbed] })
+            interaction.reply({
+                embeds : [pingEmbed] 
+                allowedMentions : {
+                    repliedUser : false
+                }
+            })
+        }
+        
+        if(message) {
+            const ping = new Date().getTime() - message.createdTimestamp
+            const wsPing = Math.round(client.ws.ping)
+            
+            const timeEmbed = new MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle("🏓 Pong")
+            .addFields(
+                [
+                    {
+                        name : "Lentacy" ,
+                        value : `${ping}ms`
+                    },
+                    {
+                        name : "API" ,
+                        value : `${wsPing}ms`
+                    }
+                ]
+            )
+            
+            message.reply({
+                embeds : [timeEmbed]
+                allowedMentions : {
+                    repliedUser : true
+                }
+            })
         }
     }
 }
