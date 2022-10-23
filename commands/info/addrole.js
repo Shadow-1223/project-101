@@ -1,42 +1,41 @@
-const { Command , CommandMode } = require("sdhandler")
-const { Constants , Permissions , MessageSelectMenu , MessageActionRow } = require("discord.js")
-const prefix = 'auto_roles'
-
-module.exports = new Command({
-    name : 'setRoles',
-    description : 'Set the role to the message',
-    mode : CommandMode.Slash,
-    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
-    permissions : [Permissions.FLAGS.ADMINISTRATOR],
-    options : [
-        {
-            name : 'message_link',
-            description : 'Paste the message link here',
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : true
-        },
-        {
-            name : 'role',
-            description 'Mention a specific role you want ex: "@role", etc.',
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : true
-        },
-        {
-            name : 'emoji',
-            description : 'Put whatever emoji you want',
-            type : Constant.ApplicationCommandOptionTypes.STRING,
-            required : false
-        },
-        {
-            name : "placeholder",
-            description : 'Type any placeholder name like "select your roles"',
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : true
-        }
+ const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
+ const prefix = "auto_roles"
+ 
+ module.exports = {
+     name : "setRoles" ,
+     description : "Set a role in the messages" ,
+     permission : [PERMISSIONS.FLAGS.ADMINISTRATOR] ,
+     type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
+     slash : true ,
+     options : [
+         {
+             name : "message_link" ,
+             description : "Enter a message link" ,
+             required : true
+             type : Constants.ApplicationCommandOptionTypes.STRING ,
+         },
+         {
+             name : "roles" ,
+             description : "Select a specific role you wanna put on the selection menu" ,
+             required : true ,
+             type : Constants.ApplicationCommandOptionTypes.ROLE
+         },
+         {
+             name : "emoji" ,
+             description : "Select a emoji you want" ,
+             required : false ,
+             type : Constants.ApplicationCommandOptionTypes.STRING
+         },
+         {
+             name : "placeholder" ,
+             description : "Type a placeholder name" ,
+             required : true ,
+             type : Constants.ApplicationCommandOptionTypes.STRING
+         }
     ],
     
     async init(client) {
-        client.on('interactionCreate', async interaction => {
+        client.on("interactionCreate", async ( interaction ) => {
             if(!interaction.isSelectMenu()) {
                 return
             }
@@ -46,69 +45,69 @@ module.exports = new Command({
                 return
             }
             
-            const roleId = customId.replace(prefix , '')
+            const roleId = customId.replace(prefix , "")
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
                 member.roles.remove(roleId)
                 
                 interaction.reply({
-                    content : `You no longer have <@&${roleId}> role`,
+                    content : `You no longer have <@&${roleId}> roles` ,
                     ephemeral : true
                 })
             } else {
                 member.roles.add(roleId)
                 
                 interaction.reply({
-                    content : `You now have <@&${roleId}> role`,
+                    content : `You now have <@&${roleId}> roles` ,
                     ephemeral : true
                 })
             }
         })
     },
-    
-    async execute({ interaction , options , client }) {
-        const link = options.getString("message_link", true)
+     
+    async execute({ interaction , client , options }) {
+        const link = options.getString("message_link" , true)
         const stuff = link.split("/")
-        const channelID = stuff.pop()
         const messageID = stuff.pop()
+        const channelID = stuff.pop()
         const channel = interaction.guild.channels.get(channelID)
         if(!link || !channel) return interaction.reply({
-            content : "Invalid Link\n", "nice try breaking my bot -migzchi#9798",
+            content : "Invalid link.\n" , "Please don't some link are not real message link" ,
             ephemeral : true
         })
         
-        const emoji = interaction.options.getString("emoji")
+        const emoji = options.getString("emoji")
         if(!emoji) return interaction.reply({
-            content : "Invalid emoji please try again later.",
+            content : "Invalid emoji, please try again later" ,
             ephemeral : true
         })
         
-        const placeHolder = interaction.options.getString("placeholder", true)
+        const placeHolder = options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
-            content : "Invalid PlaceHolder",
+            content : "Invalid PlaceHolder name" ,
             ephemeral : true
         })
         
-        const role = option.getRole("role", true)
+        const role = options.getRole("role" , true)
         if(!role) return interaction.reply({
-            content : "Unknown role",
+            content : "Unknown roles" ,
             ephemeral : true
         })
         
-        const targetMessage = await channel.messages.fetch(messageID, {
-            cache : true,
+        const targetMessage = await channel.messages.fetch(messageID , {
+            cache : true ,
             force : true
         })
         
         if(!targetMessage) return interaction.reply({
-            content : "Unknown message ID",
+            content : "Unknown messageID" ,
             ephemeral : true
         })
         
         if(targetMessage.author.id !== client.user?.id) {
             return interaction.reply({
-                content : `Please provide a message ID that was sent <@${client.user?.id}>`,
+                content : `Please provide a messageID that was sent <@${client.user?.id}>` ,
                 ephemeral : true
             })
         }
@@ -120,8 +119,8 @@ module.exports = new Command({
         
         const options = [
             {
-                label : role.name,
-                value : role.id,
+                label : role.name ,
+                value : role.id ,
                 emoji : { name : emoji.name , id : emoji.id }
             }
         ]
@@ -131,10 +130,10 @@ module.exports = new Command({
             for (const o of menu.options) {
                 if(o.value === options[0].value) {
                     return interaction.reply({
-                        content : `<@&${o.value}> is already part of this menu`,
+                        content : `<@&${o.value}> is already part of this menu` ,
                         allowedMentions : {
                             roles : []
-                        },
+                        } ,
                         ephemeral : true
                     })
                 }
@@ -154,14 +153,14 @@ module.exports = new Command({
         }
         
         targetMessage.edit({
-            components : [row]
+            components : [roe]
         })
         
         if(interaction) {
             interaction.reply({
-                content : `added <@&${role.id}> to the menu`,
+                content : `added <@&${role.id}> to the menu` ,
                 ephemeral : true
             })
         }
     }
-})
+ }
