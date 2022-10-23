@@ -17,7 +17,7 @@ module.exports = {
             .setTitle("🏓 Pong!")
             .setDescription("**Lentacy:** \n " + `${ping}ms` + "\n **API** \n")
             
-            interaction.reply({ embeds : pingEmbed })
+            interaction.reply({ embeds : [pingEmbed] })
         }
     }
 }
