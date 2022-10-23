@@ -30,7 +30,7 @@ module.exports = {
             )
             
             interaction.reply({
-                embeds : [pingEmbed] 
+                embeds : [pingEmbed] ,
                 allowedMentions : {
                     repliedUser : false
                 }
@@ -58,7 +58,7 @@ module.exports = {
             )
             
             message.reply({
-                embeds : [timeEmbed]
+                embeds : [timeEmbed] ,
                 allowedMentions : {
                     repliedUser : true
                 }
