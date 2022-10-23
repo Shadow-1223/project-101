@@ -73,7 +73,7 @@
         const channelID = stuff.pop()
         const channel = interaction.guild.channels.get(channelID)
         if(!link || !channel) return interaction.reply({
-            content : "Invalid link.\n" , "Please don't some link are not real message link" ,
+            content : "Invalid link.\n Please don't some link are not real message link" ,
             ephemeral : true
         })
         
