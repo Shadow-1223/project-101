@@ -1,3 +1,4 @@
+const { MessageAttachment } = require("discord.js")
 const Canvas = require("canvas")
 
 module.exports = {
@@ -33,7 +34,7 @@ module.exports = {
         .then(img => {
             canvas.context.drawImage(img, 393, 47, 238, 238);
         })
-        let atta = new Discord.MessageAttachment(canvas.create.toBuffer(), `welcome-${member.id}.png`)
+        let atta = new MessageAttachment(canvas.create.toBuffer(), `welcome-${member.id}.png`)
         try {
             welcomechannel.send(`:wave: Hello ${member}, welcome to ${member.guild.name}!`, atta)
         } catch (error) {
