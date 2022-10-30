@@ -19,7 +19,7 @@ module.exports = {
     async execute({ interaction , client , options }) {
         let animeEmbed = new MessageEmbed()
         .setTitle("Finding Anime...")
-        setDescription("Please Wait...")
+        .setDescription("Please Wait...")
         .setColor("#0099ff")
         
         let message = await interaction.reply({
@@ -34,18 +34,18 @@ module.exports = {
                 console.log(animeId)
                 let foundAnime = await animeFinder.getAnimeById(animeId)
                 if(!foundAnime) {
-                    animeEmbed.setTitle("Anime Not Found")
-                    animeEmbed.setDescription("Please Try Again")
-                    animeEmbed.setColor("#ff0000")
+                    animeEmbed.title = "Anime Not Found"
+                    animeEmbed.description = "Please Try Again"
+                    animeEmbed.color = "#ff0000"
                     
                     return message.edit({
                         embeds : [animeEmbed]
                     })
                 }
                 
-                animeEmbed.setTitle(foundAnime.title)
-                animeEmbed.setDescription(foundAnime.description)
-                animeEmbed.setColor("#0099ff")
+                animeEmbed.title = foundAnime.title
+                animeEmbed.description = foundAnime.description
+                animeEmbed.color = "#0099ff"
                 animeEmbed.setThumbnail(foundAnime.image)
                 animeEmbed.addField("Type" , foundAnime.type , true)
                 animeEmbed.addField("Episode" , foundAnime.episodes.toString() , true)
@@ -65,9 +65,9 @@ module.exports = {
                 try {
                     let foundAnime = await animeFinder.getAnimeByName(options[0].value)
                     if(!foundAnime) {
-                        animeEmbed.setTitle("Anime Not Found")
-                        animeEmbed.setDescription("Please try Again")
-                        animeEmbed.setColor("#ff0000")
+                        animeEmbed.title = "Anime Not Found"
+                        animeEmbed.description = "Please try Again"
+                        animeEmbed.color = "#ff0000"
                         
                         return message.edit({
                             embeds : [animeEmbed]
@@ -79,9 +79,9 @@ module.exports = {
                     }
                     
                     console.log(foundAnime)
-                    animeEmbed.setTitle(foundAnime.title)
-                    animeEmbed.setDescription(foundAnime.description)
-                    animeEmbed.setColor("#0099ff")
+                    animeEmbed.title = foundAnime.title
+                    animeEmbed.description = foundAnime.description
+                    animeEmbed.color = "#0099ff"
                     animeEmbed.setThumbnail(foundAnime.image)
                     animeEmbed.addField("Type" , foundAnime.type , true)
                     animeEmbed.addField("Episode" , foundAnime.episodes.toString() , true)
