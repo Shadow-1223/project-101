@@ -61,7 +61,7 @@ module.exports = {
         
         const textEmbeds = []
         
-        if(attachment) embeds.push(
+        if(attachment) textEmbeds.push(
             new MessageEmbed()
             .setImage(attachment)
             .setColor(hexColor.toUpperCase())
