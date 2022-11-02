@@ -10,7 +10,6 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGES_REACTIONS,
         Intents.FLAGS.GUILD_PRESENCE,
-        Intents.FLAGS.MESSAGE_CONTENT,
         Intents.FLAGS.GUILD_BANS,
         Intents.FLAGS.GUILD_MEMBERS,
         Intents.FLAGS.GUILD_EMOJI_AND_STICKERS,
@@ -19,7 +18,7 @@ const client = new Client({
 
 client.on("ready", async () => {
     await mongoose.connect(
-        process.env.MONGO_URI,
+        process.env.MONGO_URI ,
         {
             keepAlive : true
         }
