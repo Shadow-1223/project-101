@@ -6,13 +6,13 @@ const { GatewayIntentBits , Client } = require('discord.js')
 
 const client = new Client({
     intents : [
-        GatewayIntentBits.FLAGS.GUILDS,
-        GatewayIntentBits.FLAGS.GUILD_MESSAGES,
-        GatewayIntentBits.FLAGS.GUILD_MESSAGES_REACTIONS,
-        GatewayIntentBits.FLAGS.GUILD_PRESENCE,
-        GatewayIntentBits.FLAGS.GUILD_BANS,
-        GatewayIntentBits.FLAGS.GUILD_MEMBERS,
-        GatewayIntentBits.FLAGS.GUILD_EMOJI_AND_STICKERS,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildPresence,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildEmojisAndStickers,
     ]
 })
 
