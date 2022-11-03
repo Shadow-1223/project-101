@@ -8,11 +8,11 @@ const client = new Client({
     intents : [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGES_REACTIONS,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         Intents.FLAGS.GUILD_PRESENCE,
         Intents.FLAGS.GUILD_BANS,
         Intents.FLAGS.GUILD_MEMBERS,
-        Intents.FLAGS.GUILD_EMOJI_AND_STICKERS,
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
     ]
 })
 
