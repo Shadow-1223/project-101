@@ -2,7 +2,7 @@
  const prefix = "auto_roles"
  
  module.exports = {
-     name : "setRoles" ,
+     name : "setroles" ,
      description : "Set a role in the messages" ,
      permission : [PERMISSIONS.FLAGS.ADMINISTRATOR] ,
      type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
@@ -30,7 +30,7 @@
              name : "placeholder" ,
              description : "Type a placeholder name" ,
              required : true ,
-             type : Constants.ApplicationCommandOptionTypes.STRING
+             type: Constants.ApplicationCommandOptionTypes.STRING
          }
     ],
     
