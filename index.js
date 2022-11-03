@@ -2,17 +2,17 @@ require('dotenv/config')
 
 const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
-const { Intents, Client } = require('discord.js')
+const { GatewayIntentBits , Client } = require('discord.js')
 
 const client = new Client({
     intents : [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_PRESENCE,
-        Intents.FLAGS.GUILD_BANS,
-        Intents.FLAGS.GUILD_MEMBERS,
-        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+        GatewayIntentBits.GUILDS,
+        GatewayIntentBits.GUILD_MESSAGES,
+        GatewayIntentBits.GUILD_MESSAGES_REACTIONS,
+        GatewayIntentBits.GUILD_PRESENCE,
+        GatewayIntentBits.GUILD_BANS,
+        GatewayIntentBits.GUILD_MEMBERS,
+        GatewayIntentBits.GUILD_EMOJI_AND_STICKERS,
     ]
 })
 
