@@ -11,7 +11,7 @@
          {
              name : "message_link" ,
              description : "Enter a message link" ,
-             required : true
+             required : true ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
          },
          {
@@ -30,7 +30,7 @@
              name : "placeholder" ,
              description : "Type a placeholder name" ,
              required : true ,
-             type: Constants.ApplicationCommandOptionTypes.STRING
+             type : Constants.ApplicationCommandOptionTypes.STRING
          }
     ],
     
