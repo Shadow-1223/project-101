@@ -6,7 +6,7 @@ module.exports = {
     description : "Find anime by name or ID" ,
     permissions : [Permissions.FLAGS.SEND_MESSAGES] ,
     slash : true ,
-    options : [
+    options: [
         {
             name : "anime" ,
             description : "Please Enter anime name or ID" ,
