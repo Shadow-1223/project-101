@@ -4,7 +4,7 @@
  module.exports = {
      name : "setroles" ,
      description : "Set a role in the messages" ,
-     permission : [Pemissions.FLAGS.ADMINISTRATOR] ,
+     permission : [Permissions.FLAGS.ADMINISTRATOR] ,
      type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
      slash : true ,
      options : [
