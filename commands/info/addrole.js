@@ -66,8 +66,8 @@
         })
     },
      
-    async execute({ interaction , client , options }) {
-        const link = options.getString("message_link" , true)
+    async execute({ interaction , client }) {
+        const link = interaction.options.getString("message_link" , true)
         const stuff = link.split("/")
         const messageID = stuff.pop()
         const channelID = stuff.pop()
@@ -77,19 +77,19 @@
             ephemeral : true
         })
         
-        const emoji = options.getString("emoji")
+        const emoji = interaction.options.getString("emoji")
         if(!emoji) return interaction.reply({
             content : "Invalid emoji, please try again later" ,
             ephemeral : true
         })
         
-        const placeHolder = options.getString("placeholder" , true)
+        const placeHolder = interaction.options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
             ephemeral : true
         })
         
-        const role = options.getRole("role" , true)
+        const role = interaction.options.getRole("role" , true)
         if(!role) return interaction.reply({
             content : "Unknown roles" ,
             ephemeral : true
