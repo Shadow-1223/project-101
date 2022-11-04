@@ -76,7 +76,7 @@ module.exports = {
                 animeEmbed.description = foundAnime.description
                 animeEmbed.color = "#0099ff"
                 animeEmbed.addField("Type" , foundAnime.type , true)
-                animeEmbed.addField("Episode" foundAnime.episodes.toString() , true)
+                animeEmbed.addField("Episode" , foundAnime.episodes.toString() , true)
                 animeEmbed.addField("Status" , foundAnime.statistics.status , true)
                 animeEmbed.addField("Score" , foundAnime.statistics?.score.toString() || foundAnime.score.toString() , true)
                 animeEmbed.addField("Scored by" , foundAnime.statistics?.scored_by.toString() || foundAnime.scored_by.toString() , true)
