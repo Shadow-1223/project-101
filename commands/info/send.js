@@ -11,32 +11,32 @@ module.exports = {
         {
             name : "channel" ,
             description : "Select a channel were your message to be sent" ,
-            required : true ,
             type : Constants.ApplicationCommandOptionTypes.CHANNEL ,
+            required : true 
         },
         {
             name : "message" ,
             description : "Type a word like 'etc' " ,
-            required : true ,
-            type : Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING ,
+            required : true 
         },
         {
             name : "title" ,
             description : "Write something about your wolrd or news using title" ,
-            required : true ,
-            type : Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING ,
+            required : false
         },
         {
             name : "attachment",
             description : "Attach any image from your gallery/album" ,
-            required : true ,
-            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT
+            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT ,
+            required : false ,
         },
         {
             name : "hex_color",
             description : "Paste or type what embed color you want to put" ,
-            required : true ,
-            type : Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING ,
+            required : false
         }
     ],
     
