@@ -11,8 +11,8 @@ module.exports = {
         {
             name : "message" ,
             description : "Write a words" ,
-            required : true ,
-            type : Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING ,
+            required : true
         }
     ],
     
