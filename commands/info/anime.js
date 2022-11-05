@@ -10,8 +10,8 @@ module.exports = {
         {
             name : "anime",
             description : "Please Enter anime name or ID",
-            required : true,
-            type : Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING,
+            required : true
         }
     ] ,
     
