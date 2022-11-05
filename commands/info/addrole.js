@@ -11,26 +11,26 @@
          {
              name : "message_link" ,
              description : "Enter a message link" ,
-             required : true ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
+             required : true ,
          },
          {
              name : "roles" ,
              description : "Select a specific role you wanna put on the selection menu" ,
-             required : true ,
-             type : Constants.ApplicationCommandOptionTypes.ROLE
+             type : Constants.ApplicationCommandOptionTypes.ROLE ,
+             required : true
          },
          {
              name : "emoji" ,
              description : "Select a emoji you want" ,
+             type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : false ,
-             type : Constants.ApplicationCommandOptionTypes.STRING
          },
          {
              name : "placeholder" ,
              description : "Type a placeholder name" ,
-             required : true ,
-             type : Constants.ApplicationCommandOptionTypes.STRING
+             type : Constants.ApplicationCommandOptionTypes.STRING ,
+             required : true
          }
     ],
     
