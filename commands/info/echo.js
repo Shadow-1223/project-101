@@ -6,7 +6,7 @@ module.exports = {
     permissions : [Permissions.FLAGS.SEND_MESSAGES] ,
     type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
     aliases : ["tell" , "say"] ,
-    slash : true
+    slash : true ,
     options : [
         {
             name : "message" ,
