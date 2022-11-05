@@ -6,7 +6,7 @@ module.exports = {
     description : 'Gives a member a timeout.',
     slash : true,
     permissions : [Permissions.FLAGS.MODERATE_MEMBERS],
-    type : Discord.Constants.ApplicationCommandTypes.CHAT_INPUT,
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     options : [
         {
             name : 'member',
