@@ -81,7 +81,7 @@ module.exports = {
         
         if(interaction) {
             interaction.reply({
-                content : `Your message has been in ${channel}`
+                content : `Your message has been in ${channel}` ,
                 ephemeral: true
             })
         }
