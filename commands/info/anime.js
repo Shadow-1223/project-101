@@ -2,15 +2,15 @@ const { MessageEmbed , Permissions , Constants } = require("discord.js")
 const anime = require("../../utils/anime.js")
 
 module.exports = {
-    name : "anime_finder" ,
-    description : "Find anime by name or ID" ,
-    permissions : [Permissions.FLAGS.SEND_MESSAGES] ,
-    slash : true ,
-    options: [
+    name : "anime_finder",
+    description : "Find anime by name or ID",
+    permissions : [Permissions.FLAGS.SEND_MESSAGES],
+    slash : true,
+    options : [
         {
-            name : "anime" ,
-            description : "Please Enter anime name or ID" ,
-            required : true ,
+            name : "anime",
+            description : "Please Enter anime name or ID",
+            required : true,
             type : Constants.ApplicationCommandOptionTypes.STRING
         }
     ] ,
@@ -22,7 +22,7 @@ module.exports = {
         .setColor("#0099ff")
         
         let message = await interaction.reply({
-            embeds : [animeEmbed] ,
+            embeds : [animeEmbed],
             fetchReply : true
         })
         
@@ -44,17 +44,17 @@ module.exports = {
                 animeEmbed.description = foundAnime.description
                 animeEmbed.color = "#0099ff"
                 animeEmbed.setThumbnail(foundAnime.image)
-                animeEmbed.addField("Type" , foundAnime.type , true)
-                animeEmbed.addField("Episode" , foundAnime.episodes.toString() , true)
-                animeEmbed.addField("Status" , foundAnime.statistics.status , true)
-                animeEmbed.addField("Score" , foundAnime.statistics.score.toString() , true)
-                animeEmbed.addField("Scored by" , foundAnime.statistics.scored_by.toString() , true)
-                animeEmbed.addField("Rank" , foundAnime.statistics.rank.toString() , true)
-                animeEmbed.addField("Popularity" , foundAnime.statistics.popurlarity.toString() , true)
-                animeEmbed.addField("Members" , foundAnime.statistics.member.toString() , true)
-                animeEmbed.addField("Favorites" , foundAnime.statistics.favorites.toString() , true)
+                animeEmbed.addField("Type", foundAnime.type, true)
+                animeEmbed.addField("Episode", foundAnime.episodes.toString(), true)
+                animeEmbed.addField("Status", foundAnime.statistics.status, true)
+                animeEmbed.addField("Score", foundAnime.statistics.score.toString(), true)
+                animeEmbed.addField("Scored by", foundAnime.statistics.scored_by.toString(), true)
+                animeEmbed.addField("Rank", foundAnime.statistics.rank.toString(), true)
+                animeEmbed.addField("Popularity", foundAnime.statistics.popurlarity.toString(), true)
+                animeEmbed.addField("Members", foundAnime.statistics.member.toString(), true)
+                animeEmbed.addField("Favorites", foundAnime.statistics.favorites.toString(), true)
                 message.edit({
-                    embeds : [animeEmbed] ,
+                    embeds : [animeEmbed],
                     fetchReply : true
                 })
             } catch(err) { console.log(err) }
@@ -75,17 +75,17 @@ module.exports = {
                 animeEmbed.title = foundAnime.title
                 animeEmbed.description = foundAnime.description
                 animeEmbed.color = "#0099ff"
-                animeEmbed.addField("Type" , foundAnime.type , true)
-                animeEmbed.addField("Episode" , foundAnime.episodes.toString() , true)
-                animeEmbed.addField("Status" , foundAnime.statistics.status , true)
-                animeEmbed.addField("Score" , foundAnime.statistics?.score.toString() || foundAnime.score.toString() , true)
-                animeEmbed.addField("Scored by" , foundAnime.statistics?.scored_by.toString() || foundAnime.scored_by.toString() , true)
-                animeEmbed.addField("Rank" , foundAnime.statistics?.rank.toString() || foundAnime.rank.toString() , true)
-                animeEmbed.addField("Popularity" , foundAnime.statistics?.popurlarity.toString() || foundAnime.popularity.toString() , true)
-                animeEmbed.addField("Members" , foundAnime.statistics?.member.toString() || foundAnime.member.toString() , true)
-                animeEmbed.addField("Favorites" , foundAnime.statistics?.favorites.toString() || foundAnime.favorites.toString() , true)
+                animeEmbed.addField("Type", foundAnime.type, true)
+                animeEmbed.addField("Episode", foundAnime.episodes.toString(), true)
+                animeEmbed.addField("Status", foundAnime.statistics.status, true)
+                animeEmbed.addField("Score", foundAnime.statistics?.score.toString() || foundAnime.score.toString(), true)
+                animeEmbed.addField("Scored by", foundAnime.statistics?.scored_by.toString() || foundAnime.scored_by.toString(), true)
+                animeEmbed.addField("Rank", foundAnime.statistics?.rank.toString() || foundAnime.rank.toString(), true)
+                animeEmbed.addField("Popularity", foundAnime.statistics?.popurlarity.toString() || foundAnime.popularity.toString(), true)
+                animeEmbed.addField("Members", foundAnime.statistics?.member.toString() || foundAnime.member.toString(), true)
+                animeEmbed.addField("Favorites", foundAnime.statistics?.favorites.toString() || foundAnime.favorites.toString(), true)
                 message.edit({
-                    embeds : [animeEmbed] ,
+                    embeds : [animeEmbed],
                     fetchReply : true
                 })
             } catch(err) { console.log(err) }
