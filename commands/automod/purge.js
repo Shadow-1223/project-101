@@ -10,9 +10,9 @@ module.exports = {
             name : "number",
             description : "The number of messages to delete",
             type : Constants.ApplicationCommandOptionTypes.INTEGER,
-            required : true,
             minValue : 1,
-            maxValue : 100
+            maxValue : 100,
+            required : true,
         },
         {
             name : "channel",
