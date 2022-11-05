@@ -1,6 +1,6 @@
-const { Permissions, MessageEmbed } = require("discord.js");
+const { Permissions, MessageEmbed , Constants } = require("discord.js");
 const ms = require('ms')
-const Discord = require('discord.js')
+
 module.exports = {
     name : 'timeout',
     description : 'Gives a member a timeout.',
@@ -11,19 +11,20 @@ module.exports = {
         {
             name : 'member',
             description : 'Member ',
-            required : true,
-            type : Discord.Constants.ApplicationCommandOptionTypes.USER
+            type : Constants.ApplicationCommandOptionTypes.USER,
+            required : true
         },
         {
             name : 'time',
             description : 'Duration',
-            required : true,
-            type : Discord.Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING,
+            required : true
         },
         {
             name : 'reason',
             description : 'Reason',
-            type : Discord.Constants.ApplicationCommandOptionTypes.STRING
+            type : Constants.ApplicationCommandOptionTypes.STRING,
+            required : false
         }
 
     ],
