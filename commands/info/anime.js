@@ -40,6 +40,7 @@ module.exports = {
                     return message.edit({
                         embeds : [animeEmbed] 
                     })
+                    console.log(foundAnime)
                 }
                 animeEmbed.title = foundAnime.title
                 animeEmbed.description = foundAnime.description
