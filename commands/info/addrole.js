@@ -21,16 +21,16 @@
              required : true
          },
          {
-             name : "emoji" ,
-             description : "Select a emoji you want" ,
-             type : Constants.ApplicationCommandOptionTypes.STRING ,
-             required : false ,
-         },
-         {
              name : "placeholder" ,
              description : "Type a placeholder name" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : true
+         },
+         {
+             name : "emoji" ,
+             description : "Select a emoji you want" ,
+             type : Constants.ApplicationCommandOptionTypes.STRING ,
+             required : false ,
          }
     ],
     
