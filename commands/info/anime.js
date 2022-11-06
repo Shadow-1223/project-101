@@ -5,6 +5,7 @@ module.exports = {
     name : "anime_finder" ,
     description : "Find anime by name or ID" ,
     permissions : [Permissions.FLAGS.SEND_MESSAGES] ,
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
     slash : true ,
     options : [
         {
@@ -15,7 +16,7 @@ module.exports = {
         }
     ] ,
     
-    async execute({ interaction , client }) {
+    async execute({ interaction , client , options }) {
         let animeEmbed = new MessageEmbed()
         .setTitle("Finding Anime...")
         .setDescription("Please Wait...")
