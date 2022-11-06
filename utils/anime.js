@@ -43,15 +43,15 @@ class anime {
     }
     async getAnimeByName(name) {
         // Check the schema for the anime
-        let animeDataObject = await this.client.animeSchema.findOne({title: name});
-        if (animeDataObject == null) {
+        let animeSchema = await this.client.animeSchema.findOne({title: name});
+        if (animeSchema == null) {
             // If the anime is not find get the full anime from jikan
             try {
                 let anime = await this.jikan.search('anime', name);
                 let numOfAnime = anime.data?.length;
                 for (let i = 0; i < numOfAnime; i++) {
                     let animeObject = anime.data[i];
-                    animeDataObject = {
+                    const animeDataObject = {
                         _id: animeObject.mal_id,
                         title: animeObject.title,
                         englishTitle: animeObject.title_english,
@@ -78,10 +78,37 @@ class anime {
                     }
                     await this.client.animeSchema.findByIdAndUpdate(animeDataObject._id ,{ $set: animeDataObject }, { upsert: true, new: true });
                 }
-                return animeDataObject;
+                // This is a half baked way of getting the anime structure
+                // I need to find a better way of doing this
+                // TODO: Find a better way of getting the anime structure
+                let animeObject1 = anime.data[0];
+                return {
+                    _id: animeObject1.mal_id,
+                    title: animeObject1.title,
+                    englishTitle: animeObject1.title_english,
+                    description: animeObject1.synopsis,
+                    type: animeObject1.type,
+                    image: animeObject1.images.jpg.image_url,
+                    source: animeObject1.source,
+                    episodes: animeObject1.episodes,
+                    status: animeObject1.status,
+                    statistics: {
+                        score: animeObject1.score,
+                        scored_by: animeObject1.scored_by,
+                        rank: animeObject1.rank,
+                        popularity: animeObject1.popularity,
+                        member: animeObject1.members,
+                        favorites: animeObject1.favorites,
+                    },
+                    airing: animeObject1.airing,
+                    aired: {
+                        from: animeObject1.aired.from,
+                        to: animeObject1.aired.to,
+                    },
+                }
             } catch (err) { return console.log('Anime Not Found', err); }
         }
-        return animeDataObject;
+        return animeSchema;
     }
 }
 module.exports = anime;
