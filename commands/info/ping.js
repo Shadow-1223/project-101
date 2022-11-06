@@ -8,7 +8,7 @@ module.exports = {
     aliases : ["p"] ,
     slash : true ,
     
-    async execute({ interaction , args , messages , client }) {
+    async execute({ interaction , args , message , client }) {
         if(interaction) {
             const ping =  new Date().getTime() - interaction.createdTimestamp
             const pingTime = Math.round(client.ws.ping)
