@@ -15,7 +15,7 @@ module.exports = {
         }
     ] ,
     
-    async execute({ interaction , client }) {
+    async execute({ interaction , client , options }) {
         let animeEmbed = new MessageEmbed()
         .setTitle("Finding Anime...")
         .setDescription("Please Wait...")
