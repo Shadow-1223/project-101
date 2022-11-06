@@ -30,7 +30,7 @@ module.exports = {
             name : "attachment",
             description : "Attach any image from your gallery/album" ,
             type : Constants.ApplicationCommandOptionTypes.ATTACHMENT ,
-            required : false ,
+            required : false
         },
         {
             name : "hex_color",
