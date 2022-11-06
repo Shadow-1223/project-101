@@ -14,7 +14,8 @@ module.exports = {
             type: Constants.ApplicationCommandOptionTypes.STRING
         }
     ],
-    execute: async (interaction, client, options) => {
+
+    async execute({interaction, client, options}) {
         let embed = new MessageEmbed()
         .setTitle('Finding Anime...')
         .setDescription('Please Wait...')
