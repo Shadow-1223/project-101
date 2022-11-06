@@ -26,8 +26,8 @@ module.exports = {
             fetchReply : true
         })
         
-        let anime = options.getString("anime")
-        let animeId = parseInt(anime);
+        let animeName = options.getString("anime")
+        let animeId = parseInt(animeName);
         let animeFinder = await new anime(client)
         if(!isNaN(animeId)) {
             try {
@@ -61,7 +61,7 @@ module.exports = {
             } catch(err) { console.log(err) }
         } else {
             try {
-                let foundAnime = await animeFinder.getAnimeByName(anime)
+                let foundAnime = await animeFinder.getAnimeByName(animeName)
                 if(!foundAnime) {
                     animeEmbed.title = "Anime Not Found"
                     animeEmbed.description = "Please Try Again"
