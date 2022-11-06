@@ -153,7 +153,7 @@
         }
         
         targetMessage.edit({
-            components : [roe]
+            components : [row]
         })
         
         if(interaction) {
