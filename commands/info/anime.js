@@ -6,6 +6,7 @@ module.exports = {
     description: 'Find Anime by name or id',
     permissions: [Permissions.FLAGS.SEND_MESSAGE], 
     type: Constants.ApplicationCommandTypes.CHAT_INPUT,
+    slash: true,
     options: [
         {
             name: 'anime',
