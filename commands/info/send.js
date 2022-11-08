@@ -68,7 +68,7 @@ module.exports = {
         )
         
         const embed = new MessageEmbed()
-        if(title) embed.setTitle(embedTitle)
+        if(embedTitle) embed.setTitle(embedTitle)
         embed.setDescription(textMessage)
         try {
             embed.setColor(hexColor)
