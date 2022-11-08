@@ -48,8 +48,8 @@ module.exports = {
             }
         })
         
-        const channel = options.getChannel("channel")
-        const textMessage = options.getString("message")
+        const channel = options.getChannel("channel" , true)
+        const textMessage = options.getString("message" , true)
         const embedTitle = options.getString("title")
         
         const attachment = options.getAttachment("attachment")
@@ -64,14 +64,14 @@ module.exports = {
         if(attachment) textEmbeds.push(
             new MessageEmbed()
             .setImage(attachment)
-            .setColor(hexColor.toUpperCase())
+            .setColor(hexColor)
         )
         
         const embed = new MessageEmbed()
         if(title) embed.setTitle(embedTitle)
         embed.setDescription(textMessage)
         try {
-            embed.setColor(hexColor.toUpperCase())
+            embed.setColor(hexColor)
         } catch {
             embed.setColor(null)
         }
