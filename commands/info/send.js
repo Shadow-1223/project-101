@@ -70,10 +70,10 @@ module.exports = {
         const embed = new MessageEmbed()
         if(embedTitle) embed.setTitle(embedTitle)
         embed.setDescription(textMessage)
-        try {
+        if(hexColor) {
             embed.setColor(hexColor)
-        } catch {
-            embed.setColor(null)
+        } else {
+            embed.setColor("#303434")
         }
         
         textEmbeds.push(embed)
