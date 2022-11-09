@@ -1,25 +1,33 @@
-const { Collection , Client } = require("discord.js")
-const voiceCollection = new Collection()
+const { VoiceState , Collection } = require("discord.js")
+const voiceGenerator = new Collection()
 
 module.exports = {
     name : "voiceStateUpdate" ,
     /**
-     * @param ${Client} client
+     * @param ${VoiceState} oldState
+     * @param ${VoiceState} newState
     */
-    async run(client , oldState , newState ) {
-        const user = await client.users.fetch(newState.id)
-        const member = newState.guild.member(user)
+    async run(oldState , newState , client) {
+        const { member , guild } = newState
+        const oldChannel = oldState.channel
+        const newChannel = newState.channel
+        const joinToCreate = "1030821612427149363"
         
-        if(!oldState.channel && newState.channel.id === "1030821612427149363") {
-            const channel = await newState.guild.channels.create(`${user.username}'s channel` , {
+        if(oldChannel !== newChannel && newChannel && newChannel.id === joinToCreate) {
+            const voiceChannel = await guild.channels.create(`${user.username}'s lounge` , {
                 type : "GUILD_VOICE" ,
-                parent : newState.channel.parent
+                parent : newChannel.parent ,
+                permissionOverwrites : [
+                    { id : member.id , allow : ["CONNECT"] } ,
+                    { id : guild.id , deny : ["CONNECT"] }
+                ]
             })
             
-            member.voice.setChannel(channel)
-            voiceCollection.set(user.id , channel.id)
-        } else if(!newState.channel) {
-            if(oldState.channelID === voiceCollection.get(newState.id)) return oldState.channel.delete()
+            voiceGenerator.set(member.id , voiceChannel.id)
+            await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
+            setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 1000)
+            
+            return setTimeout(() => member.voice.setChannel(voiceChannel) , 500)
         }
     }
 }
