@@ -54,10 +54,6 @@ module.exports = {
         
         const attachment = options.getAttachment("attachment")
         const hexColor = options.getString("hex_color")
-        if(!hexColor) return interaction.reply({
-            content : "invalid embed color" ,
-            ephemeral : true
-        })
         
         const textEmbeds = []
         
