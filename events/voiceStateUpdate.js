@@ -1,5 +1,4 @@
-const { VoiceState , Collection } = require("discord.js")
-const voiceGenerator = new Collection()
+const { VoiceState } = require("discord.js")
 
 module.exports = {
     name : "voiceStateUpdate" ,
@@ -23,7 +22,7 @@ module.exports = {
                 ]
             })
             
-            voiceGenerator.set(member.id , voiceChannel.id)
+            client.voiceGenerator.set(member.id , voiceChannel.id)
             await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
             setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 1000)
             
