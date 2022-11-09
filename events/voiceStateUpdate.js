@@ -12,7 +12,7 @@ module.exports = {
         
         if(!oldState.channel && newState.channel.id === "1030821612427149363") {
             const channel = await newState.guild.channels.create(`${user.username}'s channel` , {
-                type : "voice" ,
+                type : "GUILD_VOICE" ,
                 parent : newState.channel.parent
             })
             
