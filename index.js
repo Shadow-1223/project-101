@@ -2,7 +2,7 @@ require('dotenv/config')
 
 const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
-const { Intents , Client } = require('discord.js')
+const { Intents , Client , Collection } = require('discord.js')
 
 const client = new Client({
     intents : [
@@ -16,6 +16,8 @@ const client = new Client({
         Intents.FLAGS.GUILD_VOICE_STATES
     ]
 })
+
+client.voiceGenerator = new Collection()
 
 client.on("ready", async () => {
     await mongoose.connect(
