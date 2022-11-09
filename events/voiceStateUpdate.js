@@ -1,5 +1,4 @@
-const { VoiceState , Collection } = require("discord.js")
-const voiceGenerator = new Collection()
+const { VoiceState } = require("discord.js")
 
 module.exports = {
     name : "voiceStateUpdate" ,
