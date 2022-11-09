@@ -1,4 +1,5 @@
-const { VoiceState } = require("discord.js")
+const { VoiceState , Collection } = require("discord.js")
+const voiceGenerator = new Collection()
 
 module.exports = {
     name : "voiceStateUpdate" ,
@@ -13,7 +14,7 @@ module.exports = {
         const joinToCreate = "1030821612427149363"
         
         if(oldChannel !== newChannel && newChannel && newChannel.id === joinToCreate) {
-            const voiceChannel = await guild.channels.create(`${member.user.username}'s lounge` , {
+            const voiceChannel = await guild.channels.create(member.user.id, {
                 type : "GUILD_VOICE" ,
                 parent : newChannel.parent ,
                 permissionOverwrites : [
@@ -28,5 +29,7 @@ module.exports = {
             
             return setTimeout(() => member.voice.setChannel(voiceChannel) , 500)
         }
+        
+        const ownedChannel = client.voiceGenerator.get(member.id)
     }
 }
