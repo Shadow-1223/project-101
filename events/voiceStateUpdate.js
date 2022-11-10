@@ -14,7 +14,7 @@ module.exports = {
         const joinToCreate = "1030821612427149363"
         
         if(oldChannel !== newChannel && newChannel && newChannel.id === joinToCreate) {
-            const voiceChannel = await guild.channels.create(member.user.id, {
+            const voiceChannel = await guild.channels.create(member.user.tag, {
                 type : "GUILD_VOICE" ,
                 parent : newChannel.parent ,
                 permissionOverwrites : [
@@ -30,7 +30,7 @@ module.exports = {
             return setTimeout(() => member.voice.setChannel(voiceChannel) , 500)
         }
         
-        const ownedChannel = client.voiceGenerator.get(member.id)
+        const ownedChannel = voiceGenerator.get(member.id)
         
         if(ownedChannel && oldChannel.id == ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
             voiceGenerator.set(member.id , null);
