@@ -23,7 +23,7 @@ module.exports = {
                 ]
             })
             
-            voiceGeneratorsset(member.id , voiceChannel.id)
+            voiceGenerator.set(member.id , voiceChannel.id)
             await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
             setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 1000)
             
