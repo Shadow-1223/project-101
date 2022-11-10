@@ -33,7 +33,7 @@ module.exports = {
         const ownedChannel = client.voiceGenerators.get(member.id)
         
         if(ownedChannel && oldChannel.id == ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
-            voiceGenerator.set(member.id , null);
+            client.voiceGenerators.set(member.id , null);
             oldChannel.delete().catch(() => {});
         }
     }
