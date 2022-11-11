@@ -45,7 +45,7 @@
                 return
             }
             
-            const roleId = customId.replace(prefix , "")
+            const roleId = customId.replace(prefix , '')
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
