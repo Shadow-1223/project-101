@@ -1,6 +1,5 @@
 const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
 const prefix = "auto_roles"
-const roleId = customId.replace(prefix , '')
  
  module.exports = {
      name : "setroles" ,
@@ -46,6 +45,7 @@ const roleId = customId.replace(prefix , '')
                 return
             }
             
+            const roleId = customId.replace(prefix , '')
             const member = interaction.member
             
             if(member.roles.cache.has(roleId)) {
