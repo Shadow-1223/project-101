@@ -143,7 +143,7 @@ const prefix = "auto_roles"
             menu.setMaxValues(menu.options.length)
         } else {
             row.addComponents(
-                new MessageSelectMenu();
+                new MessageSelectMenu()
                 .setCustomId(`${prefix}${role.id}`);
                 .setMinValues(0);
                 .setMaxValues(1);
