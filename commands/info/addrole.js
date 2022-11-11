@@ -144,11 +144,11 @@ const prefix = "auto_roles"
         } else {
             row.addComponents(
                 new MessageSelectMenu()
-                .setCustomId(`${prefix}${role.id}`);
-                .setMinValues(0);
-                .setMaxValues(1);
+                .setCustomId(`${prefix}${role.id}`)
+                .setMinValues(0)
+                .setMaxValues(1)
                 .setPlaceHolder(`${placeHolder}`);
-                .addOptions(options);
+                .addOptions(options)
             )
         };
         
