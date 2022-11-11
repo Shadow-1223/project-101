@@ -143,14 +143,14 @@ const prefix = "auto_roles"
             menu.setMaxValues(menu.options.length)
         } else {
             row.addComponents(
-                new MessageSelectMenu()
-                .setCustomId(`${prefix}${role.id}`)
-                .setMinValues(0)
-                .setMaxValues(1)
-                .setPlaceHolder(`${placeHolder}`)
-                .addOptions(options)
+                new MessageSelectMenu();
+                .setCustomId(`${prefix}${role.id}`);
+                .setMinValues(0);
+                .setMaxValues(1);
+                .setPlaceHolder(`${placeHolder}`);
+                .addOptions(options);
             )
-        }
+        };
         
         targetMessage.edit({
             components : [row]
