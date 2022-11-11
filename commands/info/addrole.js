@@ -20,12 +20,12 @@ const prefix = "auto_roles"
              type : Constants.ApplicationCommandOptionTypes.ROLE ,
              required : true
          },
-         {
+         /*{
              name : "placeholder" ,
              description : "Type a placeholder name" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : true
-         },
+         },*/
          {
              name : "emoji" ,
              description : "Select a emoji you want" ,
