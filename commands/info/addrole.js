@@ -89,7 +89,7 @@
             ephemeral : true
         })
         
-        const role = interaction.options.getRole("role" , true)
+        const role = interaction.options.getRole("roles" , true)
         if(!role) return interaction.reply({
             content : "Unknown roles" ,
             ephemeral : true
