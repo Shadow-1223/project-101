@@ -83,11 +83,11 @@ const prefix = "auto_roles"
             ephemeral : true
         })
         
-        const placeHolder = interaction.options.getString("placeholder" , true)
+        /*const placeHolder = interaction.options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
             ephemeral : true
-        })
+        })*/
         
         const role = interaction.options.getRole("roles" , true)
         if(!role) return interaction.reply({
