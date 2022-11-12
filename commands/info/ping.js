@@ -24,7 +24,7 @@ module.exports = {
                     },
                     {
                         name : "API" ,
-                        value : `${pingTime}` + 'ms'
+                        value : "`${pingTime}`" + 'ms'
                     }
                 ]
             )
