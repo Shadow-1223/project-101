@@ -25,13 +25,13 @@ const prefix = "auto_roles"
              description : "Type a placeholder name" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : true
-         },*/
+         },
          {
              name : "emoji" ,
              description : "Select a emoji you want" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : false ,
-         }
+         }*/
     ],
     
     async init(client) {
@@ -77,13 +77,13 @@ const prefix = "auto_roles"
             ephemeral : true
         })
         
-        const emoji = interaction.options.getString("emoji")
+        /*const emoji = interaction.options.getString("emoji")
         if(!emoji) return interaction.reply({
             content : "Invalid emoji, please try again later" ,
             ephemeral : true
         })
         
-        /*const placeHolder = interaction.options.getString("placeholder" , true)
+        const placeHolder = interaction.options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
             ephemeral : true
