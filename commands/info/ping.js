@@ -20,7 +20,7 @@ module.exports = {
                 [
                     {
                         name : "Lentacy" ,
-                        value : `\`${ping}\`ms`
+                        value : `\`${ping}ms\``
                     },
                     {
                         name : "API" ,
@@ -48,11 +48,11 @@ module.exports = {
                 [
                     {
                         name : "Lentacy" ,
-                        value : `${ping}ms`
+                        value : `\`${ping}ms\``
                     },
                     {
                         name : "API" ,
-                        value : `${wsPing}ms`
+                        value : `\`${wsPing}ms\``
                     }
                 ]
             )
