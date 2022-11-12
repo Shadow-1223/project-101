@@ -59,7 +59,7 @@ module.exports = {
         
         if(attachment) textEmbeds.push(
             new MessageEmbed()
-            .setImage(attachment)
+            .setImage(attachment.url)
             .setColor(hexColor)
         )
         
