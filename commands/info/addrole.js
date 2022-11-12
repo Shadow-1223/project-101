@@ -147,7 +147,7 @@ const prefix = "auto_roles"
                 .setCustomId(`${prefix}${role.id}`)
                 .setMinValues(0)
                 .setMaxValues(1)
-                .setPlaceHolder(`select ypur roles`)
+                .setPlaceHolder("select your roles")
                 .addOptions(options)
             )
         };
