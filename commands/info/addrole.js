@@ -149,7 +149,7 @@ const prefix = "auto_roles"
                 .setMaxValues(1)
                 .setPlaceHolder("select your roles")
                 .addOptions(options)
-            )
+            );
         };
         
         targetMessage.edit({
