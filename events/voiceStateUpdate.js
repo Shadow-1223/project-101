@@ -12,8 +12,8 @@ module.exports = {
         const newChannel = newState.channel
         const joinToCreate = "1030821612427149363"
         
-        if(oldChannel !== newChannel && newChannel.id == joinToCreate) {
-            const voiceChannel = await guild.channels.create(`${member.user.id}`, {
+        if(oldChannel !== newChannel && newChannel && newChannel.id == joinToCreate) {
+            const voiceChannel = await guild.channels.create(`${member.user.tag}`, {
                 type : "GUILD_VOICE" ,
                 parent : newChannel.parent ,
                 permissionOverwrites : [
