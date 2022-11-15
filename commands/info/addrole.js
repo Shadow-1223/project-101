@@ -20,7 +20,7 @@ const prefix = "auto_roles"
              type : Constants.ApplicationCommandOptionTypes.ROLE ,
              required : true
          },
-         /*{
+         {
              name : "placeholder" ,
              description : "Type a placeholder name" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
@@ -31,7 +31,7 @@ const prefix = "auto_roles"
              description : "Select a emoji you want" ,
              type : Constants.ApplicationCommandOptionTypes.STRING ,
              required : false ,
-         }*/
+         }
     ],
     
     async init(client) {
@@ -77,7 +77,7 @@ const prefix = "auto_roles"
             ephemeral : true
         })
         
-        /*const emoji = interaction.options.getString("emoji")
+        const emoji = interaction.options.getString("emoji")
         if(!emoji) return interaction.reply({
             content : "Invalid emoji, please try again later" ,
             ephemeral : true
@@ -87,7 +87,7 @@ const prefix = "auto_roles"
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
             ephemeral : true
-        })*/
+        })
         
         const role = interaction.options.getRole("roles" , true)
         if(!role) return interaction.reply({
@@ -121,7 +121,7 @@ const prefix = "auto_roles"
             {
                 label : role.name ,
                 value : role.id ,
-                //emoji : { name : "" , id : "" }
+                emoji : { name : "" , id : "" }
             }
         ]
         
@@ -147,7 +147,7 @@ const prefix = "auto_roles"
                 .setCustomId(`${prefix}${role.id}`)
                 .setMinValues(0)
                 .setMaxValues(1)
-                .setPlaceHolder("select your roles")
+                .setPlaceholder(placeHolder)
                 .addOptions(options)
             );
         };
