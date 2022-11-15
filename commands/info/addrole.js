@@ -78,7 +78,6 @@ const prefix = "auto_roles"
         })
         
         const emoji = interaction.options.getString("emoji")
-        
         const placeHolder = interaction.options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
