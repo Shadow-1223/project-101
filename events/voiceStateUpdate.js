@@ -1,4 +1,5 @@
 const { VoiceState , Collection } = require("discord.js")
+const client = require("../../index.js")
 
 module.exports = {
     name : "voiceStateUpdate" ,
