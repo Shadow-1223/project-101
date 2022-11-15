@@ -1,5 +1,4 @@
 const { VoiceState , Collection } = require("discord.js")
-const voiceGenerator = new Collection()
 
 module.exports = {
     name : "voiceStateUpdate" ,
@@ -13,8 +12,8 @@ module.exports = {
         const newChannel = newState.channel
         const joinToCreate = "1030821612427149363"
         
-        if(oldChannel !== newChannel && newChannel && newChannel.id === joinToCreate) {
-            const voiceChannel = await guild.channels.create(member.user.tag, {
+        if(oldChannel !== newChannel && newChannel.id == joinToCreate) {
+            const voiceChannel = await guild.channels.create(`${member.user.id}`, {
                 type : "GUILD_VOICE" ,
                 parent : newChannel.parent ,
                 permissionOverwrites : [
@@ -23,17 +22,18 @@ module.exports = {
                 ]
             })
             
-            voiceGenerator.set(member.id , voiceChannel.id)
+            client.voiceGenerator.set(member.id , voiceChannel.id)
             await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
+            await setTimeout(() => member.voice.setChannel(voiceChannel) , 500);
             setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 1000)
             
-            return setTimeout(() => member.voice.setChannel(voiceChannel) , 500)
+            return;
         }
         
-        const ownedChannel = voiceGenerator.get(member.id)
+        const ownedChannel = client.voiceGenerator.get(member.id)
         
         if(ownedChannel && oldChannel.id == ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
-            voiceGenerator.set(member.id , null);
+            client.voiceGenerator.set(member.id , null);
             oldChannel.delete().catch(() => {});
         }
     }
