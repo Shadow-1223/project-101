@@ -19,11 +19,11 @@ module.exports = {
             .addFields(
                 [
                     {
-                        name : "Lentacy" ,
+                        name : "Lentacy:" ,
                         value : `\`${ping}ms\``
                     },
                     {
-                        name : "API" ,
+                        name : "API:" ,
                         value : `\`${pingTime}ms\``
                     }
                 ]
@@ -47,11 +47,11 @@ module.exports = {
             .addFields(
                 [
                     {
-                        name : "Lentacy" ,
+                        name : "Lentacy:" ,
                         value : `\`${ping}ms\``
                     },
                     {
-                        name : "API" ,
+                        name : "API:" ,
                         value : `\`${wsPing}ms\``
                     }
                 ]
