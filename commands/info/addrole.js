@@ -78,7 +78,6 @@ const prefix = "auto_roles"
         })
         
         const emoji = interaction.options.getString("emoji")
-        console.log(menu)
         const placeHolder = interaction.options.getString("placeholder" , true)
         if(!placeHolder) return interaction.reply({
             content : "Invalid PlaceHolder name" ,
@@ -122,6 +121,7 @@ const prefix = "auto_roles"
         ]
         
         let menu = row.components[0]
+        console.log(menu)
         if(menu) {
             for (const o of menu.options) {
                 if(o.value === options[0].value) {
