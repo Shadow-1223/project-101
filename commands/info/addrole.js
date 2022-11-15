@@ -137,7 +137,7 @@ const prefix = "auto_roles"
                         ephemeral : true
                     })
                 }
-            }
+            };
             
             menu.addOptions(options)
             menu.setMaxValues(menu.options.length)
