@@ -4,8 +4,8 @@ const voiceGenerator = new Collection();
 module.exports = {
     name : "voiceStateUpdate" ,
     /**
-     * @param ${VoiceState} oldState
-     * @param ${VoiceState} newState
+     * @param {VoiceState} oldState
+     * @param {VoiceState} newState
     */
     async run(oldState , newState , client) {
         const { member , guild } = newState
