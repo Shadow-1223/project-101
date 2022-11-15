@@ -117,7 +117,7 @@ const prefix = "auto_roles"
             {
                 label : role.name ,
                 value : role.id ,
-                emoji : { name : emoji.name , id : emoji.id }
+                emoji : { name : "" , id : "" }
             }
         ]
         
