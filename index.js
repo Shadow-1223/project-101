@@ -17,7 +17,7 @@ const client = new Client({
     ]
 })
 
-client.voiceGenerators = new Collection()
+client.voiceGenerator = new Collection()
 
 client.on("ready", async () => {
     await mongoose.connect(
