@@ -1,6 +1,5 @@
 const { VoiceState , Collection } = require("discord.js")
-const voiceGenerator = new Collection();
-
+const client = require("../index.js")
 module.exports = {
     name : "voiceStateUpdate" ,
     /**
@@ -23,7 +22,7 @@ module.exports = {
                 ]
             })
             
-            voiceGenerator.set(member.id , voiceChannel.id)
+            client.voiceGenerator.set(member.id , voiceChannel.id)
             await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
             await setTimeout(() => member.voice.setChannel(voiceChannel) , 500);
             setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 1000)
@@ -31,10 +30,10 @@ module.exports = {
             return;
         }
         
-        const ownedChannel = voiceGenerator.get(member.id)
+        const ownedChannel = client.voiceGenerator.get(member.id)
         
         if(ownedChannel && oldChannel.id == ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
-            voiceGenerator.set(member.id , null);
+            client.voiceGenerator.set(member.id , null);
             oldChannel.delete().catch(() => {});
         }
     }
