@@ -36,3 +36,5 @@ sdhandler.sdhandler({
     prefix : ["ka "] ,
     buttonsDir : "./buttons"
 })
+
+module.exports.client = client
