@@ -17,8 +17,6 @@ const client = new Client({
     ]
 })
 
-client.voiceGenerator = new Collection()
-
 client.on("ready", async () => {
     await mongoose.connect(
         process.env.MONGO_URI ,
@@ -38,4 +36,3 @@ sdhandler.sdhandler({
     prefix : ["ka "] ,
     buttonsDir : "./buttons"
 })
-module.exports = client
