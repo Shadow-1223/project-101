@@ -3,7 +3,7 @@ const Canvas = require("canvas")
 
 module.exports = {
     name : "guildMemberAdd" ,
-    async run(member , client) {
+    async run(member , ) {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
@@ -19,7 +19,7 @@ module.exports = {
             welcomeCanvas.context.fill()
         })
         
-        const welcomechannel = client.channels.cache.get('981108742714196051')
+        const welcomechannel = client.guild.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
         canvas.context.font = '42px sans-serif',
         canvas.context.textAlign = 'center';
