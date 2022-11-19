@@ -19,7 +19,7 @@ module.exports = {
             welcomeCanvas.context.fill()
         })
         
-        const welcomechannel = client.guild.channels.cache.get('981108742714196051')
+        const welcomechannel = client.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
         canvas.context.font = '42px sans-serif',
         canvas.context.textAlign = 'center';
