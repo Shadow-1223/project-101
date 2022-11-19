@@ -19,13 +19,14 @@ module.exports = {
             welcomeCanvas.context.fill()
         })
         
+        const guild = member.guild;
         const welcomechannel = client.guild.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
         canvas.context.font = '42px sans-serif',
         canvas.context.textAlign = 'center';
         canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
         canvas.context.font = '32px sans serif'
-        canvas.context.fillText(`You are the ${client.guild.memberCount.toLocaleString()}th`, 512, 455)
+        canvas.context.fillText(`You are the ${guild.memberCount.toLocaleString()}th`, 512, 455)
         canvas.context.beginPath()
         canvas.context.arc(512, 166, 119, 0, Math.PI * 2, true)
         canvas.context.closePath()
