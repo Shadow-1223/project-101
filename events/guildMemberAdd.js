@@ -18,7 +18,7 @@ module.exports = {
             welcomeCanvas.context.stroke()
             welcomeCanvas.context.fill()
         })
-        let users = guild.members.cache.filter((m) => !m.user.bot)).size
+        let users = guild.members.cache.filter((m) => !m.user.bot)).size;
         
         const welcomechannel = client.guild.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
