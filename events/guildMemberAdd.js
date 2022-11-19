@@ -3,7 +3,7 @@ const Canvas = require("canvas")
 
 module.exports = {
     name : "guildMemberAdd" ,
-    async run(member , ) {
+    async run(member , client) {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
