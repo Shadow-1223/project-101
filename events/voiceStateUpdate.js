@@ -7,7 +7,7 @@ module.exports = {
      * @param {VoiceState} oldState
      * @param {VoiceState} newState
     */
-    async run(oldState , newState , client) {
+    async run(client , oldState , newState) {
         const { member , guild } = newState
         const oldChannel = oldState.channel
         const newChannel = newState.channel
