@@ -24,10 +24,10 @@ module.exports = {
             })
             
             voiceGenerator.set(member.id , voiceChannel.id)
-            await newChannel.permissionOverwrites.edit(member , {CONNECT : false})
-            setTimeout(() => newChannel.permissionOverwrites.delete(member) , 30 * 100)
+            newChannel.permissionOverwrites.edit(member , {CONNECT : false})
+            setTimeout(() => newChannel.permissionOverwrites.delete(member) , 3000)
             
-            return setTimeout(() => member.voice.setChannel(voiceChannel))
+            return setTimeout(() => member.voice.setChannel(voiceChannel) , 1000)
         }
         
         const ownedChannel = voiceGenerator.get(member.id)
