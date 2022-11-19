@@ -18,6 +18,7 @@ module.exports = {
             welcomeCanvas.context.stroke()
             welcomeCanvas.context.fill()
         })
+        let users = guild.members.cache.filter((m) => !m.user.bot)).size
         
         const welcomechannel = client.guild.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
@@ -25,7 +26,7 @@ module.exports = {
         canvas.context.textAlign = 'center';
         canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
         canvas.context.font = '32px sans serif'
-        canvas.context.fillText(`You are the ${member.guild.memberCount}th`, 512, 455)
+        canvas.context.fillText(`You are the ${user}th`, 512, 455)
         canvas.context.beginPath()
         canvas.context.arc(512, 166, 119, 0, Math.PI * 2, true)
         canvas.context.closePath()
