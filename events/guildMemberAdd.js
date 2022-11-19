@@ -3,7 +3,7 @@ const Canvas = require("canvas")
 
 module.exports = {
     name : "guildMemberAdd" ,
-    async run(member , client) {
+    async run(member , guild) {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
@@ -18,7 +18,6 @@ module.exports = {
             welcomeCanvas.context.stroke()
             welcomeCanvas.context.fill()
         })
-        let users = guild.members.cache.filter((m) => !m.user.bot)).size;
         
         const welcomechannel = client.guild.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
@@ -26,7 +25,7 @@ module.exports = {
         canvas.context.textAlign = 'center';
         canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
         canvas.context.font = '32px sans serif'
-        canvas.context.fillText(`You are the ${users}th`, 512, 455)
+        canvas.context.fillText(`You are the ${member.guild.memberCount.toLocaleString()}th`, 512, 455)
         canvas.context.beginPath()
         canvas.context.arc(512, 166, 119, 0, Math.PI * 2, true)
         canvas.context.closePath()
