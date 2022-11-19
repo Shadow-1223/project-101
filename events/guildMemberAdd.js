@@ -1,5 +1,6 @@
 const { MessageAttachment } = require("discord.js")
-const Canvas, { fontRegister } = require("canvas")
+const Canvas = require("canvas")
+const { fontRegister } = require("canvas")
 registerFont('./fonts/Roboto-Medium.ttf', {family: 'Roboto'})
 
 module.exports = {
