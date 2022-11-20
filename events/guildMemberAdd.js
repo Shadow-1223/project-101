@@ -1,7 +1,7 @@
 const { MessageAttachment } = require("discord.js")
 const Canvas = require("canvas")
 const { registerFont } = require("canvas")
-registerFont('JetBrainsMono-Regular.ttf', { family : 'JetBrains Mono' })
+registerFont('./JetBrainsMono-Regular.ttf', { family : 'JetBrains Mono' })
 
 module.exports = {
     name : "guildMemberAdd" ,
@@ -9,7 +9,7 @@ module.exports = {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
-        welcomeCanvas.context.font = '72px "JetBrains Mono"';
+        welcomeCanvas.context.font = '72px JetBrains Mono';
         welcomeCanvas.context.fillStyle = '#ffffff';
         
         Canvas.loadImage("./structures/Images/Welcomebg.jpg").then(async (img) => {
@@ -23,10 +23,10 @@ module.exports = {
         
         const welcomechannel = client.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
-        canvas.context.font = '42px "JetBrains Mono"',
+        canvas.context.font = '42px JetBrains Mono',
         canvas.context.textAlign = 'center';
         canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
-        canvas.context.font = '32px "JetBrains Mono"'
+        canvas.context.font = '32px JetBrains Mono'
         canvas.context.fillText(`You are the ${member.guild.memberCount.toLocaleString()}th`, 512, 455)
         canvas.context.beginPath()
         canvas.context.arc(512, 166, 119, 0, Math.PI * 2, true)
