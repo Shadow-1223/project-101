@@ -1,7 +1,7 @@
 const { MessageAttachment } = require("discord.js")
 const Canvas = require("canvas")
 const { registerFont } = require("canvas")
-registerFont('./JetBrainsMono-Regular.ttf', { family : 'JetBrains Mono' })
+registerFont('JetBrainsMono-Regular.ttf', { family : 'JetBrains Mono' })
 
 module.exports = {
     name : "guildMemberAdd" ,
