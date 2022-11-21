@@ -6,6 +6,8 @@ function fontFile(name) {
     return path.join(__dirname , '/font/' , name)
 }
 
+console.log(fontFile)
+
 Canvas.registerFont(fontFile('OpenSans-Bold.ttf'), { family : 'Open Sans', weight : "bold" })
 
 module.exports = {
