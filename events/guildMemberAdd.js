@@ -17,7 +17,7 @@ module.exports = {
         welcomeCanvas.context.font = 'bold 72px Open Sans';
         welcomeCanvas.context.fillStyle = '#ffffff';
         
-        Canvas.loadImage("./Images/Welcomebg.jpg").then(async (img) => {
+        Canvas.loadImage("./structures/Images/Welcomebg.jpg").then(async (img) => {
             welcomeCanvas.context.drawImage(img, 0, 0, 1024, 500)
             welcomeCanvas.context.fillText("welcome", 360, 360);
             welcomeCanvas.context.beginPath();
