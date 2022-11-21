@@ -3,8 +3,8 @@ const path = require("path")
 const Canvas = require("canvas")
 
 function fontFile(name) {
-    //return path.join(__dirname, "font", 'OpenSans-Bold.ttf')
-    console.log(path.join(__dirname, "font", name, ".."))
+    return path.join("/project 101", "font", 'OpenSans-Bold.ttf')
+    //console.log(path.join(__dirname, "font", name, ".."))
 }
 
 Canvas.registerFont(fontFile('OpenSans-Bold.ttf'), { family : 'Open Sans', weight : "bold" })
