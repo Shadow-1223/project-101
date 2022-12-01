@@ -45,7 +45,18 @@ A change should have a valid reason, and features should be added only if it's b
 
 1. Fork the repository and select the **"main"** branch.
 2. Create a new branch and make your changes.
-3. Select a label base your issue or commit changes.[^1]
-4. Make sure you have a good commit message. [^commit]
+3. Select a label base your issue or commit changes and understandable.[^lbl]
+4. Make sure you have a good commit message.[^commit]
 5. Push your changes.
 6. Sumbit a pull request [here][pr].
+
+<img src="https://img.shields.io/badge/Contact me: migzchi%239897-5865F2.svg?style=for-the-badge&logo=Discord&logoColor=white"></img>
+
+<!-- Reference-->
+
+[^lbl]: We recommend using [`labels`] to your pr or issue.
+[^commit]: We strongly follow the [`Commit Message Conventions`]. This is important when commiting your code for a PR.
+
+[`labels`]: https://github.com/Shadow-1223/project-101/labels
+[`commit message conventions`]: https://conventionalcommits.org/en/v1.0.0/
+[pr]: https://github.com/Shadow-1223/project-101/pulls
