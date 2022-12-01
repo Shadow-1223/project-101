@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Project 101 </h1> 
+<h1 align="center">Welcome to Project 101  </h1> 
 <p align="center"><i>A prototype bot that had many coming features!</i></p>
 
 <div align="center">
