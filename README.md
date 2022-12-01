@@ -1,5 +1,4 @@
-<h1 align="center">Welcome to
- Project 101 </h1> 
+<h1 align="center">Welcome to Project 101 </h1> 
 <p align="center"><i>A prototype bot that had many coming features!</i></p>
 
 <div align="center">
@@ -46,7 +45,7 @@ A change should have a valid reason, and features should be added only if it's b
 
 1. Fork the repository and select the **"main"** branch.
 2. Create a new branch and make your changes.
-3. Select a label base your issue or commit changes.
+3. Select a label base your issue or commit changes.[^1]
 4. Make sure you have a good commit message. [^commit]
 5. Push your changes.
 6. Sumbit a pull request [here][pr].
