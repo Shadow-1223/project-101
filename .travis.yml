@@ -1,0 +1,14 @@
+languages: node_js
+node_js:
+  - node
+  
+services:
+  - mongoose
+  - npm
+  
+install:
+  - node ci
+  - npm i
+  
+script:
+  - node run
