@@ -1,13 +1,16 @@
 const { MessageAttachment } = require("discord.js")
+const fs = require("fs")
 const path = require("path")
 const Canvas = require("canvas")
 const { registerFont } = require("canvas")
-registerFont(fontFile('OpenSans-Bold.ttf', { family : 'Open Sans', weight : "bold" }))
-
 
 function fontFile (name) {
     return path.join(__dirname, '../font', name)
 }
+
+registerFont(fontFile('OpenSans-Bold.ttf'), { family : 'Open Sans', weight : "bold" })
+
+
 
 module.exports = {
     name : "guildMemberAdd" ,
