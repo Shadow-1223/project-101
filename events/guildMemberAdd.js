@@ -8,7 +8,7 @@ const { registerFont } = require("canvas")
     return path.join(__dirname, '../font', name)
 }*/
 
-registerFont('./fonts/OpenSans-Bold.ttf', { family : 'Open Sans', weight : "bold" })
+registerFont('./fonts/OpenSans-Bold.ttf', { family : 'Open Sans'})
 
 
 
@@ -18,7 +18,7 @@ module.exports = {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
-        welcomeCanvas.context.font = 'bold 72px Open Sans';
+        welcomeCanvas.context.font = '72px Open Sans Bold';
         welcomeCanvas.context.fillStyle = '#ffffff';
         
         Canvas.loadImage("./structures/Images/Welcomebg.jpg").then(async (img) => {
@@ -32,10 +32,10 @@ module.exports = {
         
         const welcomechannel = client.channels.cache.get('981108742714196051')
         let canvas = welcomeCanvas;
-        canvas.context.font = 'bold 42px Open Sans',
+        canvas.context.font = '42px Open Sans Bold',
         canvas.context.textAlign = 'center';
         canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
-        canvas.context.font = 'bold 32px Open Sans'
+        canvas.context.font = '32px Open Sans Bold'
         canvas.context.fillText(`You are the ${member.guild.memberCount.toLocaleString()}th`, 512, 455)
         canvas.context.beginPath()
         canvas.context.arc(512, 166, 119, 0, Math.PI * 2, true)
