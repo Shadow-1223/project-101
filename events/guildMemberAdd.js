@@ -8,7 +8,7 @@ const { registerFont } = require("canvas")
     return path.join(__dirname, '../font', name)
 }*/
 
-registerFont(path.resolve('./fonts/OpenSans-Bold.ttf'), { family : 'Open Sans'})
+registerFont(path.resolve('./fonts/OpenSans-Bold.ttf'), { family : 'Open Sans', weight: 'bold'})
 
 
 
