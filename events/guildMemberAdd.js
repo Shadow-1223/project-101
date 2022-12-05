@@ -1,6 +1,6 @@
 const { MessageAttachment } = require("discord.js")
-/* const fs = require("fs")
-const path = require("path") */
+// const fs = require("fs")
+const path = require("path")
 const Canvas = require("canvas")
 const { registerFont } = require("canvas")
 
@@ -8,7 +8,7 @@ const { registerFont } = require("canvas")
     return path.join(__dirname, '../font', name)
 }*/
 
-registerFont('./fonts/OpenSans-Bold.ttf', { family : 'Open Sans'})
+registerFont(path.resolve('./fonts/OpenSans-Bold.ttf'), { family : 'Open Sans'})
 
 
 
