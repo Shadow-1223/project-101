@@ -1,15 +1,12 @@
 const { MessageAttachment } = require("discord.js")
 // const fs = require("fs")
-const path = require("path")
+// const path = require("path")
 const Canvas = require("canvas")
-const { registerFont } = require("canvas")
+
 
 /* function fontFile (name) {
     return path.join(__dirname, '../font', name)
 }*/
-
-registerFont(path.resolve('./fonts/OpenSans-Bold.ttf'), { family : 'Open Sans', weight: 'bold'})
-
 
 
 module.exports = {
@@ -18,6 +15,7 @@ module.exports = {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
+        welcomeCanvas.context.font.register = Canvas.registerFont('./fonts/OpenSans-Bold', { family : 'Open Sans'})
         welcomeCanvas.context.font = '72px Open Sans Bold';
         welcomeCanvas.context.fillStyle = '#ffffff';
         
