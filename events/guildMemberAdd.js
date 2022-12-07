@@ -15,7 +15,7 @@ module.exports = {
         const welcomeCanvas = {};
         welcomeCanvas.create = Canvas.createCanvas(1024, 500)
         welcomeCanvas.context = welcomeCanvas.create.getContext('2d')
-        welcomeCanvas.context.font.register = Canvas.registerFont('./fonts/OpenSans-Bolds.tff', { family : 'Open Sans'})
+        welcomeCanvas.registerFont('./fonts/OpenSans-Bold.ttf', { family : 'Open Sans'})
         welcomeCanvas.context.font = '72px Open Sans Bold';
         welcomeCanvas.context.fillStyle = '#ffffff';
         
