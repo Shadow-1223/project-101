@@ -17,6 +17,8 @@ const client = new Client({
     ]
 })
 
+client.emit("guildMemberAdd", member)
+
 client.on("ready", async () => {
     await mongoose.connect(
         process.env.MONGO_URI ,
