@@ -3,11 +3,7 @@ const voiceGenerator = new Collection()
 
 module.exports = {
     name : "voiceStateUpdate" ,
-    /**
-     * @param {VoiceState} oldState
-     * @param {VoiceState} newState
-    */
-    async run(client , oldState , newState) {
+    async run(coldState , newState , client) {
         const { member , guild } = newState
         const oldChannel = oldState.channel
         const newChannel = newState.channel
