@@ -1,4 +1,4 @@
-/* const { MessageAttachment } = require("discord.js")
+const { MessageAttachment } = require("discord.js")
 // const fs = require("fs")
 // const path = require("path")
 const Canvas = require("canvas")
@@ -6,7 +6,7 @@ const Canvas = require("canvas")
 
 /* function fontFile (name) {
     return path.join(__dirname, '../font', name)
-}*\/
+}*/
 
 
 module.exports = {
@@ -53,5 +53,5 @@ module.exports = {
     }
 }
 
-client.emit(
-*/
+client.emit("guildMemberAdd", member)
+
