@@ -6,7 +6,7 @@ const Canvas = require("canvas")
 
 /* function fontFile (name) {
     return path.join(__dirname, '../font', name)
-}*/
+}*\/
 
 
 module.exports = {
