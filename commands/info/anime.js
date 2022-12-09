@@ -1,11 +1,12 @@
-const { MessageEmbed} = require('discord.js');
+const { MessageEmbed, Permissions } = require('discord.js');
 const anime = require('../../utils/anime');
 
 module.exports = {
     name: 'anime_finder',
     description: 'Find Anime by name or id',
-    testCommand: true,
-    ownerOnly: false,
+    permissions: [Permissions.FLAGS.SEND_MESSAGES],
+    type: Constants.ApplicationCommandTypes.CHAT_INPUT, 
+    slash: true,
     options: [
         {
             name: 'anime',
