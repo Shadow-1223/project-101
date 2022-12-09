@@ -1,4 +1,5 @@
-const { Schema , model } = require("mongoose")
+const { Schema } = require("mongoose")
+const mongoose = require("mongoose")
 
 const animeSchema = new Schema({
     _id : String,
@@ -37,4 +38,4 @@ const animeSchema = new Schema({
     ]
 })
 
-module.exports = model("anime", animeSchema)
+module.exports = mongoose.model("anime", animeSchema)
