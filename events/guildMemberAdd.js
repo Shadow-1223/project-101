@@ -53,5 +53,3 @@ module.exports = {
     }
 }
 
-client.emit("guildMemberAdd", member)
-
