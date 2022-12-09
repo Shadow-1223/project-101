@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require('discord.js');
+const { MessageEmbed, Permissions, Constants } = require('discord.js');
 const anime = require('../../utils/anime');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
             name: 'anime',
             description: 'Please Enter the Anime Name or ID',
             required: true,
-            type: 'STRING',
+            type: Constants.ApplicationCommandOptionTypes.STRING,
         }
     ],
     execute: async (interaction, client, options) => {
