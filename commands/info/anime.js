@@ -1,21 +1,20 @@
-const { MessageEmbed, Permissions, Constants } = require('discord.js');
+const { MessageEmbed} = require('discord.js');
 const anime = require('../../utils/anime');
 
 module.exports = {
     name: 'anime_finder',
     description: 'Find Anime by name or id',
-    permissions: [Permissions.FLAGS.SEND_MESSAGES], 
-    type: Constants.ApplicationCommandTypes.CHAT_INPUT,
-    slash: true,
+    testCommand: true,
+    ownerOnly: false,
     options: [
         {
             name: 'anime',
             description: 'Please Enter the Anime Name or ID',
             required: true,
-            type: Constants.ApplicationCommandOptionTypes.STRING
+            type: 'STRING',
         }
     ],
-    async execute({interaction, client, options}) {
+    execute: async (interaction, client, options) => {
         let embed = new MessageEmbed()
         .setTitle('Finding Anime...')
         .setDescription('Please Wait...')
@@ -25,9 +24,9 @@ module.exports = {
             embeds: [embed],
             fetchReply: true
         })
-        
-        const animeName = options.getString("anime")
-        let animeId = parseInt(animeName);
+
+        let myAnime = interaction.options.getString("anime")
+        let animeId = parseInt(myAnime);
         let animeFinder = await new anime(client)
         if(!isNaN(animeId)) {
             try {
@@ -56,7 +55,7 @@ module.exports = {
         } catch(err) { console.log(err) } 
         } else {
             try {
-                let foundAnime = await animeFinder.getAnimeByName(animeName);
+                let foundAnime = await animeFinder.getAnimeByName(options[0].value);
                 if(!foundAnime) {
                     embed.title = 'Anime Not Found';
                     embed.description = 'Please Try Again';
