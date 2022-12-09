@@ -4,7 +4,7 @@ const anime = require('../../utils/anime');
 module.exports = {
     name: 'anime_finder',
     description: 'Find Anime by name or id',
-    permissions: [Permissions.FLAGS.SEND_MESSAGE], 
+    permissions: [Permissions.FLAGS.SEND_MESSAGES], 
     type: Constants.ApplicationCommandTypes.CHAT_INPUT,
     slash: true,
     options: [
