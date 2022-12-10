@@ -56,7 +56,7 @@ module.exports = {
         } catch(err) { console.log(err) } 
         } else {
             try {
-                let foundAnime = await animeFinder.getAnimeByName(options[0].value);
+                let foundAnime = await animeFinder.getAnimeByName(myAnime);
                 if(!foundAnime) {
                     embed.title = 'Anime Not Found';
                     embed.description = 'Please Try Again';
