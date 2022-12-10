@@ -10,7 +10,7 @@ class anime {
     async getAnimeById(id) {  
         // Check the schema for the anime
         try {
-            let animeSchema = await this.animeSchema.findById(id);
+            let animeSchema = await animeSchema.findById(id);
             if (animeSchema) return animeSchema
                 let anime = await this.jikan.loadAnime(id);
                 anime = anime.data
@@ -39,13 +39,13 @@ class anime {
                         to: anime.aired.to,
                     },
                 }
-               await this.animeSchema.findByIdAndUpdate(anime.mal_id,{ $set: aimeObject }, { upsert: true, new: true });
+               await animeSchema.findByIdAndUpdate(anime.mal_id,{ $set: aimeObject }, { upsert: true, new: true });
                return aimeObject;
             } catch(err) { return console.log('Anime Not Found', err); }
     }
     async getAnimeByName(name) {
         // Check the schema for the anime
-        let animeSchema = await this.animeSchema.findOne({title: name});
+        let animeSchema = await animeSchema.findOne({title: name});
         if (animeSchema == null) {
             // If the anime is not find get the full anime from jikan
             try {
@@ -78,7 +78,7 @@ class anime {
                         },
                         
                     }
-                    await this.animeSchema.findByIdAndUpdate(animeDataObject._id ,{ $set: animeDataObject }, { upsert: true, new: true });
+                    await animeSchema.findByIdAndUpdate(animeDataObject._id ,{ $set: animeDataObject }, { upsert: true, new: true });
                 }
                 // This is a half baked way of getting the anime structure
                 // I need to find a better way of doing this
