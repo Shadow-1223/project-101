@@ -6,7 +6,7 @@ class anime {
     constructor(client) {
         this.client = client;
         this.jikan = jikan;
-        this.animeSchema = animeSchema
+        this.animeSchema = animeSchema;
     }
     async getAnimeById(id) {  
         // Check the schema for the anime
