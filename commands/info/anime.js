@@ -1,11 +1,12 @@
 const { MessageEmbed, Permissions, Constants } = require('discord.js');
 const anime = require('../../utils/anime');
 
+
 module.exports = {
     name: 'anime_finder',
     description: 'Find Anime by name or id',
     permissions: [Permissions.FLAGS.SEND_MESSAGES],
-    type: Constants.ApplicationCommandTypes.CHAT_INPUT, 
+    type: Constants.ApplicationCommandTypes.CHAT_INPUT,
     slash: true,
     options: [
         {
@@ -15,7 +16,8 @@ module.exports = {
             type: Constants.ApplicationCommandOptionTypes.STRING,
         }
     ],
-    async execute({interaction, client, options}) {
+    
+    execute: async (interaction, client, options) => {
         let embed = new MessageEmbed()
         .setTitle('Finding Anime...')
         .setDescription('Please Wait...')
@@ -25,8 +27,8 @@ module.exports = {
             embeds: [embed],
             fetchReply: true
         })
-
-        let myAnime = interaction.options.getString("anime")
+        
+        let myAnime = options.getString("anime")
         let animeId = parseInt(myAnime);
         let animeFinder = await new anime(client)
         if(!isNaN(animeId)) {
