@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name : "messageCreate",
-    async run(message) {
+    async run(client, message) {
         if(message.channel.id == '981108742714196051') {
             let embed = new MessageEmbed()
             .setTitle("New suggestion")
