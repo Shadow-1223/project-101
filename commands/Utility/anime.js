@@ -1,5 +1,5 @@
 const { MessageEmbed, Permissions, Constants } = require('discord.js');
-const anime = require('../../utils/anime');
+const anime = require('../../Other/utils/anime');
 
 
 module.exports = {
