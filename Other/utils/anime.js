@@ -1,6 +1,6 @@
 // Main File for all anime related things
 const jikan = require('@mateoaranda/jikanjs');
-const animeSchema = require("../../schemas/anime.js")
+const animeSchema = require("./../anime.js")
 
 class anime {
     constructor(client) {
