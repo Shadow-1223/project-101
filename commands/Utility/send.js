@@ -1,85 +1,76 @@
-const { Permissions , Constants , MessageEmbed } = require("discord.js")
+const { MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constant } = require("discord.js")
 
 module.exports = {
-    name : "setup_messages" ,
-    description : "Send messages to specify channel" ,
-    type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
-    permissions : [Permissions.FLAGS.ADMINISTRATOR] ,
-    aliases : ["Sm"] ,
-    slash : true ,
+    name : "setup_embeds" ,
+    description : "Create a Message Embed" ,
+    permissions : [Permissions.FLAGS.SEND_MESSAGES],
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT
+    slash : true,
     options : [
         {
-            name : "channel" ,
-            description : "Select a channel were your message to be sent" ,
-            type : Constants.ApplicationCommandOptionTypes.CHANNEL ,
-            required : true 
+            name : " create embeds",
+            description : "Create an embed.",
+            type : Constants.ApplicationCommandOptionTypes.SUBCOMMAND,
         },
         {
-            name : "message" ,
-            description : "Type a word like 'etc' " ,
-            type : Constants.ApplicationCommandOptionTypes.STRING ,
-            required : true 
-        },
-        {
-            name : "title" ,
-            description : "Write something about your wolrd or news using title" ,
-            type : Constants.ApplicationCommandOptionTypes.STRING ,
-            required : false
-        },
-        {
-            name : "attachment",
-            description : "Attach any image from your gallery/album" ,
-            type : Constants.ApplicationCommandOptionTypes.ATTACHMENT ,
-            required : false
-        },
-        {
-            name : "hex_color",
-            description : "Paste or type what embed color you want to put" ,
-            type : Constants.ApplicationCommandOptionTypes.STRING ,
-            required : false
+            name : "edit",
+            description : "Edit a embed.",
+            type : CONSTANTS.APPLICATIONCOMMANDOPTIONTYPES.SUB_COMMAND,
         }
     ],
     
-    async execute({ interaction , message , options }) {
-        if(message) return message.reply({
-            content : "You can't run `setup_messages` command on legacy command" ,
-            allowedMentions : {
-                repliedUser : false
-            }
+    async init(client) {
+        client.on("interactionCreate", async (interaction) => {
+            if()
         })
-        
-        const channel = options.getChannel("channel" , true)
-        const textMessage = options.getString("message" , true)
-        const embedTitle = options.getString("title")
-        
-        const attachment = options.getAttachment("attachment")
-        const hexColor = options.getString("hex_color")
-        
-        const textEmbeds = []
-        
-        if(attachment) textEmbeds.push(
-            new MessageEmbed()
-            .setImage(attachment.url)
-            .setColor(hexColor)
-        )
-        
-        const embed = new MessageEmbed()
-        if(embedTitle) embed.setTitle(embedTitle)
-        embed.setDescription(textMessage)
-        if(hexColor) {
-            embed.setColor(hexColor)
-        } else {
-            embed.setColor("#303434")
-        }
-        
-        textEmbeds.push(embed)
-        channel.send({ embeds : textEmbeds })
-        
-        if(interaction) {
-            interaction.reply({
-                content : `Your message has been in ${channel}` ,
-                ephemeral: true
-            })
-        }
+    },
+    
+    async execute({ interaction , options , message }) {
+        const embedModals = new Modal()
+          .setTitle("Create Embeds")
+          .setCustomId("embeds")
+          .addComponents(
+              new MessageActionRow({
+                  components : [
+                      new TextInputComponent()
+                          .setCustomId("title")
+                          .setLabel("What should be the title?")
+                          .setPlaceholder("Give me some interesting title? (optional)")
+                          .setStyle("SHORT")
+                  ]
+              }),
+              
+              new MessageActionRow({
+                  components : [
+                      new TextInputComponent()
+                          .setCustomId("description")
+                          .setLabel("What should be the description?")
+                          .setPlaceholder("Interesting description for the embeds? (required)")
+                          .setStyle("PARAGRAPH")
+                          .setMinValues(10)
+                  ]
+              }),
+              
+              new MessageActionRow({
+                  components : [
+                      new TextInputComponent()
+                          .setCustomId("attachment")
+                          .setLabel("What image will you put?")
+                          .setPlaceholder("What kind of sus image will put? (optional)")
+                          .setStyle("PARAGRAPH")
+                  ]
+              }),
+              
+              new MessageActionRow({
+                  components : [
+                      new TextInputComponent()
+                          .setCustomId("color")
+                          .setLabel("What should be the color?")
+                          .setPlaceholder("hex color code ()")
+                  ]
+              })
+          )
+          
+        return interaction.showModal(modal)
     }
 }
