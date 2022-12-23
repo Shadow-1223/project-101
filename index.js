@@ -1,4 +1,4 @@
-require('dotenv/config')
+require('dotenv').config()
 
 const sdhandler = require('sdhandler')
 const mongoose = require('mongoose')
