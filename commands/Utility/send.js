@@ -149,7 +149,7 @@ module.exports = {
                 })
             }
             
-            const;
+            //const;
             
             let embedBuilder = await EmbedBuilder.findOne(link)
             
