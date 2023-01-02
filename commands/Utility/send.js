@@ -1,5 +1,5 @@
-const { MessageAttchment, MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constants } = require("discord.js")
-//const EmbedBuilder = require("./Other/schemas/embed.js")
+const { MessageAttachment, MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constants } = require("discord.js")
+const EmbedBuilder = require("./Other/schemas/embed.js")
 
 module.exports = {
     name : "embeds" ,
@@ -7,7 +7,7 @@ module.exports = {
     permissions : [Permissions.FLAGS.SEND_MESSAGES],
     type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     slash : true,
-    /*options : [
+    options : [
         {
             name : "create",
             description : "Create an embed.",
@@ -34,30 +34,8 @@ module.exports = {
                 }
             ]
         }
-    ],*/
+    ],
     
-    async init(client) {
-        client.on("interactionCreate", async (interaction) => {
-            if(!interaction.isModalSubmit && !interaction.isCommand) return;
-            
-            if(interaction.customId === "embeds") {
-                const title = interaction.fields.getTextInputValue("title"),
-                      description = interaction.fields.getTextInputValue("description"),
-                      attachment = interaction.fields.getTextInputValue("attachment") || "",
-                      color = interaction.fields.getTextInputValue("color") || "#00000"
-                
-                const query = interaction.options.getSubcommand()
-
-                const att = new MessageAttachment()
-                const embed = new MessageEmbed()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(color)
-                
-                embed.send({ embeds : [embed], files : [att] })
-            }
-        })
-    },
     
     async execute({ interaction , options , client }) {
         const embedModals = new Modal()
@@ -107,23 +85,34 @@ module.exports = {
           
         return interaction.showModal(embedModals)
         
-        //const query = options.getSubcommand()
+        const query = options.getSubcommand()
         
-        /*if(query === "create") {
+        const title = interaction.fields.getTextInputValue("title")
+        const description = interaction.fields.getTextInputValue("description")
+        const attachment = interaction.fields.getTextInputValue("attachment")
+        const color = interaction.fields.getTextInputValue("color")
+        
+        if(query === "create") {
             const channel = interaction.options.getChannel("channel")
-            const link = options.getString("message_link")
+            //const link = options.getString("message_link")
             
             const embeds = {
-                channelID : link
+                channelID : channel.id
                 title : title,
                 description : description,
-                image : attachment,
+                image : attachment.url,
                 hexColor : color
             }
             
             const embedDB = await new EmbedBuilder(embeds).save()
+            const filter = (interaction) => interaction.customId === "embeds"
+            interaction.awaitModalSubmit({ filter, time : 15_000 }).then({})
+              .then( interaction => interaction.reply({
+                  content : `The modals has been submited`,
+                  ephemeral : true
+              })).catch(console.error)
             
-            const file = new MessageAttachment(attachment)
+            const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
@@ -131,10 +120,7 @@ module.exports = {
             
             channel.send({ embeds : [embed], files : [file] })
             
-            if(interaction) return interaction.reply({
-                content : `The embed has benn sent in ${channel}`
-                ephemeral : true
-            })
+            
         } else if(query === "edit") {
             const link = interaction.options.getString("message_link")
             const stuff = link.split("/")
@@ -162,7 +148,7 @@ module.exports = {
                 })
             }
             
-            const 
+            const;
             
             let embedBuilder = await EmbedBuilder.findOne(link)
             
@@ -178,6 +164,6 @@ module.exports = {
                 content : "The embeds has been edited.",
                 ephemeral : true
             })
-        }*/
+        }
     }
 }
