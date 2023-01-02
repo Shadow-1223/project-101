@@ -97,7 +97,7 @@ module.exports = {
             //const link = options.getString("message_link")
             
             const embeds = {
-                channelID : channel.id
+                channelID : channel.id,
                 title : title,
                 description : description,
                 image : attachment.url,
