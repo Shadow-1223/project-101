@@ -128,7 +128,7 @@ module.exports = {
             const channelID = stuff.pop()
             const channel = interaction.guild.channels.cache.get(channelID)
             if(!link && !channel) return interaction.reply({
-                content : `There is an invalid link you sent. \n ```js ${link}`\``
+                content : `There is an invalid link you sent. \n```js ${link}```\`
             })
             
             const targetMessage = await channel.messages.fetch(messageID, {
