@@ -1,28 +1,32 @@
 {
-  "name": "nodejs",
+  "name": "project-101",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h1 align=\"center\">Welcome to Project 101 </h1>  <p align=\"center\"><i>A prototype bot that had many coming features!</i></p>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shadow-1223/project-101.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Shadow-1223",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shadow-1223/project-101/issues"
+  },
+  "homepage": "https://github.com/Shadow-1223/project-101#readme",
   "dependencies": {
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/voice": "^0.14.0",
     "@mateoaranda/jikanjs": "^1.2.4",
-    "@types/node": "^18.0.6",
     "discord.js": "^13.12.0",
-    "dotenv": "^16.0.1",
-    "git": "^0.1.5",
-    "mongoose": "^6.8.1",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.19",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.8.2",
     "ms": "^2.1.3",
-    "sdhandler": "^1.2.7",
-    "canvas": "^2.10.2",
-    "@discordjs/voice": "^0.13.0",
-    "@discordjs/builders": "^1.3.0"
+    "nodemon": "^2.0.20",
+    "sdhandler": "^1.2.7"
   }
 }
