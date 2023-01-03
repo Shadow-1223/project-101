@@ -1,5 +1,5 @@
 const { MessageAttachment, MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constants } = require("discord.js")
-const EmbedBuilder = require("../../Other/schemas/embed.js")
+const EmbedBuilder = require("./Other/schemas/embed.js")
 
 module.exports = {
     name : "embeds" ,
@@ -105,11 +105,9 @@ module.exports = {
             
             const embedDB = await new EmbedBuilder(embeds).save()
             const filter = (interaction) => interaction.customId === "embeds"
-            interaction.awaitModalSubmit({ filter, time : 15_000 }).then({})
-              .then( interaction => interaction.reply({
-                  content : `The modals has been submited`,
-                  ephemeral : true
-              })).catch(error) { console.log(error) }
+            interaction.awaitModalSubmit({ filter, time : 15_000 })
+              .then(interaction => console.log("modal has been submited"))
+              .catch(error) { console.log(error) }
             
             const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
@@ -128,7 +126,7 @@ module.exports = {
             const channel = interaction.guild.channels.cache.get(channelID)
             const invalid = "```\n" + link + "```"
             if(!link && !channel) return interaction.reply({
-                content : `There is an invalid link you sent. \n ${invalid}`
+                content : `There is an invalid link you sent. \n ${inavlid}`
             })
             
             const targetMessage = await channel.messages.fetch(messageID, {
