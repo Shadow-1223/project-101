@@ -115,13 +115,13 @@ module.exports = {
                 })
             }
             
-            const file = new MessageAttachment(attachment.url)
+            //const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
             
-            channel.send({ embeds : [embed], files : [file] })
+            channel.send({ embeds : [embed] })
             
             
         } else if(query === "edit") {
