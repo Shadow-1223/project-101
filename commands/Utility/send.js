@@ -104,10 +104,11 @@ module.exports = {
             }
             
             const embedDB = await new EmbedBuilder(embeds).save()
-            const filter = (interaction) => interaction.customId === "embeds"
-            interaction.awaitModalSubmit({ filter, time : 15_000 })
-              .then(interaction => console.log("modal has been submited"))
-              .catch(console.error)
+            // Collect a modal submit interaction
+            const filter = (interaction) => interaction.customId === 'embeds';
+            interaction.awaitModalSubmit({ filter, time: 15_000 })
+              .then(interaction => console.log(`${interaction.customId} was submitted!`))
+              //.catch(console.error);
             
             const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
