@@ -107,7 +107,7 @@ module.exports = {
             const filter = (interaction) => interaction.customId === "embeds"
             interaction.awaitModalSubmit({ filter, time : 15_000 })
               .then(interaction => console.log("modal has been submited"))
-              .catch(error) { console.log(error) }
+              .catch(console.error)
             
             const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
