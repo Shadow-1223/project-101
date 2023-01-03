@@ -88,10 +88,6 @@ module.exports = {
         
         
         if(query === "create") {
-            const channel = interaction.options.getChannel("channel")
-            //const link = options.getString("message_link")
-            
-            
             // Collect a modal submit interaction
             const filter = (interaction) => interaction.customId === 'modal';
             const modalsInteraction = await interaction.awaitModalSubmit({ filter, time: 15_000 })
@@ -100,12 +96,25 @@ module.exports = {
             
             if(modalsInteraction) {
                 const title = modalsInteraction?.fields.getTextInputValue("title")
-                const description = modalsInteraction?.fields.getTextInputValue("description")
+                const description = modalsInteraction?fields.getTextInputValue("description")
+                let color;
+                const channel = interaction.options.getChannel("channel")
+                //const link = options.getString("message_link")
+            
                 
                 const embeds = {
                     title : title,
                     description : description
                 }
+                
+                const file = new MessageAttachment(attachment.url)
+                const embed = new MessageEmbed()
+                .setTitle(title)
+                .setDescription(description)
+                //.setColor(color)
+            
+               channel.send({ embeds : [embed] })
+            
                 
                 const embedDB = new EmbedBuilder(embeds).save()
                 
@@ -114,15 +123,6 @@ module.exports = {
                     ephemeral : true
                 })
             }
-            
-            //const file = new MessageAttachment(attachment.url)
-            const embed = new MessageEmbed()
-            .setTitle(title)
-            .setDescription(description)
-            .setColor(color)
-            
-            channel.send({ embeds : [embed] })
-            
             
         } else if(query === "edit") {
             const link = interaction.options.getString("message_link")
