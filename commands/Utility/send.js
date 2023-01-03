@@ -90,25 +90,30 @@ module.exports = {
         if(query === "create") {
             const channel = interaction.options.getChannel("channel")
             //const link = options.getString("message_link")
-            const title = interaction.fields.getTextInputValue("title")
-            const description = interaction.fields.getTextInputValue("description")
-            const attachment = interaction.fields.getTextInputValue("attachment")
-            const color = interaction.fields.getTextInputValue("color")
-        
-            const embeds = {
-                channelID : channel.id,
-                title : title,
-                description : description,
-                image : attachment.url,
-                hexColor : color
-            }
             
-            const embedDB = await new EmbedBuilder(embeds).save()
+            
             // Collect a modal submit interaction
-            const filter = (interaction) => interaction.customId === 'embeds';
-            interaction.awaitModalSubmit({ filter, time: 15_000 })
+            const filter = (interaction) => interaction.customId === 'modal';
+            const modalsInteraction = await interaction.awaitModalSubmit({ filter, time: 15_000 })
               .then(interaction => console.log(`${interaction.customId} was submitted!`))
               .catch(console.error);
+            
+            if(modalsInteraction) {
+                const title = modalsInteraction?.fields.getTextInputValue("title")
+                const description = modalsInteraction?fields.getTextInputValue("description")
+                
+                const embeds = {
+                    title : title,
+                    description : description
+                }
+                
+                const embedDB = new EmbedBuilder(embeds).save()
+                
+                modalsInteraction.reply({
+                    content : "the embeds has been submited",
+                    ephemeral : true
+                })
+            }
             
             const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
