@@ -1,5 +1,5 @@
 const { MessageAttachment, MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constants } = require("discord.js")
-const EmbedBuilder = require("./Other/schemas/embed.js")
+const EmbedBuilder = require("../../Other/schemas/embed.js")
 
 module.exports = {
     name : "embeds" ,
