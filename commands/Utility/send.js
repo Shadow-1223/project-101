@@ -97,7 +97,7 @@ module.exports = {
             if(modalsInteraction) {
                 const title = modalsInteraction?.fields.getTextInputValue("title")
                 const description = modalsInteraction?fields.getTextInputValue("description")
-                let color;
+                //let color;
                 const channel = interaction.options.getChannel("channel")
                 //const link = options.getString("message_link")
             
