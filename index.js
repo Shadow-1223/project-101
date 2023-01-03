@@ -33,6 +33,6 @@ sdhandler.sdhandler({
     commandsDir : "./commands" ,
     eventsDir : "./events" ,
     token : process.env.TOKEN ,
-    prefix : ["ka "] ,
+    prefix : ["ka ", " "] ,
     buttonsDir : "./buttons"
 })
