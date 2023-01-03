@@ -86,15 +86,15 @@ module.exports = {
         
         const query = options.getSubcommand()
         
-        const title = interaction.fields.getTextInputValue("title")
-        const description = interaction.fields.getTextInputValue("description")
-        const attachment = interaction.fields.getTextInputValue("attachment")
-        const color = interaction.fields.getTextInputValue("color")
         
         if(query === "create") {
             const channel = interaction.options.getChannel("channel")
             //const link = options.getString("message_link")
-            
+            const title = interaction.fields.getTextInputValue("title")
+            const description = interaction.fields.getTextInputValue("description")
+            const attachment = interaction.fields.getTextInputValue("attachment")
+            const color = interaction.fields.getTextInputValue("color")
+        
             const embeds = {
                 channelID : channel.id,
                 title : title,
@@ -146,7 +146,10 @@ module.exports = {
                 })
             };
             
-            //const;
+            const title = interaction.fields.getTextInputValue("title")
+            const description = interaction.fields.getTextInputValue("description")
+            const attachment = interaction.fields.getTextInputValue("attachment")
+            const color = interaction.fields.getTextInputValue("color")
             
             let embedBuilder = await EmbedBuilder.findOne(link)
             
