@@ -36,7 +36,6 @@ module.exports = {
         }
     ],
     
-    
     async execute({ interaction , options , client }) {
         const embedModals = new Modal()
           .setTitle("Create Embeds")
@@ -105,11 +104,12 @@ module.exports = {
             }
             
             const embedDB = await new EmbedBuilder(embeds).save()
-            // Collect a modal submit interaction
-            const filter = (interaction) => interaction.customId === 'modal';
-            interaction.awaitModalSubmit({ filter, time: 15_000 })
-              .then(interaction => console.log(`${interaction.customId} was submitted!`))
-              .catch(console.error); 
+            const filter = (interaction) => interaction.customId === "embeds"
+            interaction.awaitModalSubmit({ filter, time : 15_000 }).then({})
+              .then( interaction => interaction.reply({
+                  content : `The modals has been submited`,
+                  ephemeral : true
+              })).catch(error) { console.log(error) }
             
             const file = new MessageAttachment(attachment.url)
             const embed = new MessageEmbed()
@@ -126,8 +126,9 @@ module.exports = {
             const messageID = stuff.pop()
             const channelID = stuff.pop()
             const channel = interaction.guild.channels.cache.get(channelID)
+            const invalid = "```\n" + link + "```"
             if(!link && !channel) return interaction.reply({
-                content : `There is an invalid link you sent. \n```js ${link}\````
+                content : `There is an invalid link you sent. \n ${inavlid}`
             })
             
             const targetMessage = await channel.messages.fetch(messageID, {
@@ -145,9 +146,9 @@ module.exports = {
                     content : `Please provide a messageID that was sent <@${client.user?.id}>`,
                     ephemeral : true
                 })
-            }
+            };
             
-            const;
+            //const;
             
             let embedBuilder = await EmbedBuilder.findOne(link)
             
