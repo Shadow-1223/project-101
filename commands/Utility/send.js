@@ -82,7 +82,7 @@ module.exports = {
               })
           )
           
-        interaction.showModal(embedModals)
+        await interaction.showModal(embedModals)
         
         const query = options.getSubcommand()
         
