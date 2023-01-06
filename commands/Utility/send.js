@@ -121,7 +121,7 @@ module.exports = {
                     .setDescription(description)
                     .setTitle(title)
                     
-                    modalsInteraction.channel.send({ embeds : [embed] })
+                    modalsInteraction.channels.send({ embeds : [embed] })
                     modalsInteraction.reply({
                         content : `The embeds has been sent in ${channel}`,
                         ephemeral : true
