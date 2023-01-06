@@ -101,7 +101,6 @@ module.exports = {
             try {
                 const filter = (interaction) => interaction.customId === "embeds";
                 const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
-                  .then(interaction => console.log(`the ${interaction.customId} has been submitted!`))
                   .catch(console.error)
                 
                 if(modalsInteraction) {
