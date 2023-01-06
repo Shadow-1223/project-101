@@ -1,4 +1,13 @@
-const { MessageAttachment, MessageEmbed, MessageActionRow, Modal, TextInputComponent, Permissions, Constants } = require("discord.js")
+const { 
+    MessageAttachment, 
+    MessageEmbed, 
+    MessageActionRow, 
+    Modal, 
+    TextInputComponent, 
+    MessageButton, 
+    Permissions, 
+    Constants 
+} = require("discord.js")
 const EmbedBuilder = require("../../Other/schemas/embed.js")
 
 module.exports = {
@@ -93,8 +102,54 @@ module.exports = {
             const modalsInteraction = await interaction.awaitModalSubmit({ filter, time: 15_000 })
               .then(interaction => console.log(`${interaction.customId} was submitted!`))
               .catch(console.error);
+              
+            try {
+                if(modalsInteraction) {
+                    const title = modalsInteraction?.fields.getTextInputValue("title")
+                    const description = modalsInteraction?.fields.getTextInputValue("description")
+                    const channel = interaction.options.getChannel("channel")
+                    
+                    const embedObj = {
+                        title : title,
+                        description : description
+                        channelID : channel.id
+                    }
+                    
+                    const embedDb = new EmbedBuilder(embedObj).save();
+                    
+                    const embed = new MessageEmbed()
+                    .setDescription(description)
+                    .setTitle(title)
+                    
+                    channel.send({ embeds : [embed] })
+                    modalsInteraction.reply({
+                        content : `The embeds has been sent in ${channel}`,
+                        ephemeral : true
+                    })
+                }
+                
+            } catch(err) {
+                const row = new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                    .setCustomId("errDel")
+                    .setLabel("Delete?")
+                    .setEmoji("1060554179258634251")
+                    .setStyle("DANGER")
+                )
+                
+                const errEmbed = new MessageEmbed()
+                .setTitle("Error Alert!")
+                .setDescription(`\`\`\`\n${err}\````)
+                .setColor("RED")
+                
+                return interaction.reply({
+                    embeds : [errEmbed],
+                    components : [row]
+                })
+            }
             
-            if(modalsInteraction) {
+            /*if(modalsInteraction) {
                 const title = modalsInteraction?.fields.getTextInputValue("title")
                 const description = modalsInteraction?.fields.getTextInputValue("description")
                 const channel = interaction.options.getChannel("channel")
@@ -121,7 +176,7 @@ module.exports = {
                     content : "the embeds has been submited",
                     ephemeral : true
                 })
-            }
+            }*/
             
         } else if(query === "edit") {
             const link = interaction.options.getString("message_link")
