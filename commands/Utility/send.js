@@ -111,7 +111,7 @@ module.exports = {
                     
                     const embedObj = {
                         title : title,
-                        description : description
+                        description : description,
                         channelID : channel.id
                     }
                     
