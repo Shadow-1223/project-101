@@ -98,12 +98,14 @@ module.exports = {
         
         if(query === "create") {
             // Collect a modal submit interaction
-            const filter = (interaction) => interaction.customId === 'modal';
+            const filter = (interaction) => interaction.customId === 'embeds';
             const modalsInteraction = await interaction.awaitModalSubmit({ filter, time: 15_000 })
               .then(interaction => console.log(`${interaction.customId} was submitted!`))
               .catch(console.error);
               
             try {
+                //const filter = (interaction) => interaction.customId === "embeds"
+                
                 if(modalsInteraction) {
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
