@@ -211,7 +211,7 @@ module.exports = {
                     .setLabel("Delete?")
                     .setEmoji("1060554179258634251")
                     .setStyle("DANGER")
-                )
+                );
                 
                 const errEmbed = new MessageEmbed()
                 .setTitle("Error Alert!")
