@@ -143,7 +143,7 @@ module.exports = {
                 
                 const errEmbed = new MessageEmbed()
                 .setTitle("Error Alert!")
-                .setDescription(`\`\`\`\n${error}\````)
+                .setDescription(codeBlock(err))
                 .setColor("RED")
                 
                 return interaction.reply({
@@ -207,7 +207,7 @@ module.exports = {
                 
                 const errEmbed = new MessageEmbed()
                 .setTitle("Error Alert!")
-                .setDescription(`\`\`\`\n${error}\````)
+                .setDescription(codeBlock(err))
                 .setColor("RED")
                 
                 return interaction.reply({
