@@ -165,7 +165,7 @@ module.exports = {
                     const channelID = stuff.pop()
                     const channel = interaction.guild.channels.cache.get(channelID)
                     const invalid = codeBlock(link)
-                    channel 
+                    //channel 
                     if(!link && !channel) return interaction.reply({
                         content : `invalid link please try again. \n${invalid}`,
                         ephemeral : true
