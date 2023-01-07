@@ -8,6 +8,7 @@ const {
     Permissions, 
     Constants 
 } = require("discord.js")
+const { codeBlock } = require("@discordjs/builders")
 const EmbedBuilder = require("../../Other/schemas/embed.js")
 
 module.exports = {
@@ -45,7 +46,7 @@ module.exports = {
         }
     ],
     
-    async execute({ interaction , options , client }) {
+    async execute({ interaction , client }) {
         const embedModals = new Modal()
           .setTitle("Create Embeds")
           .setCustomId("embeds")
@@ -93,11 +94,11 @@ module.exports = {
           
         await interaction.showModal(embedModals)
         
-        const query = options.getSubcommand()
+        const query = interaction.options.getSubcommand()
         
         
         if(query === "create") {
-
+            
             try {
                 const filter = (interaction) => interaction.customId === "embeds";
                 const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
@@ -106,6 +107,8 @@ module.exports = {
                 if(modalsInteraction) {
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
+                    const att = modalsInteraction?fields.getTextInputValue("attachment")
+                    const color = modalsInteraction?fields.getTextInputValue("color")
                     const channel = interaction.options.getChannel("channel")
                     
                     const embedObj = {
@@ -115,13 +118,14 @@ module.exports = {
                     }
                     
                     const embedDb = new EmbedBuilder(embedObj).save();
-                    
-                    const embed = new MessageEmbed()
+                    const attach = new MessageAttachment(att)
+                    const createEmbed = new MessageEmbed()
                     .setDescription(description)
                     .setTitle(title)
+                    .setColor(color)
                     
-                    channel.send({ embeds : [embed] })
-                    modalsInteraction.reply({
+                    channel.send({ embeds : [createEmbed] })
+                    await modalsInteraction.reply({
                         content : `The embeds has been sent in ${channel}`,
                         ephemeral : true
                     })
@@ -148,82 +152,57 @@ module.exports = {
                 })
             }
             
-            /*if(modalsInteraction) {
+        } else if(query === "edit") {
+            
+            const filter = (interaction) => interaction.customId === "embeds";
+            const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
+              .catch(console.error);
+            
+            if(modalsInteraction) {
+                const link = interaction.options.getString("message_link")
+                const stuff = link.split("/")
+                const messageID = stuff.pop()
+                const channelID = stuff.pop()
+                const channel = interaction.guild.channels.cache.get(channelID)
+                const invalid = codeBlock(link)
+                if(!link && !channel) return interaction.reply({
+                    content : `invalid link please try again. \n${invalid}`,
+                    ephemeral : true
+                })
+                
                 const title = modalsInteraction?.fields.getTextInputValue("title")
                 const description = modalsInteraction?.fields.getTextInputValue("description")
-                const channel = interaction.options.getChannel("channel")
-                //const link = options.getString("message_link")
-            
+                const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
+                const color = modalsInteraction?.fields.getTextInputValue("color")
+                const targetMessage = await channel.messages.fetch(messageID, {
+                    force : true,
+                    cache : true
+                })
                 
-                const embeds = {
-                    title : title,
-                    description : description
+                if(!targetMessage) return interaction.reply({
+                    content : "Unknown message ID",
+                    ephemeral : true
+                })
+                
+                if(targetMessage.author.id !== client.user?.id) {
+                    return interaction.reply({
+                        content : `Please provide a messageID that was sent <@${client.user?.id}>`,
+                        ephemeral : true
+                    })
                 }
                 
-                const file = new MessageAttachment(attachment.url)
-                const embed = new MessageEmbed()
+                const att = new MessageAttachment(attachment)
+                const editEmbed = new MessageEmbed()
                 .setTitle(title)
                 .setDescription(description)
-                //.setColor(color)
-            
-               channel.send({ embeds : [embed] })
-            
+                .setColor(title)
                 
-                const embedDB = new EmbedBuilder(embeds).save()
-                
-                modalsInteraction.reply({
-                    content : "the embeds has been submited",
+                link.edit({ embeds : [editEmbed] })
+                await modalsInteraction.reply({
+                    content : `Successfully edit the embed!`,
                     ephemeral : true
                 })
-            }*/
-            
-        } else if(query === "edit") {
-            const link = interaction.options.getString("message_link")
-            const stuff = link.split("/")
-            const messageID = stuff.pop()
-            const channelID = stuff.pop()
-            const channel = interaction.guild.channels.cache.get(channelID)
-            const invalid = "```\n" + link + "```"
-            if(!link && !channel) return interaction.reply({
-                content : `There is an invalid link you sent. \n ${inavlid}`
-            })
-            
-            const targetMessage = await channel.messages.fetch(messageID, {
-                force : true,
-                cache : true
-            })
-            
-            if(!targetMessage) return interaction.reply({
-                content : "Unknown messageID",
-                ephemeral : true
-            })
-            
-            if(targetMessage.author.id !== client.user?.id) {
-                return interaction.reply({
-                    content : `Please provide a messageID that was sent <@${client.user?.id}>`,
-                    ephemeral : true
-                })
-            };
-            
-            const title = interaction.fields.getTextInputValue("title")
-            const description = interaction.fields.getTextInputValue("description")
-            const attachment = interaction.fields.getTextInputValue("attachment")
-            const color = interaction.fields.getTextInputValue("color")
-            
-            let embedBuilder = await EmbedBuilder.findOne(link)
-            
-            const att = new MessageAttachment(attachment)
-            const embed = new MessageEmbed()
-            .setTitle(title)
-            .setDescription(description)
-            .setColor(color)
-            
-            link.edit({ embeds : [embed], files : [att] })
-            
-            if(link) return interaction.reply({
-                content : "The embeds has been edited.",
-                ephemeral : true
-            })
+            }
         }
     }
 }
