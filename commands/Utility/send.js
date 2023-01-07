@@ -212,7 +212,7 @@ module.exports = {
                 .setDescription(codeBlock(err))
                 .setColor("RED")
                 
-                await interaction.editReply({
+                await interaction.reply({
                     embeds : [errEmbed],
                     components : [row]
                 })
