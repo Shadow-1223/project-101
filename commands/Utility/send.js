@@ -156,7 +156,7 @@ module.exports = {
             try {
                 const filter = (interaction) => interaction.customId === "embeds";
                 const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
-                 .catch(console.error);
+                  .catch(console.error)
             
                 if(modalsInteraction) {
                     const link = interaction.options.getString("message_link")
