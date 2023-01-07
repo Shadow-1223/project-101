@@ -165,6 +165,7 @@ module.exports = {
                     const channelID = stuff.pop()
                     const channel = interaction.guild.channels.cache.get(channelID)
                     const invalid = codeBlock(link)
+                    channel 
                     if(!link && !channel) return interaction.reply({
                         content : `invalid link please try again. \n${invalid}`,
                         ephemeral : true
@@ -197,7 +198,7 @@ module.exports = {
                      .setDescription(description)
                      .setColor(title)
                 
-                    link.edit({ embeds : [editEmbed] })
+                    channel.messages.edit(messageID, options)
                     await modalsInteraction.reply({
                         content : `Successfully edit the embed!`,
                         ephemeral : true
