@@ -107,8 +107,8 @@ module.exports = {
                 if(modalsInteraction) {
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
-                    const att = modalsInteraction?.fields.getTextInputValue("attachment")
-                    const color = modalsInteraction?.fields.getTextInputValue("color")
+                    const att = modalsInteraction?fields.getTextInputValue("attachment")
+                    const color = modalsInteraction?fields.getTextInputValue("color")
                     const channel = interaction.options.getChannel("channel")
                     
                     const embedObj = {
@@ -153,54 +153,74 @@ module.exports = {
             }
             
         } else if(query === "edit") {
+            try {
+                const filter = (interaction) => interaction.customId === "embeds";
+                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
+                 .catch(console.error);
             
-            const filter = (interaction) => interaction.customId === "embeds";
-            const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
-              .catch(console.error);
-            
-            if(modalsInteraction) {
-                const link = interaction.options.getString("message_link")
-                const stuff = link.split("/")
-                const messageID = stuff.pop()
-                const channelID = stuff.pop()
-                const channel = interaction.guild.channels.cache.get(channelID)
-                const invalid = codeBlock(link)
-                if(!link && !channel) return interaction.reply({
-                    content : `invalid link please try again. \n${invalid}`,
-                    ephemeral : true
-                })
+                if(modalsInteraction) {
+                    const link = interaction.options.getString("message_link")
+                    const stuff = link.split("/")
+                    const messageID = stuff.pop()
+                    const channelID = stuff.pop()
+                    const channel = interaction.guild.channels.cache.get(channelID)
+                    const invalid = codeBlock(link)
+                    if(!link && !channel) return interaction.reply({
+                        content : `invalid link please try again. \n${invalid}`,
+                        ephemeral : true
+                    })
                 
-                const title = modalsInteraction?.fields.getTextInputValue("title")
-                const description = modalsInteraction?.fields.getTextInputValue("description")
-                const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
-                const color = modalsInteraction?.fields.getTextInputValue("color")
-                const targetMessage = await channel.messages.fetch(messageID, {
-                    force : true,
-                    cache : true
-                })
+                    const title = modalsInteraction?.fields.getTextInputValue("title")
+                    const description = modalsInteraction?.fields.getTextInputValue("description")
+                    const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
+                    const color = modalsInteraction?.fields.getTextInputValue("color")
+                    const targetMessage = await channel.messages.fetch(messageID, {
+                        force : true,
+                        cache : true
+                    })
                 
-                if(!targetMessage) return interaction.reply({
-                    content : "Unknown message ID",
-                    ephemeral : true
-                })
+                    if(!targetMessage) return interaction.reply({
+                        content : "Unknown message ID",
+                        ephemeral : true
+                    })
                 
-                if(targetMessage.author.id !== client.user?.id) {
-                    return interaction.reply({
-                        content : `Please provide a messageID that was sent <@${client.user?.id}>`,
+                    if(targetMessage.author.id !== client.user?.id) {
+                        return interaction.reply({
+                            content : `Please provide a messageID that was sent <@${client.user?.id}>`,
+                            ephemeral : true
+                        })
+                    }
+                
+                    const att = new MessageAttachment(attachment)
+                    const editEmbed = new MessageEmbed()
+                     .setTitle(title)
+                     .setDescription(description)
+                     .setColor(title)
+                
+                    link.edit({ embeds : [editEmbed] })
+                    await modalsInteraction.reply({
+                        content : `Successfully edit the embed!`,
                         ephemeral : true
                     })
                 }
+            } catch(err) {
+                const row = new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                    .setCustomId("errDel")
+                    .setLabel("Delete?")
+                    .setEmoji("1060554179258634251")
+                    .setStyle("DANGER")
+                )
                 
-                const att = new MessageAttachment(attachment)
-                const editEmbed = new MessageEmbed()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(title)
+                const errEmbed = new MessageEmbed()
+                .setTitle("Error Alert!")
+                .setDescription(`\`\`\`\n${err}\````)
+                .setColor("RED")
                 
-                link.edit({ embeds : [editEmbed] })
-                await modalsInteraction.reply({
-                    content : `Successfully edit the embed!`,
-                    ephemeral : true
+                return interaction.reply({
+                    embeds : [errEmbed],
+                    components : [row]
                 })
             }
         }
