@@ -107,8 +107,8 @@ module.exports = {
                 if(modalsInteraction) {
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
-                    const att = modalsInteraction?fields.getTextInputValue("attachment")
-                    const color = modalsInteraction?fields.getTextInputValue("color")
+                    const att = modalsInteraction?.fields.getTextInputValue("attachment")
+                    const color = modalsInteraction?.fields.getTextInputValue("color")
                     const channel = interaction.options.getChannel("channel")
                     
                     const embedObj = {
