@@ -199,6 +199,7 @@ module.exports = {
                      .setColor(title)
                 
                     channel.messages.edit(messageID, options)
+                    link.edit({ embeds : [editEmbed] })
                     await modalsInteraction.reply({
                         content : `Successfully edit the embed!`,
                         ephemeral : true
