@@ -104,7 +104,7 @@ module.exports = {
         
         const query = interaction.options.getSubcommand()
         const filter = i => i.customId === "errDel";
-        const collector = interaction.message.createMessageComponentCollector({ filter, time : 20_000 })
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time : 20_000 })
         collector.on("collect", async i => {
             await i.update({ embeds : [] , components : [] })
         })
@@ -152,7 +152,7 @@ module.exports = {
             } catch(err) {
                 
                 const errEmbed = new MessageEmbed()
-                .setTitle("Error Alert!")
+                .setTitle("⚠️ | Error Alert!")
                 .setDescription(codeBlock(err))
                 .setColor("RED")
                 
@@ -207,7 +207,7 @@ module.exports = {
             } catch(err) {
                 
                 const errEmbed = new MessageEmbed()
-                .setTitle("Error Alert!")
+                .setTitle("⚠️ | Error Alert!")
                 .setDescription(codeBlock("js", err))
                 .setColor("RED")
                 
