@@ -211,7 +211,7 @@ module.exports = {
                 .setDescription(codeBlock(err))
                 .setColor("RED")
                 
-                await interaction.reply({
+                await interaction.followUp({
                     embeds : [errEmbed],
                     components : [row]
                 })
