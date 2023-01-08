@@ -40,7 +40,8 @@ module.exports = {
         if(message) {
             const ping = new Date().getTime() - message.createdTimestamp
             const wsPing = Math.round(client.ws.ping)
-            
+            const wsInline = codeBlock('js', ping)
+
             const timeEmbed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle("🏓 Pong")
@@ -48,7 +49,7 @@ module.exports = {
                 [
                     {
                         name : "Lentacy:" ,
-                        value : `\`${ping}ms\``
+                        value : `${wsInline}ms`
                     },
                     {
                         name : "API:" ,
