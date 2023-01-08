@@ -109,7 +109,7 @@ module.exports = {
             await i.update({ embeds : [] , components : [] })
         })
         
-        collector.end("end", async collected => collected.reply({
+        collector.on("end", async collected => collected.reply({
                 content : `Successfully deleted the embeds!`,
                 ephemeral : true
             })
