@@ -104,7 +104,7 @@ module.exports = {
         
         const query = interaction.options.getSubcommand()
         const filter = i => i.customId === "errDel";
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time : 20_000 })
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time : 20000 })
         collector.on("collect", async i => {
             await i.update({ embeds : [] , components : [] })
         })
