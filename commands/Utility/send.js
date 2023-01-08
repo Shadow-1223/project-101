@@ -103,13 +103,24 @@ module.exports = {
         await interaction.showModal(embedModals)
         
         const query = interaction.options.getSubcommand()
+        const filter = i => i.customId === "errDel";
+        const collector = interaction.message.createMessageComponentCollector({ filter, time : 20_000 })
+        collector.on("collect", async i => {
+            await i.update({ embeds : [] , components : [] })
+        })
         
+        collector.end("end" async collected => {
+            await collected.reply({
+                content : `Successfully deleted the embeds!`,
+                ephemeral : true
+            })
+        })
         
         if(query === "create") {
             
             try {
                 const filter = (interaction) => interaction.customId === "embeds";
-                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
+                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
                   .catch(console.error)
                 
                 if(modalsInteraction) {
@@ -155,8 +166,8 @@ module.exports = {
         } else if(query === "edit") {
             try {
                 const filter = (interaction) => interaction.customId === "embeds";
-                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 15_000 })
-                 .catch(console.error);
+                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
+                  .catch(console.error)
             
                 if(modalsInteraction) {
                     const messageId = interaction.options.getString("messageid")
