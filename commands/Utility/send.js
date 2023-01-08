@@ -165,7 +165,7 @@ module.exports = {
                     const channelID = stuff.pop()
                     const channel = interaction.guild.channels.cache.get(channelID)
                     const invalid = codeBlock(link)
-                    //channel 
+                    channel 
                     if(!link && !channel) return interaction.reply({
                         content : `invalid link please try again. \n${invalid}`,
                         ephemeral : true
@@ -175,7 +175,7 @@ module.exports = {
                     const description = modalsInteraction?.fields.getTextInputValue("description")
                     const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
                     const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await channel.messages.fetch(messageID, {
+                    const targetMessage = await channel.messages.cache.fetch(messageID, {
                         force : true,
                         cache : true
                     })
@@ -198,8 +198,7 @@ module.exports = {
                      .setDescription(description)
                      .setColor(title)
                 
-                    channel.messages.edit(messageID, options)
-                    link.edit({ embeds : [editEmbed] })
+                    targetMessage.edit({ embeds : [editEmbed] })
                     await modalsInteraction.reply({
                         content : `Successfully edit the embed!`,
                         ephemeral : true
