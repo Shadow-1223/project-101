@@ -23,11 +23,11 @@ module.exports = {
                 [
                     {
                         name : "Lentacy:" ,
-                        value : `${pingLine}ms`
+                        value : `${pingLine}`
                     },
                     {
                         name : "API:" ,
-                        value : `${inlineCode}ms`
+                        value : `${inlineCode}`
                     }
                 ]
             )
@@ -48,11 +48,11 @@ module.exports = {
                 [
                     {
                         name : "Lentacy:" ,
-                        value : `${wsInline}ms`
+                        value : `${wsInline}`
                     },
                     {
                         name : "API:" ,
-                        value : `${inline}ms`
+                        value : `${inline}`
                     }
                 ]
             )
