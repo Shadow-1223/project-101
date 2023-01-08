@@ -13,39 +13,37 @@ module.exports = {
         if(interaction) {
             const ping =  new Date().getTime() - interaction.createdTimestamp
             const pingTime = Math.round(client.ws.ping)
-            
+            const pingLine = inlineCode(ping);
+            const inlineCode = inlineCode(pingTime);
+
             const pingEmbed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle("🏓 Pong!")
+            .setTitle("🏓 : Pong!")
             .addFields(
                 [
                     {
                         name : "Lentacy:" ,
-                        value : `\`${ping}ms\``
+                        value : `${pingLine}ms`
                     },
                     {
                         name : "API:" ,
-                        value : `\`${pingTime}ms\``
+                        value : `${inlineCode}ms`
                     }
                 ]
             )
             
-            interaction.reply({
-                embeds : [pingEmbed] ,
-                allowedMentions : {
-                    repliedUser : false
-                }
-            })
+            interaction.reply({ embeds : [pingEmbed] })
         }
         
         if(message) {
             const ping = new Date().getTime() - message.createdTimestamp
             const wsPing = Math.round(client.ws.ping)
-            const wsInline = codeBlock('js', ping)
+            const wsInline = inlineCode(ping);
+            const inline = inlineCode(wsPing);
 
             const timeEmbed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle("🏓 Pong")
+            .setTitle("🏓 : Pong")
             .addFields(
                 [
                     {
@@ -54,7 +52,7 @@ module.exports = {
                     },
                     {
                         name : "API:" ,
-                        value : `\`${wsPing}ms\``
+                        value : `${inline}ms`
                     }
                 ]
             )
