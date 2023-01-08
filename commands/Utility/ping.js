@@ -18,7 +18,7 @@ module.exports = {
 
             const pingEmbed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle("🏓 : Pong!")
+            .setTitle("🏓 | Pong!")
             .addFields(
                 [
                     {
@@ -43,7 +43,7 @@ module.exports = {
 
             const timeEmbed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle("🏓 : Pong")
+            .setTitle("🏓 | Pong")
             .addFields(
                 [
                     {
