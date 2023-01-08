@@ -13,8 +13,8 @@ module.exports = {
         if(interaction) {
             const ping =  new Date().getTime() - interaction.createdTimestamp
             const pingTime = Math.round(client.ws.ping)
-            const pingLine = inlineCode(ping);
-            const inlineCode = inlineCode(pingTime);
+            const pingLine = inlineCode(`${ping}ms`);
+            const inlineCode = inlineCode(`${pingTime}ms`);
 
             const pingEmbed = new MessageEmbed()
             .setColor("RANDOM")
@@ -38,8 +38,8 @@ module.exports = {
         if(message) {
             const ping = new Date().getTime() - message.createdTimestamp
             const wsPing = Math.round(client.ws.ping)
-            const wsInline = inlineCode(ping);
-            const inline = inlineCode(wsPing);
+            const wsInline = inlineCode(`${ping}ms`);
+            const inline = inlineCode(`${wsPing}ms`);
 
             const timeEmbed = new MessageEmbed()
             .setColor("RANDOM")
