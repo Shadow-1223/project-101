@@ -60,7 +60,7 @@ module.exports = {
             message.reply({
                 embeds : [timeEmbed] ,
                 allowedMentions : {
-                    repliedUser : true
+                    repliedUser : false
                 }
             })
         }
