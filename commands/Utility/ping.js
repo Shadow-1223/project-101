@@ -1,5 +1,5 @@
 const { Permissions , Constants , MessageEmbed } = require("discord.js")
-const { codeBlock } = require("@discordjs/builders")
+const { inlineCode } = require("@discordjs/builders")
 
 module.exports = {
     name : "ping" ,
