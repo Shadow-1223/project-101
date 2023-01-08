@@ -45,8 +45,8 @@ module.exports = {
             type : Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
             options : [
                 {
-                    name : "message_link",
-                    description : "Enter a message link",
+                    name : "messageid",
+                    description : "Enter a message id",
                     type : Constants.ApplicationCommandOptionTypes.STRING,
                     required : true
                 }
@@ -159,23 +159,13 @@ module.exports = {
                  .catch(console.error);
             
                 if(modalsInteraction) {
-                    const link = interaction.options.getString("message_link")
-                    const stuff = link.split("/")
-                    const messageID = stuff.pop()
-                    const channelID = stuff.pop()
-                    const channel = interaction.guild.channels.cache.get(channelID)
-                    const invalid = codeBlock(link)
-                    channel 
-                    if(!link && !channel) return interaction.reply({
-                        content : `invalid link please try again. \n${invalid}`,
-                        ephemeral : true
-                    })
+                    const messageId = interaction.options.getString("messageid")
                 
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
                     const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
                     const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await channel.messages.cache.fetch(messageID, {
+                    const targetMessage = await channel.messages.fetch(messageId, {
                         force : true,
                         cache : true
                     })
@@ -208,7 +198,7 @@ module.exports = {
                 
                 const errEmbed = new MessageEmbed()
                 .setTitle("Error Alert!")
-                .setDescription(codeBlock(err))
+                .setDescription(codeBlock("js", err))
                 .setColor("RED")
                 
                 await interaction.followUp({
