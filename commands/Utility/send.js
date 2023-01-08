@@ -109,12 +109,11 @@ module.exports = {
             await i.update({ embeds : [] , components : [] })
         })
         
-        collector.end("end" async collected => {
-            await collected.reply({
+        collector.end("end" async collected => collected.reply({
                 content : `Successfully deleted the embeds!`,
                 ephemeral : true
             })
-        })
+        )
         
         if(query === "create") {
             
