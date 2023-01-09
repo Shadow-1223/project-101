@@ -106,12 +106,12 @@ module.exports = {
         const filter = i => i.customId === "errDel";
         const collector = interaction.channels.createMessageComponentCollector({ filter, time : 20000 })
         collector.on("collect", async i => {
-            await i.update({ embeds : [] , components : [] })
+            await i.update({ content : "the message has been deleted" , components : [] })
         })
         
-        collector.on("end", async collected => interaction.followUp({
+        collector.on("end", async collected => interaction.Update({
                 content : `Successfully deleted the embeds! and collect the ${collected.size}`,
-                ephemeral : true
+                ephemeral : true,
             })
         )
         
