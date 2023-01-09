@@ -109,7 +109,7 @@ module.exports = {
             await i.update({ content : "the message has been deleted" , components : [] })
         })
         
-        collector.on("end", async collected => interaction.Update({
+        collector.on("end", async collected => interaction.editReply({
                 content : `Successfully deleted the embeds! and collect the ${collected.size}`,
                 ephemeral : true,
             })
