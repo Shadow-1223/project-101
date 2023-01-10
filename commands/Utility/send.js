@@ -106,12 +106,12 @@ module.exports = {
         const filter = i => i.customId === "errDel";
         const collector = interaction.channel.createMessageComponentCollector({ filter, time : 20000 })
         collector.on("collect", async i => {
-            await i.update({ content : "the message has been deleted" , components : [] })
+            await i.update({ embeds : [] , components : [] })
         })
         
-        collector.on("end", async collected => interaction.editReply({
+        collector.on("end", async collected => interaction.reply({
                 content : `Successfully deleted the embeds! and collect the ${collected.size}`,
-                ephemeral : true,
+                ephemeral : true
             })
         )
         
@@ -175,7 +175,7 @@ module.exports = {
                     const description = modalsInteraction?.fields.getTextInputValue("description")
                     const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
                     const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await channel.messages.fetch(messageId, {
+                    const targetMessage = await messageid?.channel.messages.fetch(messageId, {
                         force : true,
                         cache : true
                     })
