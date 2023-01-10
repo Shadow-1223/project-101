@@ -109,7 +109,7 @@ module.exports = {
             await i.update({ embeds : [] , components : [] })
         })
         
-        collector.on("end", async collected => interaction.reply({
+        collector.on("end", async collected => interaction.editReply({
                 content : `Successfully deleted the embeds! and collect the ${collected.size}`,
                 ephemeral : true
             })
@@ -150,16 +150,7 @@ module.exports = {
                 }
                 
             } catch(err) {
-                
-                const errEmbed = new MessageEmbed()
-                .setTitle("⚠️ | Error Alert!")
-                .setDescription(codeBlock(err))
-                .setColor("RED")
-                
-                await interaction.reply({
-                    embeds : [errEmbed],
-                    components : [row]
-                })
+                console.log(err)
             }
             
         } else if(query === "edit") {
@@ -175,7 +166,7 @@ module.exports = {
                     const description = modalsInteraction?.fields.getTextInputValue("description")
                     const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
                     const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await messageId?.channel.messages.fetch(messageId, {
+                    const targetMessage = await channel.messages.fetch(messageId, {
                         force : true,
                         cache : true
                     })
@@ -196,7 +187,11 @@ module.exports = {
                     const editEmbed = new MessageEmbed()
                      .setTitle(title)
                      .setDescription(description)
-                     .setColor(title)
+                     try {
+                         editEmbed.setColor(color)
+                     } catch {
+                         editEmbed.setColor("#2f3136")
+                     }
                 
                     targetMessage.edit({ embeds : [editEmbed] })
                     await modalsInteraction.reply({
