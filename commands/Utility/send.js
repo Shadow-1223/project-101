@@ -175,7 +175,7 @@ module.exports = {
                     const description = modalsInteraction?.fields.getTextInputValue("description")
                     const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
                     const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await messageid?.channel.messages.fetch(messageId, {
+                    const targetMessage = await messageId?.channel.messages.fetch(messageId, {
                         force : true,
                         cache : true
                     })
