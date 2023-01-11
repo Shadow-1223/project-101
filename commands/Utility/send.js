@@ -167,6 +167,10 @@ module.exports = {
             
                 if(modalsInteraction) {
                     const messageId = interaction.options.getString("messageid")
+                    if(!messageId) return interaction.reply({
+                        content : "invalid message id",
+                        ephemeral : true
+                    })
                 
                     const title = modalsInteraction?.fields.getTextInputValue("title")
                     const description = modalsInteraction?.fields.getTextInputValue("description")
@@ -176,6 +180,8 @@ module.exports = {
                         force : true,
                         cache : true
                     })
+
+                    const editObj = {}
                 
                     if(!targetMessage) return interaction.reply({
                         content : "Unknown message ID",
@@ -212,7 +218,7 @@ module.exports = {
                 .setDescription(codeBlock("js", err))
                 .setColor("RED")
                 
-                await interaction.editReply({
+                await interaction.followUp({
                     embeds : [errEmbed],
                     components : [row]
                 })
