@@ -10,14 +10,6 @@ const {
 } = require("discord.js")
 const { codeBlock } = require("@discordjs/builders")
 const EmbedBuilder = require("../../Other/schemas/embed.js")
-const row = new MessageActionRow()
- .addComponents(
-     new MessageButton()
-    .setCustomId("errDel")
-    .setLabel("Delete?")
-    .setEmoji("1060554179258634251")
-    .setStyle("DANGER")
-)
 
 module.exports = {
     name : "embeds" ,
@@ -103,125 +95,86 @@ module.exports = {
         await interaction.showModal(embedModals)
         
         const query = interaction.options.getSubcommand()
-        const filter = i => i.customId === "errDel";
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time : 20000 })
-        collector.on("collect", async i => {
-            await i.update({ content : "successfully removed the logs", components : [] })
-        })
-        
-        collector.on("end", async collected => console.log(`the collector collect ${collected}`)
-        )
         
         if(query === "create") {
-            
-            try {
-                const filter = (interaction) => interaction.customId === "embeds";
-                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
-                  .catch(console.error)
+            const filter = (interaction) => interaction.customId === "embeds";
+            const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
+              .catch(console.error)
                 
-                if(modalsInteraction) {
-                    const title = modalsInteraction?.fields.getTextInputValue("title")
-                    const description = modalsInteraction?.fields.getTextInputValue("description")
-                    const att = modalsInteraction?.fields.getTextInputValue("attachment")
-                    const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const channel = interaction.options.getChannel("channel")
+            if(modalsInteraction) {
+                const title = modalsInteraction?.fields.getTextInputValue("title")
+                const description = modalsInteraction?.fields.getTextInputValue("description")
+                const att = modalsInteraction?.fields.getTextInputValue("attachment")
+                const color = modalsInteraction?.fields.getTextInputValue("color")
+                const channel = interaction.options.getChannel("channel")
                     
-                    const embedObj = {
-                        title : title,
-                        description : description,
-                        channelID : channel.id
-                    }
-                    
-                    const embedDb = new EmbedBuilder(embedObj).save();
-                    const attach = new MessageAttachment(att)
-                    const createEmbed = new MessageEmbed()
-                    .setDescription(description)
-                    .setTitle(title)
-                    .setColor(color)
-                    
-                    channel.send({ embeds : [createEmbed] })
-                    await modalsInteraction.reply({
-                        content : `The embeds has been sent in ${channel}`,
-                        ephemeral : true
-                    })
+                const embedObj = {
+                    title : title,
+                    description : description,
+                    channelID : channel.id
                 }
-                
-            } catch(err) {
-                
-                const errEmbed = new MessageEmbed()
-                .setTitle("⚠️ | Error Alert!")
-                .setDescription(codeBlock(err))
-                .setColor("RED")
-                
-                await interaction.reply({
-                    embeds : [errEmbed],
-                    components : [row]
+                    
+                const embedDb = new EmbedBuilder(embedObj).save();
+                const attach = new MessageAttachment(att)
+                const createEmbed = new MessageEmbed()
+                .setDescription(description)
+                if(title) createEmbed.setTitle(title)
+                try {
+                    createEmbed.setColor(color)
+                } catch {
+                    createEmbed.setColor("#2f3136")
+                }
+                    
+                channel.send({ embeds : [createEmbed] })
+                await modalsInteraction.reply({
+                    content : `The embeds has been sent in ${channel}`,
+                    ephemeral : true
                 })
             }
-            
         } else if(query === "edit") {
-            try {
-                const filter = (interaction) => interaction.customId === "embeds";
-                const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
-                  .catch(console.error)
-            
-                if(modalsInteraction) {
-                    const messageId = interaction.options.getString("messageid")
-                    if(!messageId) return interaction.reply({
-                        content : "invalid message id",
+            const filter = (interaction) => interaction.customId === "embeds";
+            const modalsInteraction = await interaction.awaitModalSubmit({ filter, time : 40_000 })
+              .catch(console.error)
+              
+            if(modalsInteraction) {
+                const messageId = interaction.options.getString("messageId")
+                
+                const titl = modalsInteraction?.fields.getTextInputValue("title")
+                const desc = modalsInteraction?.fields.getTextInputValue("description")
+                const att = modalsInteraction?.fields.getTextInputValue("attachment")
+                const color = modalsInteraction?.fields.getTextInputValue("color")
+                const targetMessage = await interaction.channel.messages.fetch(messageId, {
+                    cache : true,
+                    force : true
+                })
+                
+                if(!targetMessage) return interaction.reply({
+                    content : "Unknown Message ID.",
+                    ephemeral : true
+                })
+                
+                if(targetMessage.author.id !==  client.user?.id) {
+                    return interaction.reply({
+                        content : `Please provide a messageID that was sent <@${client.user?.id}>`,
                         ephemeral : true
                     })
-                
-                    const title = modalsInteraction?.fields.getTextInputValue("title")
-                    const description = modalsInteraction?.fields.getTextInputValue("description")
-                    const attachment = modalsInteraction?.fields.getTextInputValue("attachment")
-                    const color = modalsInteraction?.fields.getTextInputValue("color")
-                    const targetMessage = await interaction.channel.messages.fetch(messageId, {
-                        force : true,
-                        cache : true
-                    })
-
-                    const editObj = {}
-                
-                    if(!targetMessage) return interaction.reply({
-                        content : "Unknown message ID",
-                        ephemeral : true
-                    })
-                
-                    if(targetMessage.author.id !== client.user?.id) {
-                        return interaction.reply({
-                            content : `Please provide a messageID that was sent <@${client.user?.id}>`,
-                            ephemeral : true
-                        })
-                    }
-                
-                    const att = new MessageAttachment(attachment)
+                    
+                    const attach = new MessageAttachment(att)
                     const editEmbed = new MessageEmbed()
-                     .setTitle(title)
-                     .setDescription(description)
+                     if(titl) editEmbed.setTitle(titl)
+                     .setDescription(desc)
                      try {
                          editEmbed.setColor(color)
                      } catch {
                          editEmbed.setColor("#2f3136")
                      }
-                
-                    targetMessage.edit({ embeds : [editEmbed] })
-                    await modalsInteraction.reply({
-                        content : `Successfully edit the embed!`,
-                        ephemeral : true
-                    })
+                     
+                     targetMessage.edit({ embeds : [editEmbed] })
+                     await modalsInteraction.reply({
+                         content : `Successfully edit the embeds`,
+                         ephemeral : true
+                     })
                 }
-            } catch(err) {
-                
-                const errEmbed = new MessageEmbed()
-                .setTitle("⚠️ | Error Alert!")
-                .setDescription(codeBlock("js", err))
-                .setColor("RED")
-                
-                await interaction.followUp({
-                    embeds : [errEmbed],
-                    components : [row]
-                })
             }
         }
     }
