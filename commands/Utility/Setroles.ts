@@ -1,144 +1,138 @@
-import {
-  Client,
-  GuildMember,
-  MessageActionRow,
-  MessageSelectMenu,
-  MessageSelectOptionData,
-  Role,
-  TextChannel,
-} from 'discord.js'
-import { ICommand } from 'wokcommands'
+const {
+    Permissions,
+    Constants,
+    MessageSelectMenu,
+    MessageActionRow,
+} = require("discord.js")
 
-export default {
-  category: 'Configuration',
-  description: 'Adds a role to the auto role message.',
-
-  permissions: ['ADMINISTRATOR'],
-
-  minArgs: 3,
-  maxArgs: 3,
-  expectedArgs: '<channel> <messageId> <role>',
-  expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
-
-  slash: 'both',
-  testOnly: true,
-  guildOnly: true,
-
-  init: (client: Client) => {
-    client.on('interactionCreate', (interaction) => {
-      if (!interaction.isSelectMenu()) {
-        return
-      }
-
-      const { customId, values, member } = interaction
-
-      if (customId === 'auto_roles' && member instanceof GuildMember) {
-        const component = interaction.component as MessageSelectMenu
-        const removed = component.options.filter((option) => {
-          return !values.includes(option.value)
+module.exports = {
+    name : "addrole",
+    description : "Adds a role to the auto role message.",
+    permissions : [Permissions.FLAGS.ADMINISTRATOR],
+    slash : true,
+    options : [
+        {
+            name : "channel",
+            description : "Specify a channel",
+            type : Constants.ApplicationCommandOptionTypes.CHANNEL,
+            required : true
+        },
+        {
+            name : "messageId",
+            description : "Enter a messageId",
+            type : Constants.ApplicationCommandOptionTypes.STRING,
+            required : true
+        },
+        {
+            name : "role",
+            description : "Select a role",
+            type : Constants.ApplicationCommandOptionTypes.ROLE,
+            required : true
+        }
+    ],
+    
+    async init(client) {
+        client.on("interactionCreate", async (interaction) => {
+            if(!interaction.isSelectMenu) return;
+            
+            const { customId, values, member } = interaction
+            if(customId === "auto_roles") {
+                const component = interaction.component
+                const removed = component.options.filter((option) => {
+                    return !values.includes(option.value)
+                })
+                
+                for (const id of removed) {
+                    member.roles.remove(id.value)
+                }
+                
+                for (const id of values) {
+                    member.roles.add(id)
+                }
+                
+                interaction.reply({
+                    content : "Role Updated",
+                    ephemeral : true
+                })
+            }
         })
-
-        for (const id of removed) {
-          member.roles.remove(id.value)
+    },
+    
+    async execute({ interaction, client }) {
+        const channel = interaction.options.getChannel("channel")
+        if(!channel || channel.types !== "GUILD_TEXT") {
+            return interaction.reply({
+                content : "please tag a text channel"
+            })
         }
-
-        for (const id of values) {
-          member.roles.add(id)
-        }
-
-        interaction.reply({
-          content: 'Roles update!',
-          ephemeral: true,
+        
+        const messageId = interaction.options.getString("messageId")
+        const targetMessage = await channel.messages.fetch(messageId, {
+            cache : true,
+            force : true
         })
-      }
-    })
-  },
-
-  callback: async ({ message, interaction, args, client }) => {
-    const channel = (
-      message
-        ? message.mentions.channels.first()
-        : interaction.options.getChannel('channel')
-    ) as TextChannel
-    if (!channel || channel.type !== 'GUILD_TEXT') {
-      return 'Please tag a text channel.'
-    }
-
-    const messageId = args[1]
-
-    const role = (
-      message
-        ? message.mentions.roles.first()
-        : interaction.options.getRole('role')
-    ) as Role
-    if (!role) {
-      return 'Unknown role!'
-    }
-
-    const targetMessage = await channel.messages.fetch(messageId, {
-      cache: true,
-      force: true,
-    })
-
-    if (!targetMessage) {
-      return 'Unknown message ID.'
-    }
-
-    if (targetMessage.author.id !== client.user?.id) {
-      return `Please provide a message ID that was sent from <@${client.user?.id}>`
-    }
-
-    let row = targetMessage.components[0] as MessageActionRow
-    if (!row) {
-      row = new MessageActionRow()
-    }
-
-    const option: MessageSelectOptionData[] = [
-      {
-        label: role.name,
-        value: role.id,
-      },
-    ]
-
-    let menu = row.components[0] as MessageSelectMenu
-    if (menu) {
-      for (const o of menu.options) {
-        if (o.value === option[0].value) {
-          return {
-            custom: true,
-            content: `<@&${o.value}> is already part of this menu.`,
-            allowedMentions: {
-              roles: [],
-            },
-            ephemeral: true,
-          }
+        
+        if(!targetMessage) return interaction.reply({
+            content : "Unknown message ID.",
+            ephemeral : true
+        })
+        
+        if(targetMessage.author.id !== client.user?.id) return interaction.reply({
+            content : `Please provide a message ID that was sent from <@${client.user?.id}>`,
+            ephemeral : true
+        })
+        
+        let row = targetMessage.components[0]
+        if(!row) {
+            row = new MessageActionRow()
         }
-      }
-
-      menu.addOptions(option)
-      menu.setMaxValues(menu.options.length)
-    } else {
-      row.addComponents(
-        new MessageSelectMenu()
-          .setCustomId('auto_roles')
-          .setMinValues(0)
-          .setMaxValues(1)
-          .setPlaceholder('Select your roles...')
-          .addOptions(option)
-      )
+        
+        const option = [
+            {
+                label : role.name,
+                label : role.id
+            }
+        ]
+        
+        let menu = row.components[0]
+        if(menu) {
+            for (const o of menu.options) {
+                if(o.value === option[0].value) {
+                    return interaction.reply({
+                        content : `<@&${o.value}> is already part of this menu.`,
+                        ephemeral : true,
+                        allowedMentions : {
+                            roles : []
+                        }
+                    })
+                }
+            }
+            
+            menu.addOptions(option)
+            menu.setMaxValues(menu.options.length)
+        } else {
+            row.addComponents(
+                new MessageSelectMenu()
+                .setCustomId("auto_roles")
+                .setMinValues(0)
+                .setMaxValues(1)
+                .setPlaceholder("select your roles...")
+                .addOptions(option)
+            )
+        }
+        
+        targetMessage.edit({
+            components : [row]
+        })
+        
+        if(interaction) {
+            interaction.reply({
+                content : `Added <@&${role.id}> to the auto roles menu.`,
+                ephemeral : true,
+                allowedMentions : {
+                    roles : []
+                }
+            })
+        }
     }
-
-    targetMessage.edit({
-      components: [row],
-    })
-
-    return {
-      custom: true,
-      content: `Added <@&${role.id}> to the auto roles menu.`,
-      allowedMentions: {
-        roles: [],
-      },
-      ephemeral: true,
-    }
-  },
-} as ICommand
+}
