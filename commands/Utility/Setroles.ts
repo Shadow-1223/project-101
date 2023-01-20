@@ -66,10 +66,8 @@ module.exports = {
         })
         
         const messageId = interaction.options.getString("messageId")
-        const targetMessage = await channel.messages.fetch(messageId, {
-            cache: true,
-            force: true,
-        })
+        const targetMessage = await channel.messages.fetch(messageId)
+           .catch(() => null)
         
         if (!targetMessage) {
             return interaction.reply({
