@@ -60,22 +60,23 @@ module.exports = {
     
     async execute({ interaction, client }) {
         const channel = interaction.options.getChannel("channel")
-        if(!channel || channel.types !== "GUILD_TEXT") {
-            return interaction.reply({
-                content : "please tag a text channel"
-            })
-        }
+        if(!channel) return interaction.reply({
+            content : "please tag a text channel",
+            ephemeral : true
+        })
         
         const messageId = interaction.options.getString("messageId")
         const targetMessage = await channel.messages.fetch(messageId, {
-            cache : true,
-            force : true
+            cache: true,
+            force: true,
         })
         
-        if(!targetMessage) return interaction.reply({
-            content : "Unknown message ID.",
-            ephemeral : true
-        })
+        if (!targetMessage) {
+            return interaction.reply({
+                content : "Unknown message id",
+                ephemeral : true
+            })
+        }
         
         if(targetMessage.author.id !== client.user?.id) return interaction.reply({
             content : `Please provide a message ID that was sent from <@${client.user?.id}>`,
