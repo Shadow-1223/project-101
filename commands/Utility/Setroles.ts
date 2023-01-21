@@ -56,6 +56,7 @@ const prefix = "auto_roles"
     },
      
     async execute({ interaction, client }) {
+        console.log(execute)
         const channel = interaction.options.getChannel("channel")
         if(!channel || channel.types !== "GUILD_TEXT") {
             return interaction.reply({
