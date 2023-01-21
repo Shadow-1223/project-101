@@ -1,9 +1,15 @@
-const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
+const {
+    Permissions,
+    Constants,
+    MessageSelectMenu,
+    MessageActionRow,
+} = require("discord.js")
 
 module.exports = {
     name : "addrole",
     description : "Adds a role to the auto role message.",
-    permission : [Permissions.FLAGS.ADMINISTRATOR],
+    permissions : [Permissions.FLAGS.ADMINISTRATOR],
+    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
     slash : true,
     options : [
         {
@@ -54,7 +60,6 @@ module.exports = {
     },
     
     async execute({ interaction, client }) {
-        console.log(execute)
         const channel = interaction.options.getChannel("channel")
         if(!channel) return interaction.reply({
             content : "please tag a text channel",
@@ -62,8 +67,10 @@ module.exports = {
         })
         
         const messageId = interaction.options.getString("messageId")
-        const targetMessage = await channel.messages.fetch(messageId)
-           .catch(() => null)
+        const targetMessage = await channel.messages.fetch(messageId , {
+            cache : true,
+            force : true,
+        })
         
         if (!targetMessage) {
             return interaction.reply({
