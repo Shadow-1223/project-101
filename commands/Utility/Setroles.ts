@@ -1,9 +1,4 @@
-const {
-    Permissions,
-    Constants,
-    MessageSelectMenu,
-    MessageActionRow,
-} = require("discord.js")
+const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
 
 module.exports = {
     name : "addrole",
