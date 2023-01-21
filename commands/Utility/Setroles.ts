@@ -3,7 +3,7 @@ const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = requi
 module.exports = {
     name : "addrole",
     description : "Adds a role to the auto role message.",
-    permissions : [Permissions.FLAGS.ADMINISTRATOR],
+    permission : [Permissions.FLAGS.ADMINISTRATOR],
     slash : true,
     options : [
         {
