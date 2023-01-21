@@ -1,44 +1,40 @@
-const {
-    Permissions,
-    Constants,
-    MessageSelectMenu,
-    MessageActionRow,
-} = require("discord.js")
-
-module.exports = {
-    name : "addrole",
-    description : "Adds a role to the auto role message.",
-    permissions : [Permissions.FLAGS.ADMINISTRATOR],
-    type : Constants.ApplicationCommandTypes.CHAT_INPUT,
-    slash : true,
-    options : [
-        {
-            name : "channel",
-            description : "Specify a channel",
-            type : Constants.ApplicationCommandOptionTypes.CHANNEL,
-            required : true
-        },
-        {
-            name : "messageId",
-            description : "Enter a messageId",
-            type : Constants.ApplicationCommandOptionTypes.STRING,
-            required : true
-        },
-        {
-            name : "role",
-            description : "Select a role",
-            type : Constants.ApplicationCommandOptionTypes.ROLE,
-            required : true
-        }
+const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
+const prefix = "auto_roles"
+ 
+ module.exports = {
+     name : "setroles" ,
+     description : "Set a role in the messages" ,
+     permission : [Permissions.FLAGS.ADMINISTRATOR] ,
+     type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
+     slash : true ,
+     options : [
+         {
+             name : "channel" ,
+             description : "Specify a channel" ,
+             type : Constants.ApplicationCommandOptionTypes.CHANNEL ,
+             required : true ,
+         },
+         {
+             name : "messageId" ,
+             description : "Enter a messageId" ,
+             type : Constants.ApplicationCommandOptionTypes.STRING ,
+             required : true
+         },
+         {
+             name : "roles" ,
+             description : "Select a role" ,
+             type : Constants.ApplicationCommandOptionTypes.ROLE ,
+             required : true
+         }
     ],
     
     async init(client) {
-        client.on("interactionCreate", async (interaction) => {
-            if(!interaction.isSelectMenu) return;
+        client.on("interactionCreate", interaction => {
+            if(!interaction.isSelectMenu()) return;
             
-            const { customId, values, member } = interaction
+            const { customId, values, member } = interaction;
             if(customId === "auto_roles") {
-                const component = interaction.component
+                const component = interaction.component;
                 const removed = component.options.filter((option) => {
                     return !values.includes(option.value)
                 })
@@ -52,60 +48,62 @@ module.exports = {
                 }
                 
                 interaction.reply({
-                    content : "Role Updated",
+                    content : "Roles updated",
                     ephemeral : true
                 })
             }
         })
     },
-    
+     
     async execute({ interaction, client }) {
         const channel = interaction.options.getChannel("channel")
-        if(!channel) return interaction.reply({
-            content : "please tag a text channel",
-            ephemeral : true
-        })
+        if(!channel || channel.types !== "GUILD_TEXT") {
+            return interaction.reply({
+                content : "please tag a text channel"
+            })
+        }
         
         const messageId = interaction.options.getString("messageId")
-        const targetMessage = await channel.messages.fetch(messageId , {
+        const role = interaction.options.getRole("role")
+        if(!role) {
+            return interaction.reply({ content : "Unknown role" })
+        }
+        
+        const targetMessage = await channel.messages.fetch(messageId, {
             cache : true,
             force : true,
         })
         
-        if (!targetMessage) {
-            return interaction.reply({
-                content : "Unknown message id",
-                ephemeral : true
-            })
+        if(!targetMessage) {
+            return interaction.reply({ content : "Unknown messageID" })
         }
         
-        if(targetMessage.author.id !== client.user?.id) return interaction.reply({
-            content : `Please provide a message ID that was sent from <@${client.user?.id}>`,
-            ephemeral : true
-        })
+        if (targetMessage.author.id !== client.user?.id) {
+            return interaction.reply({ content : `Please provide a message ID that was sent from <@${client.user?.id}>` })
+        }
         
         let row = targetMessage.components[0]
-        if(!row) {
+        if (!row) {
             row = new MessageActionRow()
         }
         
-        const option = [
+        const option: MessageSelectOptionData[] = [
             {
-                label : role.name,
-                label : role.id
-            }
+                label: role.name,
+                value: role.id,
+            },
         ]
         
-        let menu = row.components[0]
-        if(menu) {
+        let menu = row.components[0] as MessageSelectMenu
+        if (menu) {
             for (const o of menu.options) {
-                if(o.value === option[0].value) {
+                if (o.value === option[0].value) {
                     return interaction.reply({
-                        content : `<@&${o.value}> is already part of this menu.`,
-                        ephemeral : true,
-                        allowedMentions : {
-                            roles : []
-                        }
+                        content: `<@&${o.value}> is already part of this menu.`,
+                        allowedMentions: {
+                            roles: [],
+                        },
+                        ephemeral: true,
                     })
                 }
             }
@@ -115,26 +113,24 @@ module.exports = {
         } else {
             row.addComponents(
                 new MessageSelectMenu()
-                .setCustomId("auto_roles")
-                .setMinValues(0)
-                .setMaxValues(1)
-                .setPlaceholder("select your roles...")
-                .addOptions(option)
+                  .setCustomId('auto_roles')
+                  .setMinValues(0)
+                  .setMaxValues(1)
+                  .setPlaceholder('Select your roles...')
+                  .addOptions(option)
             )
         }
-        
+
         targetMessage.edit({
-            components : [row]
+            components: [row],
         })
-        
-        if(interaction) {
-            interaction.reply({
-                content : `Added <@&${role.id}> to the auto roles menu.`,
-                ephemeral : true,
-                allowedMentions : {
-                    roles : []
-                }
-            })
-        }
-    }
-}
+
+        interaction.reply({
+            content: `Added <@&${role.id}> to the auto roles menu.`,
+            allowedMentions: {
+                roles: [],
+            },
+            ephemeral: true,
+        })
+     }
+ }
