@@ -59,6 +59,7 @@ module.exports = {
     },
     
     async execute({ interaction, client }) {
+        console.log(execute)
         const channel = interaction.options.getChannel("channel")
         if(!channel) return interaction.reply({
             content : "please tag a text channel",
