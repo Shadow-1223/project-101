@@ -2,7 +2,7 @@ const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = requi
 const prefix = "auto_roles"
  
  module.exports = {
-     name : "setroles" ,
+     name : "setroles2" ,
      description : "Set a role in the messages" ,
      permission : [Permissions.FLAGS.ADMINISTRATOR] ,
      type : Constants.ApplicationCommandTypes.CHAT_INPUT ,
