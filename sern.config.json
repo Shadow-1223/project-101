@@ -1,0 +1,7 @@
+{
+  "language": "javascript",
+  "paths": {
+    "base": "src",
+    "commands": "commands"
+  }
+}
