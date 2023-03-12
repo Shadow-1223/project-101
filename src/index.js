@@ -39,8 +39,8 @@ Sern.init({
     commands : 'src/commands',
     events : 'src/events',
     containerConfig : {
-		  get: useContainer
-	 }
+	    get: useContainer
+    }
 })
 
 client.login(process.env.TOKEN)
