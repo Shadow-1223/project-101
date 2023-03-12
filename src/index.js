@@ -1,23 +1,29 @@
-require('dotenv').config()
-
-const sdhandler = require('sdhandler')
+const { Sern , single } = require("@sern/handler")
 const mongoose = require('mongoose')
-const { Intents , Client } = require('discord.js') 
+const { GatewayIntentBits, Events, Client } = require('discord.js') 
+require("dotenv/config")
 
 const client = new Client({
     intents : [
-        Intents.FLAGS.GUILDS ,
-        Intents.FLAGS.GUILD_MESSAGES ,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS ,
-        Intents.FLAGS.GUILD_PRESENCES ,
-        Intents.FLAGS.GUILD_BANS,
-        Intents.FLAGS.GUILD_MEMBERS ,
-        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS ,
-        Intents.FLAGS.GUILD_VOICE_STATES
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessageReaction,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildMember,
+        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildVoiceStates
     ]
 })
 
-client.on("ready", async () => {
+export const useContainer = Sern.makeDependencies({
+    build: root => root
+        .add({ '@sern/client': single(() => client)  })
+        .upsert({ '@sern/logger': single(() => new DefaultLogging()) })
+});
+
+client.on('ready', async () => {
     await mongoose.connect(
         process.env.MONGO_URI ,
         {
@@ -28,11 +34,13 @@ client.on("ready", async () => {
     client.user.setActivity("ka help (its now online thank you for your patience)", { type : "STREAMING" })
 })
 
-sdhandler.sdhandler({
-    client : client ,
-    commandsDir : "./commands" ,
-    eventsDir : "./events" ,
-    token : process.env.TOKEN ,
-    prefix : ["ka ", " "] ,
-    buttonsDir : "./buttons"
+Sern.init({
+    defaultPrefix : 'ka ',
+    commands : 'src/commands',
+    events : 'src/events',
+    containerConfig : {
+		  get: useContainer
+	 }
 })
+
+client.login(process.env.TOKEN)
