@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/Shadow-1223/project-101.git"
   },
-  "keywords": [],
+  "keywords": [
+    "karni"
+  ],
   "author": "Shadow-1223",
   "license": "ISC",
   "bugs": {
