@@ -5,7 +5,7 @@ const { inlineCode } = require("discordjs/builders")
 exports.defualt = new commandModule({
     type : CommandType.Both,
     description : "Replied with a pong",
-    alias : ["p"]
+    alias : ["p"],
     execute: async (ctx) => {
         const { client } = ctx
         const pingTime = new Date() - ctx.createdTimestamp
