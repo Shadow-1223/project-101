@@ -1,5 +1,5 @@
-const { Sern , single } = require("@sern/handler")
 const mongoose = require('mongoose')
+const { Sern , single } = require("@sern/handler")
 const { GatewayIntentBits, Events, Client } = require('discord.js') 
 require("dotenv/config")
 
@@ -17,11 +17,13 @@ const client = new Client({
     ]
 })
 
-export const useContainer = Sern.makeDependencies({
+const useContainer = Sern.makeDependencies({
     build: root => root
         .add({ '@sern/client': single(() => client)  })
         .upsert({ '@sern/logger': single(() => new DefaultLogging()) })
 });
+
+module.exports.defualt = { useContainer }
 
 client.on('ready', async () => {
     await mongoose.connect(
