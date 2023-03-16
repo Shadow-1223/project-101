@@ -22,7 +22,7 @@ module.exports.defualt = commandModule({
                     value : `${inline}`
                 },
                 {
-                    name : "Api:"
+                    name : "Api:",
                     value : `${line}`
                 }
             ]
