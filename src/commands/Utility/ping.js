@@ -11,7 +11,7 @@ module.exports.defualt = commandModule({
         const pingTime = new Date() - ctx.createdTimestamp
         const pingRound = Math.round(client.ws.ping)
         const inline = new inlineCode(`${pingTime}ms`)
-        const line = new InlineCode(`${pingRound}ms`)
+        const line = new inlineCode(`${pingRound}ms`)
         const pingEmbed = new EmbedBuilder()
         .setColor("Random")
         .setTitle("🏓 | Pong!")
