@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const { Sern , single } = require("@sern/handler")
-const { GatewayIntentBits, Events, Client } = require('discord.js') 
+const { GatewayIntentBits, Events, Client } = require('discord.js')
+const { Sern, single, DefaultLogging } = require("@sern/handler")
 require("dotenv/config")
 
 const client = new Client({
@@ -9,6 +9,11 @@ const client = new Client({
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
+                GatewayIntentBits.GuildBans,
+                GatewayIntentBits.GuildMessageReactions,
+                GatewayIntentBits.GuildEmojisAndStickers,
+                GatewayIntentBits.GuildPresences,
+                GatewayIntentBits.GuildVoiceStates,
 		GatewayIntentBits.MessageContent, // Make sure this is enabled for text commands!
 	],
 });
