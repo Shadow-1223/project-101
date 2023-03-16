@@ -4,18 +4,14 @@ const { GatewayIntentBits, Events, Client } = require('discord.js')
 require("dotenv/config")
 
 const client = new Client({
-    intents : [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildPresences,
-        GatewayIntentBits.GuildMessageReaction,
-        GatewayIntentBits.GuildBans,
-        GatewayIntentBits.GuildMember,
-        GatewayIntentBits.GuildEmojisAndStickers,
-        GatewayIntentBits.GuildVoiceStates
-    ]
-})
+	intents: [
+	
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent, // Make sure this is enabled for text commands!
+	],
+});
 
 const useContainer = Sern.makeDependencies({
     build: root => root
