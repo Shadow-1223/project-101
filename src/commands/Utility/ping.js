@@ -2,7 +2,7 @@ const { CommandType , commandModule } = require("@sern/handler")
 const { EmbedBuilder } = require("discord.js")
 const { inlineCode } = require("discordjs/builders")
 
-module.exports.defualt = new commandModule({
+module.exports.defualt = commandModule({
     type : CommandType.Both,
     description : "Replied with a pong",
     alias : ["p"],
