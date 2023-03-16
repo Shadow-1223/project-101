@@ -88,14 +88,14 @@ const prefix = "auto_roles"
             row = new MessageActionRow()
         }
         
-        const option: MessageSelectOptionData[] = [
+        const option = [
             {
                 label: role.name,
                 value: role.id,
             },
         ]
         
-        let menu = row.components[0] as MessageSelectMenu
+        let menu = row.components[0]
         if (menu) {
             for (const o of menu.options) {
                 if (o.value === option[0].value) {
