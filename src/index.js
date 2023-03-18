@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { GatewayIntentBits, Events, Client } = require('discord.js')
 const { Sern, single, DefaultLogging } = require("@sern/handler")
-require("dotenv/config")
+require("dotenv").config();
 
 const client = new Client({
 	intents: [
