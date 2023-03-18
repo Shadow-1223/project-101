@@ -9,3 +9,5 @@ RUN npm install
 COPY . .
 
 RUN node src/index.js
+
+ARG token="foobar"
