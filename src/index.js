@@ -45,4 +45,4 @@ Sern.init({
     }
 })
 
-client.login()
+client.login(process.env.TOKEN)
