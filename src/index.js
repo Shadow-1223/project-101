@@ -45,5 +45,5 @@ Sern.init({
     }
 })
 
-client.login(process.env.token)
 console.log(process.env)
+client.login(process.env.token)
