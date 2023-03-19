@@ -91,19 +91,36 @@ module.exports.defualt = commandModule({
         
         if(query === "create") {
             const filter = (interaction) => interaction.customId === "create_modal"
-            const modalsInteraction = interaction.awaitModalSubmit({ filter, time: 40_000 })
-            if(modalsInteraction) {
+            const modalsInt = interaction.awaitModalSubmit({ filter, time: 40_000 })
+            if(modalsInt) {
                 const titl = interaction.fields.getTextInputValue("title")
                 const text = interaction.fields.getTextInputValue("desc")
                 const color = interaction.fields.getTextInputValue("color")
                 const att = interaction.fields.geyTextInputValue("attachment")
                 const channel = interaction.options.getChannel("channel")
+                const embedSave = new EmbedDB(embedObj).save();
                 const embedObj = {
                     title : titl,
                     description : text,
-                    channelID 
+                    channelID : channel,
+                    attachment : attach
                 }
                 
+                const attach = new AttachmentBuilder(att. { name: "test.png"})
+                const createEmbed = new EmbedBuilder():
+                  if(titl) createEmbed.setTitle(titl)
+                  .setDescription(text)
+                  try {
+                      createEmbed.setColor(color)
+                  } catch {
+                      createEmbed.setColor("#2f3136)
+                  }
+                
+                channel.send({ embeds: [createEmbed] })
+                await modalsInt.reply({
+                    content : `The embed has been sent in ${channel}.`
+                    ephemeral : true
+                })
             }
         } else if(query === "edit") {}
     }
