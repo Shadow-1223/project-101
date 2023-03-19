@@ -1,4 +1,4 @@
-const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
+/*const { Permissions , Constants , MessageSelectMenu , MessageActionRow } = require("discord.js")
 const prefix = "auto_roles"
  
  module.exports = {
@@ -134,4 +134,4 @@ const prefix = "auto_roles"
             ephemeral: true,
         })
      }
- }
+ }*/
