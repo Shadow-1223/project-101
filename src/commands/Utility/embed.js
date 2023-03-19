@@ -90,6 +90,7 @@ module.exports.defualt = commandModule({
         await interaction.showModal(embedModal)
         
         if(query === "create") {
+            
             const filter = (interaction) => interaction.customId === "create_modal"
             const modalsInt = interaction.awaitModalSubmit({ filter, time: 40_000 })
             if(modalsInt) {
@@ -118,10 +119,12 @@ module.exports.defualt = commandModule({
                 
                 channel.send({ embeds: [createEmbed] })
                 await modalsInt.reply({
-                    content : `The embed has been sent in ${channel}.`
+                    content : `The embed has been sent in ${channel}.`,
                     ephemeral : true
                 })
             }
-        } else if(query === "edit") {}
+        } else if(query === "edit") {
+            h
+        }
     }
 })
