@@ -141,13 +141,16 @@ module.exports.defualt = commandModule({
                 const targetMessage = await interaction.channel.messages.fetch(messageId)
                 
                 const editedObj = {
+                    _id : messageId,
                     title : titl,
                     description : editText,
                     hexColor : color,
                     image : attachment
                 }
                 
-                const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new c u })
+                const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new: true })
+                const editedEmbed = new EmbedBuilder()
+                if(titl) editedEmbed.setTitle()
             }
         }
     }
