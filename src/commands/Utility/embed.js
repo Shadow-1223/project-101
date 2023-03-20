@@ -90,10 +90,11 @@ module.exports.defualt = commandModule({
         await interaction.showModal(embedModal)
         
         if(query === "create") {
-            
             const filter = (interaction) => interaction.customId === "create_modal"
-            const modalsInt = interaction.awaitModalSubmit({ filter, time: 40_000 })
-            if(modalsInt) {
+            const createModalsInt = interaction.awaitModalSubmit({ filter, time: 40_000 })
+            .catch(error => (null))
+            
+            if(createModalsInt) {
                 const titl = interaction.fields.getTextInputValue("title")
                 const text = interaction.fields.getTextInputValue("desc")
                 const color = interaction.fields.getTextInputValue("color")
@@ -104,17 +105,20 @@ module.exports.defualt = commandModule({
                     title : titl,
                     description : text,
                     channelID : channel,
-                    attachment : attach
+                    image : att
                 }
                 
-                const attach = new AttachmentBuilder(att. { name: "test.png"})
-                const createEmbed = new EmbedBuilder():
+                const createSave = new EmbedDB(embedObj).save();
+                const attach = new AttachmentBuilder(att. { name: "test.png"}) || ""
+                const createEmbed = new EmbedBuilder();
                   if(titl) createEmbed.setTitle(titl)
                   .setDescription(text)
                   try {
+                      createEmbed.setImage(attach)
                       createEmbed.setColor(color)
                   } catch {
-                      createEmbed.setColor("#2f3136)
+                      createEmbed.setImage(null)
+                      createEmbed.setColor("#2f3136")
                   }
                 
                 channel.send({ embeds: [createEmbed] })
@@ -122,9 +126,29 @@ module.exports.defualt = commandModule({
                     content : `The embed has been sent in ${channel}.`,
                     ephemeral : true
                 })
-            }
+            },
         } else if(query === "edit") {
-            h
+            const filter = (interaction) => interaction.customId === "create_embed"
+            const editModalsInt = await interaction.awaitModalSubmit({ filter, time : 40_000 })
+            .catch(error => (null))
+            
+            if(editModalsInt) {
+                const titl = interaction.fields.getTexInputValue("title")
+                const editText = interaction.fields.getTextInputValue("desc")
+                const color interaction.fields.getTextInputValue("color")
+                const attachment = interaction.fields.getTextInputValue("attactment")
+                const messageId = interaction.options.getString("messageId")
+                const targetMessage = await interaction.channel.messages.fetch(messageId)
+                
+                const editedObj = {
+                    title : titl,
+                    description : editText,
+                    hexColor : color,
+                    image : attachment
+                }
+                
+                const editSave = new EmbedDB.
+            }
         }
     }
 })
