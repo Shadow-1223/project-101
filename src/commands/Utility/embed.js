@@ -147,7 +147,7 @@ module.exports.defualt = commandModule({
                     image : attachment
                 }
                 
-                const editSave = new EmbedDB.
+                const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new c u })
             }
         }
     }
