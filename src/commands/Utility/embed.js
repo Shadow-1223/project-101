@@ -110,15 +110,24 @@ module.exports.defualt = commandModule({
                 
                 const createSave = new EmbedDB(embedObj).save();
                 const attach = new AttachmentBuilder(att. { name: "test.png"}) || ""
+                const createImage = new EmbedBuilder()
+                if(text) createImage.setDescription(null)
+                try {
+                    createImage.setImage(attachment)
+                    createImage.setColor(color)
+                } catch {
+                    createImage.setImage(null)
+                    createImage.setColor(2f3136)
+                }
+            
                 const createEmbed = new EmbedBuilder();
                   if(titl) createEmbed.setTitle(titl)
                   .setDescription(text)
                   try {
-                      createEmbed.setImage(attach)
+                      attach)
                       createEmbed.setColor(color)
                   } catch {
-                      createEmbed.setImage(null)
-                      createEmbed.setColor("#2f3136")
+                      createEmbed.setColor(2f3136)
                   }
                 
                 channel.send({ embeds: [createEmbed] })
@@ -126,7 +135,7 @@ module.exports.defualt = commandModule({
                     content : `The embed has been sent in ${channel}.`,
                     ephemeral : true
                 })
-            },
+            }
         } else if(query === "edit") {
             const filter = (interaction) => interaction.customId === "create_embed"
             const editModalsInt = await interaction.awaitModalSubmit({ filter, time : 40_000 })
@@ -149,8 +158,31 @@ module.exports.defualt = commandModule({
                 }
                 
                 const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new: true })
+                const imageBuffer = new AttachmentBuilder(attachment, { name
+                const editedImage = new EmbedBuilder()
+                if(editText) editedImage.setDescription(null)
+                try {
+                    editedImage.setImage(attachment)
+                    editedImage.setColor(color)
+                } catch {
+                    editedImage.setImage(null)
+                    editedImage.setColor(2f3136)
+                }
+                
                 const editedEmbed = new EmbedBuilder()
                 if(titl) editedEmbed.setTitle()
+                .setDescription(editText)
+                try {
+                    editedEmbed.setColor(color)
+                } catch {
+                    editedEmbed.setColor(2f3136)
+                }
+                
+                targetMessage.edit({ embeds : [editedEmbed] })
+                await editModalsInt.reply({
+                    content : "The embed has been edited!",
+                    ephemeral : true
+                })
             }
         }
     }
