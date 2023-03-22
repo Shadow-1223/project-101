@@ -1,4 +1,4 @@
-const { Permissions , Constants } = require("discord.js")
+/*const { Permissions , Constants } = require("discord.js")
 
 module.exports = {
     name : "echo" ,
@@ -37,4 +37,4 @@ module.exports = {
             })
         }
     }
-}
+}*/
