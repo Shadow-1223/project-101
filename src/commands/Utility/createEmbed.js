@@ -110,7 +110,7 @@ module.exports.defualt = commandModule({
                 
                 const imageBuffer = Buffer.from(att, "base64")
                 const createSave = new EmbedDB(embedObj).save();
-                const attach = new AttachmentBuilder(imageBuffer. { name: "test.png"})
+                const attach = new AttachmentBuilder(imageBuffer. { name: "test.png"}) | null
                 const createImage = new EmbedBuilder()
                 if(text) createImage.setDescription(null);
                 try {
@@ -163,7 +163,7 @@ module.exports.defualt = commandModule({
                 
                 const buffer = Buffer.from(attachment, "base64")
                 const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new: true })
-                const imageBuffer = new AttachmentBuilder(buffer, { name : "hello.png" })
+                const imageBuffer = new AttachmentBuilder(buffer, { name : "hello.png" }) | null
                 const editedImage = new EmbedBuilder()
                 if(editText) editedImage.setDescription(null)
                 try {
