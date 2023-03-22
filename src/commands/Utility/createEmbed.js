@@ -118,7 +118,7 @@ module.exports.defualt = commandModule({
                     createImage.setColor(color)
                 } catch {
                     createImage.setImage(null)
-                    createImage.setColor(2f3136)
+                    createImage.setColor(0x0099FF)
                 }
             
                 const createEmbed = new EmbedBuilder();
@@ -180,7 +180,7 @@ module.exports.defualt = commandModule({
                 try {
                     editedEmbed.setColor(color)
                 } catch {
-                    editedEmbed.setColor(2f3136)
+                    editedEmbed.setColor(0x0099FF)
                 }
                 
                 targetMessage.edit({ embeds : [editedEmbed] })
