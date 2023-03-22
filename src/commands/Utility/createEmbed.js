@@ -110,11 +110,11 @@ module.exports.defualt = commandModule({
                 
                 const imageBuffer = Buffer.from(att, "base64")
                 const createSave = new EmbedDB(embedObj).save();
-                const attach = new AttachmentBuilder(imageBuffer. { name: "test.png"}) || ""
+                const attach = new AttachmentBuilder(imageBuffer. { name: "test.png"})
                 const createImage = new EmbedBuilder()
-                if(text) createImage.setDescription(null)
+                if(text) createImage.setDescription(null);
                 try {
-                    createImage.setImage(attachment)
+                    createImage.setImage(attach)
                     createImage.setColor(color)
                 } catch {
                     createImage.setImage(null)
@@ -125,7 +125,6 @@ module.exports.defualt = commandModule({
                   if(titl) createEmbed.setTitle(titl)
                   .setDescription(text)
                   try {
-                      attach)
                       createEmbed.setColor(color)
                   } catch {
                       createEmbed.setColor(2f3136)
@@ -149,6 +148,10 @@ module.exports.defualt = commandModule({
                 const attachment = interaction.fields.getTextInputValue("attactment")
                 const messageId = interaction.options.getString("messageId")
                 const targetMessage = await interaction.channel.messages.fetch(messageId)
+                if(!targetMessage) return interaction.reply({
+                    content : "Unknown messageID",
+                    ephemeral : true
+                })
                 
                 const editedObj = {
                     _id : messageId,
@@ -160,11 +163,11 @@ module.exports.defualt = commandModule({
                 
                 const buffer = Buffer.from(attachment, "base64")
                 const editSave = new EmbedDB.FindOneAndUpdate(editedObj._id, { $set: editedObj }, { upsert: true, new: true })
-                const imageBuffer = new AttachmentBuilder(attachment, { name : "hello.png" })
+                const imageBuffer = new AttachmentBuilder(buffer, { name : "hello.png" })
                 const editedImage = new EmbedBuilder()
                 if(editText) editedImage.setDescription(null)
                 try {
-                    editedImage.setImage("attachment://hello.png")
+                    editedImage.setImage(imageBuffer)
                     editedImage.setColor(color)
                 } catch {
                     editedImage.setImage(null)
@@ -172,7 +175,7 @@ module.exports.defualt = commandModule({
                 }
                 
                 const editedEmbed = new EmbedBuilder()
-                if(titl) editedEmbed.setTitle()
+                if(titl) editedEmbed.setTitle(titl)
                 .setDescription(editText)
                 try {
                     editedEmbed.setColor(color)
