@@ -110,7 +110,7 @@ module.exports.defualt = commandModule({
                 
                 const imageBuffer = Buffer.from(att, "base64")
                 const createSave = new EmbedDB(embedObj).save();
-                const attach = new AttachmentBuilder(imageBuffer. { name: "test.png"}) | null
+                const attach = new AttachmentBuilder(imageBuffer, { name: "test.png"}) || null
                 const createImage = new EmbedBuilder()
                 if(text) createImage.setDescription(null);
                 try {
