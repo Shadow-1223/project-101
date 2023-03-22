@@ -8,7 +8,7 @@ const {
     ApplicationCommandOptionType,
 } = require("discord.js")
 const { commandModule , CommandType } = require("@sern/handler")
-const EmbedDB = require("../src/Other/schemas/embed.js")
+const EmbedDB = require("../../Other/schemas/embed.js")
 
 module.exports.defualt = commandModule({
     type : CommandType.Slash,
