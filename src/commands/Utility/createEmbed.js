@@ -36,7 +36,7 @@ module.exports.defualt = commandModule({
                 {
                     name : "messageId",
                     description : "Enter a message id",
-                    type ApplicationCommandOptionType.String,
+                    type : ApplicationCommandOptionType.String,
                     required : true
                 }
             ]
