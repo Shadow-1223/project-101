@@ -1,4 +1,5 @@
-const { MessageEmbed, Permissions, Constants } = require('discord.js');
+// currently focusing converting embed.js file to new syntax
+/*const { MessageEmbed, Permissions, Constants } = require('discord.js');
 const anime = require('../../Other/utils/anime');
 
 
@@ -87,4 +88,4 @@ module.exports = {
             } catch(err) { console.log(err) }
         }
     }
-}
+}*/
