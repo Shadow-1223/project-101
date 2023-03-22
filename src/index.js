@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { GatewayIntentBits, Events, Client } = require('discord.js')
+const { GatewayIntentBits, Client, ActivityType } = require('discord.js')
 const { Sern, single, DefaultLogging } = require("@sern/handler")
 require("dotenv").config();
 
@@ -33,7 +33,7 @@ client.on('ready', async () => {
         }
     )
     //set activity of the bot.
-    client.user.setActivity("ka help (its now online thank you for your patience)", { type : "STREAMING" })
+    client.user.setActivity("ka help (its now online thank you for your patience)", { type : ActivityType.Competing })
 })
 
 Sern.init({
