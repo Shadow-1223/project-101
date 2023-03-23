@@ -144,7 +144,7 @@ module.exports.defualt = commandModule({
             if(editModalsInt) {
                 const titl = interaction.fields.getTexInputValue("title")
                 const editText = interaction.fields.getTextInputValue("desc")
-                const color interaction.fields.getTextInputValue("color")
+                const color = interaction.fields.getTextInputValue("color")
                 const attachment = interaction.fields.getTextInputValue("attactment")
                 const messageId = interaction.options.getString("messageId")
                 const targetMessage = await interaction.channel.messages.fetch(messageId)
