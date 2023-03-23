@@ -11,6 +11,7 @@ const { commandModule , CommandType } = require("@sern/handler")
 const EmbedDB = require("../../Other/schemas/embed.js")
 
 module.exports.defualt = commandModule({
+    name : "embeds",
     type : CommandType.Slash,
     plugins : [],
     description : "Embed maker",

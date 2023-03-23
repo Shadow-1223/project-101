@@ -32,18 +32,17 @@ client.on('ready', async () => {
             keepAlive : true
         }
     )
+    console.log("the bot is online")
     //set activity of the bot.
     client.user.setActivity("ka help (its now online thank you for your patience)", { type : ActivityType.Competing })
 })
 
 Sern.init({
-    defaultPrefix : 'ka ',
+    defaultPrefix : 'ka',
     commands : 'src/commands',
     events : 'src/events',
     containerConfig : {
 	    get: useContainer
     }
 })
-
-console.log(process.env)
 client.login(process.env.token)
