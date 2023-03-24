@@ -1,9 +1,9 @@
-const { CommandType , commandModule } = require("@sern/handler")
-const { EmbedBuilder } = require("discord.js")
-const { inlineCode } = require("@discordjs/builders")
-const { publish } = require("#plugins")
+import { CommandType , commandModule } = require("@sern/handler")
+import { EmbedBuilder } from "discord.js"
+import { inlineCode } from "@discordjs/builders"
+import { publish } from "#plugins"
 
-module.exports.defualt = commandModule({
+export default commandModule({
     type : CommandType.Both,
     plugins : [publish()]
     description : "Replied with a pong",

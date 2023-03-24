@@ -1,4 +1,4 @@
-const {
+import {
     ModalBuilder,
     EmbedBuilder,
     TextInputStyle,
@@ -6,12 +6,12 @@ const {
     ActionRowBuilder,
     AttachmentBuilder,
     ApplicationCommandOptionType,
-} = require("discord.js")
-const { commandModule , CommandType } = require("@sern/handler")
-const EmbedDB = require("../../Other/schemas/embed.js")
-const { publish } = require("../../plugins/publish.js")
+} from "discord.js"
+import { commandModule , CommandType } from "@sern/handler"
+import EmbedDB from "../../Other/schemas/embed.js"
+import { publish } from "../../plugins/publish.js"
 
-module.exports.defualt = commandModule({
+export default commandModule({
     type : CommandType.Slash,
     plugins : [publish()],
     description : "Embed maker",
