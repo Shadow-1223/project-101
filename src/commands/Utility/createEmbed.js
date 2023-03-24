@@ -9,11 +9,11 @@ const {
 } = require("discord.js")
 const { commandModule , CommandType } = require("@sern/handler")
 const EmbedDB = require("../../Other/schemas/embed.js")
+const { publish } = require("../../plugins/publish.js")
 
 module.exports.defualt = commandModule({
-    name : "embeds",
     type : CommandType.Slash,
-    plugins : [],
+    plugins : [publish()],
     description : "Embed maker",
     options : [
         {

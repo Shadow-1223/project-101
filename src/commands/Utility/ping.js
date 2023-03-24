@@ -1,9 +1,11 @@
 const { CommandType , commandModule } = require("@sern/handler")
 const { EmbedBuilder } = require("discord.js")
 const { inlineCode } = require("@discordjs/builders")
+const { publish } = require("#plugins")
 
 module.exports.defualt = commandModule({
     type : CommandType.Both,
+    plugins : [publish()]
     description : "Replied with a pong",
     alias : ["p"],
     execute: async (ctx, args) => {
