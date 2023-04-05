@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 /**
  * Checks if a command is available in a specific server.
  *
@@ -19,16 +18,17 @@
  * });
  * ```
  */
-import { controller, CommandControlPlugin } from "@sern/handler";
+
+import { CommandType, controller, CommandControlPlugin } from "@sern/handler";
+
 export function serverOnly(
-	guildId,
+	guildId: string[],
 	failMessage = "This command is not available in this guild. \nFor permission to use in your server, please contact my developer."
 ) {
-	return CommandControlPlugin(async (ctx, _) => {
+	return CommandControlPlugin<CommandType.Both>(async (ctx, _) => {
 		if (ctx.guildId == null) {
 			return controller.stop();
 		}
-
 		if (!guildId.includes(ctx.guildId)) {
 			ctx.reply(failMessage).then(async (m) => {
 				setTimeout(async () => {
@@ -37,7 +37,6 @@ export function serverOnly(
 			});
 			return controller.stop();
 		}
-
 		return controller.next();
 	});
 }

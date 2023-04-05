@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 /**
  * Allows you to set cooldowns (or "ratelimits") for commands
  * limits user/channel/guild actions,
@@ -17,27 +16,40 @@
  * })
  * ```
  */
-import { CommandControlPlugin, controller } from "@sern/handler";
+
+import {
+	CommandControlPlugin,
+	CommandType,
+	Context,
+	controller,
+} from "@sern/handler";
 import { GuildMember } from "discord.js";
 /**
  * actions/seconds
  */
+export type CooldownString = `${number}/${number}`;
+export interface Cooldown {
+	location: CooldownLocation;
+	seconds: number;
+	actions: number;
+}
+export enum CooldownLocation {
+	channel = "channel",
+	user = "user",
+	guild = "guild",
+}
 
-export let CooldownLocation;
-
-(function (CooldownLocation) {
-	CooldownLocation["channel"] = "channel";
-	CooldownLocation["user"] = "user";
-	CooldownLocation["guild"] = "guild";
-})(CooldownLocation || (CooldownLocation = {}));
-
-export class ExpiryMap extends Map {
-	constructor(expiry = Infinity, iterable = []) {
+export class ExpiryMap<K, V> extends Map<K, V> {
+	public readonly expiry: number;
+	constructor(
+		expiry: number = Infinity,
+		iterable: [K, V][] | ReadonlyMap<K, V> = []
+	) {
 		super(iterable);
 		this.expiry = expiry;
 	}
 
-	set(key, value, expiry = this.expiry) {
+	public set(key: K, value: V, expiry: number = this.expiry): this {
 		super.set(key, value);
 		if (expiry !== Infinity)
 			setTimeout(() => {
@@ -46,9 +58,13 @@ export class ExpiryMap extends Map {
 		return this;
 	}
 }
-export const map = new ExpiryMap();
 
-function parseCooldown(location, cooldown) {
+export const map = new ExpiryMap<string, number>();
+
+function parseCooldown(
+	location: CooldownLocation,
+	cooldown: CooldownString
+): Cooldown {
 	const [actions, seconds] = cooldown.split("/").map((s) => Number(s));
 
 	if (
@@ -67,35 +83,47 @@ function parseCooldown(location, cooldown) {
 	};
 }
 
-function getPropertyForLocation(context, location) {
+function getPropertyForLocation(context: Context, location: CooldownLocation) {
 	switch (location) {
 		case CooldownLocation.channel:
-			return context.channel.id;
-
+			return context.channel!.id;
 		case CooldownLocation.user:
 			if (!context.member || !(context.member instanceof GuildMember)) {
 				throw new Error("context.member is not a GuildMember");
 			}
-
 			return context.member.id;
-
 		case CooldownLocation.guild:
 			return context.guildId;
 	}
 }
 
-function add(items, message) {
+export interface RecievedCooldown {
+	location: CooldownLocation;
+	actions: number;
+	maxActions: number;
+	seconds: number;
+	context: Context;
+}
+type CooldownResponse = (cooldown: RecievedCooldown) => any;
+
+function add(
+	items: Array<
+		| [CooldownLocation | keyof typeof CooldownLocation, CooldownString]
+		| Cooldown
+	>,
+	message?: CooldownResponse
+) {
 	const raw = items.map((c) => {
 		if (!Array.isArray(c)) return c;
-		return parseCooldown(c[0], c[1]);
-	});
-	return CommandControlPlugin(async (context, args) => {
+		return parseCooldown(c[0] as CooldownLocation, c[1]);
+	}) as Array<Cooldown>;
+	return CommandControlPlugin<CommandType.Both>(async (context, args) => {
 		for (const { location, actions, seconds } of raw) {
 			const id = getPropertyForLocation(context, location);
-			const cooldown = map.get(id);
+			const cooldown = map.get(id!);
 
 			if (!cooldown) {
-				map.set(id, 1, seconds * 1000);
+				map.set(id!, 1, seconds * 1000);
 				continue;
 			}
 
@@ -109,23 +137,24 @@ function add(items, message) {
 						context,
 					});
 				}
-
 				return controller.stop();
 			}
 
-			map.set(id, cooldown + 1, seconds * 1000);
+			map.set(id!, cooldown + 1, seconds * 1000);
 		}
-
 		return controller.next();
 	});
 }
 
-const locations = {
+type Location = (value: CooldownString) => ReturnType<typeof add>;
+
+const locations: Record<CooldownLocation, Location> = {
 	[CooldownLocation.channel]: (value) =>
 		add([[CooldownLocation.channel, value]]),
 	[CooldownLocation.user]: (value) => add([[CooldownLocation.user, value]]),
 	[CooldownLocation.guild]: (value) => add([[CooldownLocation.guild, value]]),
 };
+
 export const cooldown = {
 	add,
 	locations,

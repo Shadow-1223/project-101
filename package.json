@@ -2,11 +2,10 @@
   "name": "project-101",
   "version": "1.0.0",
   "description": "<h1 align=\"center\">Welcome to Project 101 </h1>  <p align=\"center\"><i>A prototype bot that had many coming features!</i></p>",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "./dist/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "dev": "tsc && node ./dist/srcindex.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +15,7 @@
     "karni"
   ],
   "author": "Shadow-1223",
+  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Shadow-1223/project-101/issues"
@@ -31,11 +31,13 @@
     "dotenv": "^16.0.3",
     "mongoose": "^6.8.2",
     "ms": "^2.1.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
   },
   "imports": {
-    "#plugins": [
-      "./dist/plugins/index.js"
-    ]
+    "#plugins": "./dist/src/plugins/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }
