@@ -1,4 +1,4 @@
-import {
+/*import {
     ModalBuilder,
     EmbedBuilder,
     TextInputStyle,
@@ -133,7 +133,7 @@ export default commandModule({
                   }
                 
                 channel.send({ embeds: [createEmbed] })
-                await modalsInt.reply({
+                await createModalsInt.reply({
                     content : `The embed has been sent in ${channel}.`,
                     ephemeral : true
                 })
@@ -194,3 +194,4 @@ export default commandModule({
         }
     }
 })
+*/
