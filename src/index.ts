@@ -38,8 +38,8 @@ export const useContainer = Sern.makeDependencies<MyDependencies>({
 
 Sern.init({
     defaultPrefix: "karni ",
-    commands: "dist/src/commands",
-    events: "dist/src/events",
+    commands: "./dist/commands",
+    events: "./dist/events",
     containerConfig: {
         get: useContainer
     }
